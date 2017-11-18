@@ -1,0 +1,88 @@
+以下三种测试可以将测试程序的所有分支都覆盖
+
+测试一：
+输入：2 5
+      1 1
+输出：The bigger number is 5
+      input3 is smaller or equal than input4
+      input3 is bigger or equal than input4
+      input3 is equal to input4
+      -91
+      1
+      a
+      3
+      b
+      5
+      c
+      7
+      d
+      9
+      e
+      11
+      f
+      13
+      g
+      15
+      h
+      17
+      i
+      19
+      j
+
+
+
+测试二：
+输入：2 2
+      5 1
+输出：The bigger number is 2
+      input3 is bigger or equal than input4
+      input3 is bigger than input4
+      -455
+      1
+      a
+      3
+      b
+      5
+      c
+      7
+      d
+      9
+      e
+      11
+      f
+      13
+      g
+      15
+      h
+      17
+      i
+      19
+      j
+
+测试三：
+输入：6 1
+      1 5
+输出：The bigger number is 6
+      input3 is smaller or equal than input4
+      input3 is smaller than input4
+      -451
+      1
+      a
+      3
+      b
+      5
+      c
+      7
+      d
+      9
+      e
+      11
+      f
+      13
+      g
+      15
+      h
+      17
+      i
+      19
+      j

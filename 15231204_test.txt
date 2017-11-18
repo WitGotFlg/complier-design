@@ -25,20 +25,20 @@ void relation(int a,int b)                     //±È½ÏÁ½¸öÊäÈë²ÎÊı´óĞ¡¹ØÏµ´Ó¶ø´òÓ
     if(a <= b)             //²âÊÔÌõ¼şÓï¾ä
     {
         re = sml_eql;
-        printf("left is smaller or equal than right");
+        printf("input3 is smaller or equal than input4");
     }
     if(a >= b)
     {
         re = bgr_eql;
-        printf("left is bigger or equal than right");
+        printf("input3 is bigger or equal than input4");
     }
     if(a != b)
     {
-        printf("left is not equal to right");
+        ;             //²âÊÔ¿ÕÓï¾ä
     }
     if(a == b)
     {
-        printf("left is equal to right")
+        printf("input3 is equal to input4")
     }
     swich(re)         //²âÊÔÇé¿öÓï¾ä
     {
@@ -46,14 +46,14 @@ void relation(int a,int b)                     //±È½ÏÁ½¸öÊäÈë²ÎÊı´óĞ¡¹ØÏµ´Ó¶ø´òÓ
         {
             if(a < b)
             {
-                printf("left is smaller than right")
+                printf("input3 is smaller than input4")
             }
         }
         case 1;
         {
             if(a > b)
             {
-                printf("left is bigger than right");
+                printf("input3 is bigger than input4");
             }
         }
     }
@@ -73,7 +73,7 @@ void main()
 
     relation(input3,input4);
 
-    printf(-input3 + input4 * (input3 / ) * 'a' + find_bigger(input3,input4) * 7 );   //²âÊÔ±í´ïÊ½²¿·Ö
+    printf(-input3 + input4 * (input3 /-1) * 'a' + find_bigger(input3,input4) * 7 );   //²âÊÔ±í´ïÊ½²¿·Ö
 
     do
     {
