@@ -606,6 +606,7 @@ int getsym()
 
 int Lexical_output()
 {
+    ofstream outfile("15231204_lexical_result.txt");
     int lexnum = 0;
     Ch = *p;
     while(Ch != '\0')
@@ -616,31 +617,33 @@ int Lexical_output()
             lexnum++;
             //cout << lexnum << " " << symbol << endl;
             if(symbol == string("NUMSY"))
-                cout << lexnum << " " << symbol << " " << num << endl;
+                outfile << lexnum << " " << symbol << " " << num << endl;
             else if(symbol == string("CHARASCII"))
-                cout << lexnum << " " << symbol << " " << singleC << endl;
+                outfile << lexnum << " " << symbol << " " << singleC << endl;
             else if(symbol == string("STRINGSY"))
-                cout << lexnum << " " << symbol << " " << stringCHAR << endl;
+                outfile << lexnum << " " << symbol << " " << stringCHAR << endl;
             else if(symbol == string("IDSY"))
-                cout << lexnum << " " << symbol << " " << IDNAME << endl;
+                outfile << lexnum << " " << symbol << " " << IDNAME << endl;
             else
-                cout << lexnum << " " << symbol << " " << symvalue.find(symbol)->second << endl;
+                outfile << lexnum << " " << symbol << " " << symvalue.find(symbol)->second << endl;
 
         }
         Getchar();
     }
+    outfile.close();
     return 0;
 }
 
 void readCodeFile()
 {
     ifstream infile;
+
     string infileName;
 
     cout << "Please input the original code file: " << endl;
-   // getline(cin,infileName);
+    getline(cin,infileName);
 
-    infile.open("15231204_test.txt");           //infileName.c_str()
+    infile.open(infileName.c_str());           //infileName.c_str()
     assert(infile.is_open());
 
     char c;

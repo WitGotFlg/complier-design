@@ -1,28 +1,28 @@
 const int con_int1 = +1, con_int2 = -1 , con_int3 = 0,con_int4 = 10;
-const char con_ch4 = 'a';                            //³£Á¿ËµÃ÷²¿·ÖµÄ²âÊÔ
+const char con_ch4 = 'a';                          
 
 int index , var_arr[10] , bigger_input;
-char var_arr_ch[10];                                //±äÁ¿ËµÃ÷µÄ²âÊÔ
+char var_arr_ch[10];                           
 
 int find_bigger(int a, int b)
 {
     if(a >= b)
         return(a);
     return(find_bigger(a+1,b));
-}                                                  //Ò»¸ö·µ»ØÁ½¸öÕûĞÍÊıÖ®ÖĞ½Ï´óµÄÊıµÄ¼òµ¥º¯Êı£¬ÓÃµİ¹éµÄĞ§¹ûÊµÏÖ
+}                                                 
 
 void print_bigger()
 {
     printf("The bigger number is ",bigger_input);
-}                                                 //ÎŞ·µ»ØÖµµÄ´òÓ¡È«¾Ö±äÁ¿bigger_inputµÄº¯Êı
+}                                              
 
-void relation(int a,int b)                     //±È½ÏÁ½¸öÊäÈë²ÎÊı´óĞ¡¹ØÏµ´Ó¶ø´òÓ¡²»Í¬µÄ×Ö·û´®µÄÎŞ·µ»ØÖµº¯Êı
+void relation(int a,int b)     
 {
     const sml_eql = 0, bgr_eql = 1;
 
     int re;
 
-    if(a <= b)             //²âÊÔÌõ¼şÓï¾ä
+    if(a <= b)       
     {
         re = sml_eql;
         printf("input3 is smaller or equal than input4");
@@ -34,22 +34,22 @@ void relation(int a,int b)                     //±È½ÏÁ½¸öÊäÈë²ÎÊı´óĞ¡¹ØÏµ´Ó¶ø´òÓ
     }
     if(a != b)
     {
-        ;             //²âÊÔ¿ÕÓï¾ä
+        ;             
     }
     if(a == b)
     {
         printf("input3 is equal to input4")
     }
-    swich(re)         //²âÊÔÇé¿öÓï¾ä
+    switch(re)      
     {
-        case 0;
+        case 0:
         {
             if(a < b)
             {
                 printf("input3 is smaller than input4")
             }
         }
-        case 1;
+        case 1:
         {
             if(a > b)
             {
@@ -65,23 +65,24 @@ void main()
     int input3,input4;
 
     scanf(input1,input2);
-    scanf(input3,input4);               //²âÊÔ¶ÁÓï¾ä
+    scanf(input3,input4);         
 
     index = 0;
-    bigger_input = find_bigger(input1,input2);             //µ÷ÓÃ¿Éµİ¹éµÄfind_bigger
-    print_bigger();                     	//´òÓ¡ÓÉfind_biggerÕÒ³öµÄbigger_input
+    bigger_input = find_bigger(input1,input2);          
+    print_bigger();                     	
 
     relation(input3,input4);
 
-    printf(-input3 + input4 * (input3 /-1) * 'a' + find_bigger(input3,input4) * 7 );   //²âÊÔ±í´ïÊ½²¿·Ö
+    printf(-input3 + input4 * (input3 /-1) * 'a' + find_bigger(input3,input4) * 7 ); 
 
     do
     {
         var_arr[index] = index*2 + 1;
         var_arr_ch[index] = con_ch4 + index;
         printf(var_arr[index] );
-        printf(var_arr_ch[index]);           //ÖÁ´Ë£¬printfÓï¾äµÄÈıÖÖĞÎÊ½È«²¿²âÊÔÍê±Ï
+        printf(var_arr_ch[index]);         
         index = index + 1;
 
-    }while(index < con_int4)          //²âÊÔÑ­»·Óï¾ä²¿·Ö
+    }while(index < con_int4)       
 }
+
