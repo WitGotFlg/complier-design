@@ -1,0 +1,16 @@
+# depslib dependency file v1.0
+1511447156 source:f:\缩小版备份\北航\编译原理\2017年编译技术课设\compiler-design\c0_mips\c0_mips\lexical.cpp
+	"global.h"
+
+1511419922 f:\缩小版备份\北航\编译原理\2017年编译技术课设\compiler-design\c0_mips\c0_mips\global.h
+	<iostream>
+	<fstream>
+	<cassert>
+	<string>
+	<map>
+	<stdlib.h>
+	<string.h>
+
+1511350769 source:f:\缩小版备份\北航\编译原理\2017年编译技术课设\compiler-design\c0_mips\c0_mips\main.cpp
+	"global.h"
+
