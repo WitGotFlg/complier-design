@@ -22,7 +22,7 @@
 22 CHARSY char
 23 IDSY con_ch4
 24 EQUAL =
-25 CHARASCII 'a'
+25 CHARASCII 'A'
 26 SEMI ;
 27 INTSY int
 28 IDSY index
@@ -122,7 +122,7 @@
 122 SEMI ;
 123 PRINTSY printf
 124 LPAR (
-125 STRINGSY "input3 is smaller or equal than input4"
+125 STRINGSY "input3 is smaller OR equal than input4"
 126 RPAR )
 127 SEMI ;
 128 RBRACE }
@@ -139,7 +139,7 @@
 139 SEMI ;
 140 PRINTSY printf
 141 LPAR (
-142 STRINGSY "input3 is bigger or equal than input4"
+142 STRINGSY "input3 is bigger OR equal than input4"
 143 RPAR )
 144 SEMI ;
 145 RBRACE }
