@@ -35,6 +35,7 @@
 		<Unit filename="global.h" />
 		<Unit filename="lexical.cpp" />
 		<Unit filename="main.cpp" />
+		<Unit filename="syntax.cpp" />
 		<Extensions>
 			<code_completion />
 			<envvars />

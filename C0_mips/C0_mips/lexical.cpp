@@ -1,4 +1,3 @@
-
 #include "global.h"
 
 using namespace std;
@@ -14,7 +13,10 @@ char singleC[5];  //专门用于方便词法分析程序输出的
 char stringCHAR[100];   //在本程序中，将单字符和字符串的‘和”也放在了单词中，因为只有这个地方出现了，所以不会对其他语法造成影响
 int num; //存放当前读入的整型数值
 string symbol = string("null");
-int line_num = 1;
+int line_num = 1;               //记录行数用于错误处理
+char linebuf[100];              //行缓冲
+int line_count=0;
+int endNum=0;
 map<string, int>symcode;
 map<string, string>symvalue;
 
@@ -26,6 +28,13 @@ int Getchar()
 {
     p++;
     Ch = *p;
+    if(Ch == '\n'){
+        char* n_p=p+1;
+        while((*n_p != '\n') && (*n_p != '\0'))
+            linebuf[line_count++]=*(n_p++);
+        linebuf[line_count]='\0';
+        line_count=0;
+    }
     return 0;
 }
 
@@ -424,11 +433,37 @@ int error(int e)                    ////////////////////////////初步的报错
 {
     switch(e)
     {
-        case 1: cout << "Missing \' in the singleCHAR" << endl;     break;
-        case 2: cout << "Ilegal single char" << endl;       break;
-        case 3: cout << "Missing \" in the string" << endl;     break;
-        case 4: cout << "Missing \'=\' in NEQUAL" << endl;      break;
+        case 1: cout <<"error: "<< " in line:" << line_num << " Missing \' in the singleCHAR" << endl;     break;
+        case 2: cout <<"error: "<< " in line:" << line_num << " Ilegal single char"  << endl;       break;
+        case 3: cout <<"error: "<< " in line:" << line_num << " Missing \" in the string"  <<endl;     break;
+        case 4: cout <<"error: "<< " in line:" << line_num << " Missing \'=\' in NEQUAL"  <<endl;      break;
+        case 5: cout <<"error: "<< " in line:" << line_num << " Missing function name or \"main\""  <<endl;      break;
+        case 6: cout <<"error: "<< " in line:" << line_num << " Missing type identification: int|char|void"  <<endl;      break;
+        case 7: cout <<"error: "<< " in line:" << line_num << " Missing \',\' or \';\' or ["  <<endl;      break;
+        case 8: cout <<"error: "<< " in line:" << line_num << " Missing identification"  <<endl;      break;
+        case 9: cout <<"error: "<< " in line:" << line_num << " Ileagal integer"  <<endl;      break;
+        case 10: cout <<"error: "<< " in line:" << line_num << " Missing \'=\'"  <<endl;      break;
+        case 11: cout <<"error: "<< " in line:" << line_num << " Missing single char"  <<endl;      break;
+        case 12: cout <<"error: "<< " in line:" << line_num << " Missing semi: ;"  <<endl;      break;
+        case 13: cout <<"error: "<< " in line:" << line_num << " Missing right bracket:]"  <<endl;      break;
+        case 14: cout <<"error: "<< " in line:" << line_num << " Missing left brace:{"  <<endl;      break;
+        case 15: cout <<"error: "<< " in line:" << line_num << " Missing right par:)"  <<endl;      break;
+        case 16: cout <<"error: "<< " in line:" << line_num << " Missing left par:("  <<endl;      break;
+        case 17: cout <<"error: "<< " in line:" << line_num << " Missing right brace:}"  <<endl;      break;
+        case 18: cout <<"error: "<< " in line:" << line_num << " This function has no return!"  <<endl;      break;
+        case 19: cout <<"error: "<< " in line:" << line_num << " The main function return is not void"  <<endl;      break;
+        case 20: cout <<"error: "<< " in line:" << line_num << " Missing expression"  <<endl;      break;
+        case 21: cout <<"error: "<< " in line:" << line_num << " Ileagal factor"  <<endl;      break;
+        case 22: cout <<"error: "<< " in line:" << line_num << " Ileagal assignment statement"  <<endl;      break;
+        case 23: cout <<"error: "<< " in line:" << line_num << " Ileagal statement"  <<endl;      break;
+        case 24: cout <<"error: "<< " in line:" << line_num << " Ileagal comparational symbol"  <<endl;      break;
+        case 25: cout <<"error: "<< " in line:" << line_num << " Missing while"  <<endl;      break;
+        case 26: cout <<"error: "<< " in line:" << line_num << " Missing colon \':\'"  <<endl;      break;
+        case 27: cout <<"error: "<< " in line:" << line_num << " Ileagal const(not integer and not char)"  <<endl;      break;
+        case 28: cout <<"error: "<< " in line:" << line_num << " Missing \'=\'"  <<endl;      break;
+        case 29: cout <<"error: "<< " in line:" << line_num << " Ileagal operation"  <<endl;      break;
     }
+    cout<<linebuf<<endl;
     return 0;
 }
 
@@ -617,15 +652,15 @@ int Lexical_output()
             lexnum++;
             //cout << lexnum << " " << symbol << endl;
             if(symbol == string("NUMSY"))
-                outfile << lexnum << " " << symbol << " " << num << endl;
+                cout << lexnum << " " << symbol << " " << num <<" in line: "<< line_num<< endl;
             else if(symbol == string("CHARASCII"))
-                outfile << lexnum << " " << symbol << " " << singleC << endl;
+                cout << lexnum << " " << symbol << " " << singleC <<" in line: "<< line_num<<  endl;
             else if(symbol == string("STRINGSY"))
-                outfile << lexnum << " " << symbol << " " << stringCHAR << endl;
+                cout << lexnum << " " << symbol << " " << stringCHAR <<" in line: "<< line_num<<  endl;
             else if(symbol == string("IDSY"))
-                outfile << lexnum << " " << symbol << " " << IDNAME << endl;
+                cout << lexnum << " " << symbol << " " << IDNAME <<" in line: "<< line_num<<  endl;
             else
-                outfile << lexnum << " " << symbol << " " << symvalue.find(symbol)->second << endl;
+                cout << lexnum << " " << symbol << " " << symvalue.find(symbol)->second <<" in line: "<< line_num<<  endl;
 
         }
         Getchar();
@@ -650,6 +685,9 @@ void readCodeFile()
     infile >> noskipws;
 
     p = code;
+    pre1p = code;
+    pre2p = code;
+    pre3p = code;
 
     while (infile.get(c))
     {
@@ -659,7 +697,6 @@ void readCodeFile()
     infile.close();
 
     symcodeinit();
-
-    Lexical_output();
+    //Lexical_output();
 }
 

@@ -1,4 +1,4 @@
-const int con_int1 = +1, con_int2 = -1 , con_int3 = 0,con_int4 = 10;
+const int con_int1 = +1, con_int2 = -1 , con_int3 = 34,con_int4 = 10;
 const char con_ch4 = 'A';                          
 
 int index , var_arr[10] , bigger_input;
@@ -18,7 +18,7 @@ void print_bigger()
 
 void relation(int a,int b)     
 {
-    const sml_eql = 0, bgr_eql = 1;
+    const int sml_eql = 0, bgr_eql = 1;
 
     int re;
 
@@ -38,7 +38,7 @@ void relation(int a,int b)
     }
     if(a == b)
     {
-        printf("input3 is equal to input4")
+        printf("input3 is equal to input4");
     }
     switch(re)      
     {
@@ -46,7 +46,7 @@ void relation(int a,int b)
         {
             if(a < b)
             {
-                printf("input3 is smaller than input4")
+                printf("input3 is smaller than input4");
             }
         }
         case 1:
