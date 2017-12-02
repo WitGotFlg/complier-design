@@ -11,6 +11,7 @@
 #include <sstream>
 #include <vector>
 #include <algorithm>
+
 using namespace std;
 void readCodeFile();
 
@@ -72,5 +73,24 @@ void readstatement();
 void writestatement();
 void returnstatement();
 void program();
+
+typedef struct symnode
+{
+    string name;
+    string kind;           //const£¬var....
+    string type;           //int char string...
+    int value;
+    int symindex;
+    bool arr;
+    int length;
+    int level;
+    int depth;
+}symele;
+extern vector<symele> symboltable;
+
+int checkname();
+void insertsymboltable();
+int getsymindex();
+void deletefunction();
 
 #endif // GLOBAL_H_INCLUDED

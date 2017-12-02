@@ -1,8 +1,8 @@
 # depslib dependency file v1.0
-1512194370 source:f:\缩小版备份\北航\编译原理\2017年编译技术课设\compiler-design\c0_mips\c0_mips\lexical.cpp
+1512198706 source:f:\缩小版备份\北航\编译原理\2017年编译技术课设\compiler-design\c0_mips\c0_mips\lexical.cpp
 	"global.h"
 
-1512061338 f:\缩小版备份\北航\编译原理\2017年编译技术课设\compiler-design\c0_mips\c0_mips\global.h
+1512232402 f:\缩小版备份\北航\编译原理\2017年编译技术课设\compiler-design\c0_mips\c0_mips\global.h
 	<iostream>
 	<fstream>
 	<cassert>
@@ -14,9 +14,13 @@
 	<vector>
 	<algorithm>
 
-1512060230 source:f:\缩小版备份\北航\编译原理\2017年编译技术课设\compiler-design\c0_mips\c0_mips\main.cpp
+1512232560 source:f:\缩小版备份\北航\编译原理\2017年编译技术课设\compiler-design\c0_mips\c0_mips\main.cpp
 	"global.h"
 
 1512194049 source:f:\缩小版备份\北航\编译原理\2017年编译技术课设\compiler-design\c0_mips\c0_mips\syntax.cpp
 	"global.h"
+
+1512232580 source:f:\缩小版备份\北航\编译原理\2017年编译技术课设\compiler-design\c0_mips\c0_mips\symboltable.cpp
+	"global.h"
+	<vector>
 
