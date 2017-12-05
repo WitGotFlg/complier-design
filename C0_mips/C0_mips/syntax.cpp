@@ -13,27 +13,27 @@ string return_type = string("VOIDSY");
 
 void nextsym()            //Óï·¨·ÖÎöÈ¡µ¥´Ê£¬3¸öprepÓÃÓÚ±êÊ¶·û£¬Êı×é£¬º¯ÊıÇø·ÖÊ±±ØÒªµÄÔ¤¶Á
 {
-    pre3p = pre2p;
-    pre2p = pre1p;
-    pre1p = p;
-    getsym();
-    Getchar();
+	pre3p = pre2p;
+	pre2p = pre1p;
+	pre1p = p;
+	getsym();
+	Getchar();
 }
 
 void recallsym()          //·¢ÏÖÊÇÊı×é»òº¯ÊıÊ±Ê¹ÓÃ£¬½«p»ØÍËºóÔÙµ÷ÓÃÏàÓ¦µÄ×ÓÓï·¨·ÖÎö³ÌĞò
 {
-    char* current_p = p;
-    p = pre1p;
-    Ch = *p;
-    pre1p = pre2p;
-    pre2p = pre3p;
-    char* temp = p;
-    while(temp < current_p)
-    {
-        if(*temp == '\n')
-            line_num--;
-        temp ++;
-    }
+	char* current_p = p;
+	p = pre1p;
+	Ch = *p;
+	pre1p = pre2p;
+	pre2p = pre3p;
+	char* temp = p;
+	while (temp < current_p)
+	{
+		if (*temp == '\n')
+			line_num--;
+		temp++;
+	}
 }
 
 //£¼³£Á¿¶¨Òå£¾   ::=   int£¼±êÊ¶·û£¾£½£¼ÕûÊı£¾{,£¼±êÊ¶·û£¾£½£¼ÕûÊı£¾}
@@ -43,1424 +43,1425 @@ void recallsym()          //·¢ÏÖÊÇÊı×é»òº¯ÊıÊ±Ê¹ÓÃ£¬½«p»ØÍËºóÔÙµ÷ÓÃÏàÓ¦µÄ×ÓÓï·¨·
 //£¼±êÊ¶·û£¾    ::=  £¼×ÖÄ¸£¾£û£¼×ÖÄ¸£¾£ü£¼Êı×Ö£¾£ı
 void next_semi()
 {
-    while(symbol.compare("SEMI")!=0)
-    {
-        nextsym();
-    }
-    nextsym();
+	while (symbol.compare("SEMI") != 0)
+	{
+		nextsym();
+	}
+	nextsym();
 }
 
 void next_RBRACE()
 {
-    while(symbol.compare("RBRACE")!=0)
-    {
-        nextsym();
-    }
-    nextsym();
+	while (symbol.compare("RBRACE") != 0)
+	{
+		nextsym();
+	}
+	nextsym();
 }
 
 void next_LBRACE()
 {
-    while(symbol.compare("LBRACE")!=0)
-    {
-        nextsym();
-    }
-    nextsym();
+	while (symbol.compare("LBRACE") != 0)
+	{
+		nextsym();
+	}
+	nextsym();
 }
 
 void next_declare_head()
 {
-    nextsym();
-    while((symbol.compare("INTSY")!=0) && (symbol.compare("CHARSY")!=0) && (symbol.compare("VOIDSY")!=0))
-    {
-        nextsym();
-    }
+	nextsym();
+	while ((symbol.compare("INTSY") != 0) && (symbol.compare("CHARSY") != 0) && (symbol.compare("VOIDSY") != 0))
+	{
+		nextsym();
+	}
 }
 
 void next_RPAR()
 {
-    while(symbol.compare("RPAR")!=0)
-    {
-        nextsym();
-    }
+	while (symbol.compare("RPAR") != 0)
+	{
+		nextsym();
+	}
 }
 
 void next_statement()
 {
-    while((symbol.compare("IFSY")!=0) && (symbol.compare("DOSY")!=0) && (symbol.compare("SWITCHSY")!=0) &&
-          (symbol.compare("LBRACE")!=0) && (symbol.compare("IDSY")!=0) && (symbol.compare("SCANFSY")!=0) &&
-          (symbol.compare("PRINTSY")!=0) && (symbol.compare("SEMI")!=0) && (symbol.compare("RETURNSY")!=0))
-          {
-              nextsym();
-          }
+	while ((symbol.compare("IFSY") != 0) && (symbol.compare("DOSY") != 0) && (symbol.compare("SWITCHSY") != 0) &&
+		(symbol.compare("LBRACE") != 0) && (symbol.compare("IDSY") != 0) && (symbol.compare("SCANFSY") != 0) &&
+		(symbol.compare("PRINTSY") != 0) && (symbol.compare("SEMI") != 0) && (symbol.compare("RETURNSY") != 0))
+	{
+		nextsym();
+	}
 }
 
 int integer()
 {
-    flag_for_interger2const = 0;
-    int NUM = 0;
-    int flag = 1;
-    if((symbol.compare("PLUS")==0)|| (symbol.compare("MINUS")==0))
-    {
-        if(symbol.compare("MINUS")==0)
-        {
-            flag = -1;
-        }
-        nextsym();
-    }
-    if(symbol.compare("NUMSY")==0)
-    {
-        if(*pre1p!='0' || (p-pre1p)<2)
-        {
-            NUM = flag*num;
-            cout<<"This is integer" <<" in line "<< line_num<< endl;
-            nextsym();
-        }
-        else
-        {
-            error(9);
-            next_semi();
-            flag_for_interger2const = 1;
-        }
-    }
-    return NUM;
+	flag_for_interger2const = 0;
+	int NUM = 0;
+	int flag = 1;
+	if ((symbol.compare("PLUS") == 0) || (symbol.compare("MINUS") == 0))
+	{
+		if (symbol.compare("MINUS") == 0)
+		{
+			flag = -1;
+		}
+		nextsym();
+	}
+	if (symbol.compare("NUMSY") == 0)
+	{
+		if (*pre1p != '0' || (p - pre1p)<2)
+		{
+			NUM = flag*num;
+			cout << "This is integer" << " in line " << line_num << endl;
+			nextsym();
+		}
+		else
+		{
+			error(9);
+			next_semi();
+			flag_for_interger2const = 1;
+		}
+	}
+	return NUM;
 }
 
 void constdefine()
 {
-    while(symbol.compare("CONSTSY") == 0)
-    {
-        nextsym();
-        string type;
-        if(symbol.compare("INTSY") == 0)
-        {
-            type = string("INTSY");
-            nextsym();
-            if(symbol.compare("IDSY") == 0)
-            {
-                string Name = string(IDNAME);
-                nextsym();
-                if(symbol.compare("EQUAL") == 0)
-                {
-                    nextsym();
-                    int NUM = integer();
-                    if(flag_for_interger2const == 1)
-                    {
-                        continue;
-                    }
-                                    ////////////////////////////Ç·Ò»¸ö·ûºÅ±í²åÈë
-                ////////////////////////////ÒÔ¼°ÖĞ¼ä´úÂëÉú³É
-                ////////////////////////////
-                }
-                else
-                {
-                    error(10);
-                    next_semi();
-                    continue;
-                }
-            }
-            else
-            {
-                error(8);
-                next_semi();
-                continue;
-            }
-            int flag = 0;
-            while(symbol.compare("COMMA")==0)
-            {
-                nextsym();
-                if(symbol.compare("IDSY")==0)
-                {
-                    string Name = string(IDNAME);
-                    nextsym();
-                    if(symbol.compare("EQUAL")==0)
-                    {
-                        nextsym();
-                        int NUM = integer();
-                        if(flag_for_interger2const == 1)
-                        {
-                            continue;
-                        }
-//////////////////////////////////////////////////////Ç·Ò»¸ö²åÈë
-                        ///////////////////////ÒÔ¼°ÖĞ¼ä´úÂëÉú³É
-                        ///////////
-                    }
-                    else
-                    {
-                        error(10);
-                        flag = 1;
-                        break;
-                    }
-                }
-                else
-                {
-                    error(8);
-                    flag = 1;
-                    break;
-                }
-            }
-            if(flag == 1)
-            {
-                next_semi();
-                continue;
-            }
-        }
-        else if(symbol.compare("CHARSY")==0)
-        {
-            type = string("CHARSY");
-            nextsym();
-            if(symbol.compare("IDSY")==0)
-            {
-                string Name = string(IDNAME);
-                nextsym();
-                int ascii;
-                if(symbol.compare("EQUAL")==0)
-                {
-                    nextsym();
+	while (symbol.compare("CONSTSY") == 0)
+	{
+		nextsym();
+		string type;
+		if (symbol.compare("INTSY") == 0)
+		{
+			type = string("INTSY");
+			nextsym();
+			if (symbol.compare("IDSY") == 0)
+			{
+				string Name = string(IDNAME);
+				nextsym();
+				if (symbol.compare("EQUAL") == 0)
+				{
+					nextsym();
+					int NUM = integer();
+					if (flag_for_interger2const == 1)
+					{
+						continue;
+					}
+					////////////////////////////Ç·Ò»¸ö·ûºÅ±í²åÈë
+					////////////////////////////ÒÔ¼°ÖĞ¼ä´úÂëÉú³É
+					////////////////////////////
+				}
+				else
+				{
+					error(10);
+					next_semi();
+					continue;
+				}
+			}
+			else
+			{
+				error(8);
+				next_semi();
+				continue;
+			}
+			int flag = 0;
+			while (symbol.compare("COMMA") == 0)
+			{
+				nextsym();
+				if (symbol.compare("IDSY") == 0)
+				{
+					string Name = string(IDNAME);
+					nextsym();
+					if (symbol.compare("EQUAL") == 0)
+					{
+						nextsym();
+						int NUM = integer();
+						if (flag_for_interger2const == 1)
+						{
+							continue;
+						}
+						//////////////////////////////////////////////////////Ç·Ò»¸ö²åÈë
+						///////////////////////ÒÔ¼°ÖĞ¼ä´úÂëÉú³É
+						///////////
+					}
+					else
+					{
+						error(10);
+						flag = 1;
+						break;
+					}
+				}
+				else
+				{
+					error(8);
+					flag = 1;
+					break;
+				}
+			}
+			if (flag == 1)
+			{
+				next_semi();
+				continue;
+			}
+		}
+		else if (symbol.compare("CHARSY") == 0)
+		{
+			type = string("CHARSY");
+			nextsym();
+			if (symbol.compare("IDSY") == 0)
+			{
+				string Name = string(IDNAME);
+				nextsym();
+				int ascii;
+				if (symbol.compare("EQUAL") == 0)
+				{
+					nextsym();
 
-                    if(symbol.compare("CHARASCII")==0)
-                    {
-                        ascii = singleCHAR;
+					if (symbol.compare("CHARASCII") == 0)
+					{
+						ascii = singleCHAR;
 
-                        nextsym();
-                    }
-                    else
-                    {
-                        error(11);
-                        next_semi();
-                        continue;
-                    }
-                    /////////////////////////////Ç·²å·ûºÅ±í
-                        /////////////////////////////ÒÔ¼°ÖĞ¼ä´úÂëÉú³É
-                        /////////////////////////////
-                }
-                else
-                {
-                    error(10);
-                    next_semi();
-                    continue;
-                }
-            }
-            else
-            {
-                error(8);
-                next_semi();
-                continue;
-            }
-            int flag = 0;
-            while(symbol.compare("COMMA")==0)
-            {
-                nextsym();
-                if(symbol.compare("IDSY")==0)
-                {
-                    string Name = string(IDNAME);
-                    nextsym();
-                    int ascii;
-                    if(symbol.compare("EQUAL")==0)
-                    {
-                        nextsym();
-                        if(symbol.compare("CHARASCII")==0)
-                        {   ascii = singleCHAR;
+						nextsym();
+					}
+					else
+					{
+						error(11);
+						next_semi();
+						continue;
+					}
+					/////////////////////////////Ç·²å·ûºÅ±í
+					/////////////////////////////ÒÔ¼°ÖĞ¼ä´úÂëÉú³É
+					/////////////////////////////
+				}
+				else
+				{
+					error(10);
+					next_semi();
+					continue;
+				}
+			}
+			else
+			{
+				error(8);
+				next_semi();
+				continue;
+			}
+			int flag = 0;
+			while (symbol.compare("COMMA") == 0)
+			{
+				nextsym();
+				if (symbol.compare("IDSY") == 0)
+				{
+					string Name = string(IDNAME);
+					nextsym();
+					int ascii;
+					if (symbol.compare("EQUAL") == 0)
+					{
+						nextsym();
+						if (symbol.compare("CHARASCII") == 0)
+						{
+							ascii = singleCHAR;
 
-                            nextsym();
-                        }
-                        else
-                        {
-                            error(11);
-                            flag = 1;
-                            break;
-                        }
-                        /////////////////////////////Ç·²å·ûºÅ±í
-                            /////////////////////////////ÒÔ¼°ÖĞ¼ä´úÂëÉú³É
-                            /////////////////////////////
-                    }
-                    else
-                    {
-                        error(10);
-                        flag = 1;
-                        break;
-                    }
-                }
-                else
-                {
-                    error(8);
-                    flag = 1;
-                    break;
-                }
-            }
-            if(flag == 1)
-            {
-                next_semi();
-                continue;
-            }
-        }
-        else
-        {
-            error(6);
-            next_semi();
-            continue;
-        }
-        if(symbol.compare("SEMI")!=0)
-        {
-            error(12);
-        }
-        cout << "This is const define!" <<" in line "<< line_num <<endl;
-        nextsym();
-    }
+							nextsym();
+						}
+						else
+						{
+							error(11);
+							flag = 1;
+							break;
+						}
+						/////////////////////////////Ç·²å·ûºÅ±í
+						/////////////////////////////ÒÔ¼°ÖĞ¼ä´úÂëÉú³É
+						/////////////////////////////
+					}
+					else
+					{
+						error(10);
+						flag = 1;
+						break;
+					}
+				}
+				else
+				{
+					error(8);
+					flag = 1;
+					break;
+				}
+			}
+			if (flag == 1)
+			{
+				next_semi();
+				continue;
+			}
+		}
+		else
+		{
+			error(6);
+			next_semi();
+			continue;
+		}
+		if (symbol.compare("SEMI") != 0)
+		{
+			error(12);
+		}
+		cout << "This is const define!" << " in line " << line_num << endl;
+		nextsym();
+	}
 }
 
 void functiondefine()
 {
-    while((symbol.compare("INTSY")==0) || (symbol.compare("CHARSY")==0) || (symbol.compare("VOIDSY")==0))
-    {
-        level++;
-        string type = symbol;
-        return_type = symbol;
-        nextsym();
-        if(symbol.compare("MAINSY")==0)
-        {
-            recallsym();
-            recallsym();
-            level--;
-            nextsym();
-            return;
-        }
-        if(symbol.compare("IDSY")==0)
-        {
-            string Name = string(IDNAME);
-            nextsym();
-            if(symbol.compare("LPAR")==0)
-            {
-                nextsym();
-                ////////////////////È±ÓïÒå·ÖÎö
-                ///////////////////
-                int paranum = paratable();
-                if(symbol.compare("RPAR")==0)
-                {
-                    nextsym();
-                    ////////////////È±·ûºÅ±í²åÈë
-                    if(symbol.compare("LBRACE")!=0)
-                    {
-                        error(14);
-                        next_RBRACE();
-                        continue;
-                    }
-                }
-                else
-                {
-                    error(15);
-                    next_RBRACE();
-                    continue;
-                }
-            }
-            else
-            {
-                error(16);
-                next_RBRACE();
-                continue;
-            }
-        }
-        else
-        {
-            error(8);
-            next_RBRACE();
-            continue;
-        }
-        next_LBRACE();
-        compoundstatement();
-        if(symbol.compare("RBRACE")!=0)
-        {
-            error(17);
-            next_declare_head();
-            continue;
-        }
-        //////////////È±º¯Êı·ûºÅ±íÉ¾³ı
-        ///////////////È±º¯Êı½áÊøÓïÒå·ÖÎö
-        cout << "This is function define!" <<" in line "<< line_num  << endl;
-        nextsym();      /////////ÔİÊ±·ÅÔÚÉÏÃæÁ½¸öÖ®ºó
-        level--;
-        if((return_flag==false) && (return_type.compare("VOIDSY")!=0))
-        {
-            error(18);
-        }
-        return_flag = false;
-        return_expression = false;
-    }
+	while ((symbol.compare("INTSY") == 0) || (symbol.compare("CHARSY") == 0) || (symbol.compare("VOIDSY") == 0))
+	{
+		level++;
+		string type = symbol;
+		return_type = symbol;
+		nextsym();
+		if (symbol.compare("MAINSY") == 0)
+		{
+			recallsym();
+			recallsym();
+			level--;
+			nextsym();
+			return;
+		}
+		if (symbol.compare("IDSY") == 0)
+		{
+			string Name = string(IDNAME);
+			nextsym();
+			if (symbol.compare("LPAR") == 0)
+			{
+				nextsym();
+				////////////////////È±ÓïÒå·ÖÎö
+				///////////////////
+				int paranum = paratable();
+				if (symbol.compare("RPAR") == 0)
+				{
+					nextsym();
+					////////////////È±·ûºÅ±í²åÈë
+					if (symbol.compare("LBRACE") != 0)
+					{
+						error(14);
+						next_RBRACE();
+						continue;
+					}
+				}
+				else
+				{
+					error(15);
+					next_RBRACE();
+					continue;
+				}
+			}
+			else
+			{
+				error(16);
+				next_RBRACE();
+				continue;
+			}
+		}
+		else
+		{
+			error(8);
+			next_RBRACE();
+			continue;
+		}
+		next_LBRACE();
+		compoundstatement();
+		if (symbol.compare("RBRACE") != 0)
+		{
+			error(17);
+			next_declare_head();
+			continue;
+		}
+		//////////////È±º¯Êı·ûºÅ±íÉ¾³ı
+		///////////////È±º¯Êı½áÊøÓïÒå·ÖÎö
+		cout << "This is function define!" << " in line " << line_num << endl;
+		nextsym();      /////////ÔİÊ±·ÅÔÚÉÏÃæÁ½¸öÖ®ºó
+		level--;
+		if ((return_flag == false) && (return_type.compare("VOIDSY") != 0))
+		{
+			error(18);
+		}
+		return_flag = false;
+		return_expression = false;
+	}
 }
 
 void mainfunction()
 {
-    level++;
-    if(symbol.compare("VOIDSY")==0)
-    {
-        return_type = symbol;
-        nextsym();
-        if(symbol.compare("MAINSY")==0)
-        {
-            /////////////////////Ç·ÖĞ¼ä´úÂë
-            /////////////////////
-            ////////////////////
-            nextsym();
-            ////////////////////Ç··ûºÅ±í²åÈë
-            if(symbol.compare("LPAR")==0)
-            {
-                nextsym();
-                if(symbol.compare("RPAR")==0)
-                {
-                    nextsym();
-                    if(symbol.compare("LBRACE")!=0)
-                    {
-                        error(14);
-                    }
-                }
-                else
-                {
-                    error(15);
-                }
-            }
-            else
-            {
-                error(16);
-            }
-        }
-        else
-        {
-            error(5);
-        }
-    }
-    else
-    {
-        error(6);
-    }
-    next_LBRACE();
-    compoundstatement();
-    if(symbol.compare("RBRACE")!=0)
-    {
-        error(17);
-    }
-    ////////////////Ç·ÓïÒå·ÖÎö
-    ///////////////Ç·ÓïÒå·ÖÎö
-    cout << "This main function!" <<" in line "<< line_num  << endl;
-    if((return_flag==true)&&(return_expression!=false))
-    {
-        error(19);
-    }
-    return_flag = false;
-    return_expression = false;
-    level--;
+	level++;
+	if (symbol.compare("VOIDSY") == 0)
+	{
+		return_type = symbol;
+		nextsym();
+		if (symbol.compare("MAINSY") == 0)
+		{
+			/////////////////////Ç·ÖĞ¼ä´úÂë
+			/////////////////////
+			////////////////////
+			nextsym();
+			////////////////////Ç··ûºÅ±í²åÈë
+			if (symbol.compare("LPAR") == 0)
+			{
+				nextsym();
+				if (symbol.compare("RPAR") == 0)
+				{
+					nextsym();
+					if (symbol.compare("LBRACE") != 0)
+					{
+						error(14);
+					}
+				}
+				else
+				{
+					error(15);
+				}
+			}
+			else
+			{
+				error(16);
+			}
+		}
+		else
+		{
+			error(5);
+		}
+	}
+	else
+	{
+		error(6);
+	}
+	next_LBRACE();
+	compoundstatement();
+	if (symbol.compare("RBRACE") != 0)
+	{
+		error(17);
+	}
+	////////////////Ç·ÓïÒå·ÖÎö
+	///////////////Ç·ÓïÒå·ÖÎö
+	cout << "This main function!" << " in line " << line_num << endl;
+	if ((return_flag == true) && (return_expression != false))
+	{
+		error(19);
+	}
+	return_flag = false;
+	return_expression = false;
+	level--;
 }
 
 void vardefine()
 {
-    while((symbol.compare("INTSY")==0) || (symbol.compare("CHARSY")==0))
-    {
-        string type = symbol;
-        nextsym();
-        if(symbol.compare("IDSY")==0)
-        {
-            string Name = string(IDNAME);
-            nextsym();
-            if(symbol.compare("LBRACKET")==0)
-            {
-                nextsym();
-                if((symbol.compare("NUMSY")==0) && ((*pre1p)!='0'))
-                {
-                    int Length = num;
-                    nextsym();
-                    if(symbol.compare("RBRACKET")!=0)
-                    {
-                        error(13);               //È±ÉÙ]
-                        next_semi();
-                        continue;
-                    }
-                    ///////////////////////Ç·²å
-                    //////////////////////Ç·ÖĞ¼ä´úÂë
-                    ////////////////////
-                    nextsym();
-                }
-                else
-                {
-                    error(9);
-                    next_semi();
-                    continue;
-                }
-            }
-            else if(symbol.compare("LPAR")==0)
-            {
-                recallsym();
-                recallsym();
-                recallsym();
-                nextsym();
-                return;
-            }
-            else
-            {
-                ///////////////////////Ç·²å
-                    //////////////////////Ç·ÖĞ¼ä´úÂë
-                    ////////////////////
-            }
-        }
-        else
-        {
-            error(8);
-            nextsym();
-            continue;
-        }
-        int flag = 0;
-        while(symbol.compare("COMMA")==0)
-        {
-            nextsym();
-            if(symbol.compare("IDSY")==0)
-            {
-                string Name = string(IDNAME);
-                nextsym();
-                if(symbol.compare("LBRACKET")==0)
-                {
-                    nextsym();
-                    if((symbol.compare("NUMSY")==0) && ((*pre1p)!='0'))
-                    {
-                        int Length = num;
-                        nextsym();
-                        if(symbol.compare("RBRACKET")!=0)
-                        {
-                            error(13);               //È±ÉÙ]
-                            flag = 1;
-                            break;
-                        }
-                        ///////////////////////Ç·²å
-                        //////////////////////Ç·ÖĞ¼ä´úÂë
-                        ////////////////////
-                        nextsym();
-                    }
-                    else
-                    {
-                        error(9);
-                        flag = 1;
-                        break;
-                    }
-                }
-                else
-                {
-                    ///////////////////////Ç·²å
-                        //////////////////////Ç·ÖĞ¼ä´úÂë
-                        ////////////////////
-                }
-            }
-            else
-            {
-                error(8);
-                flag = 1;
-                break;
-            }
-        }
-        if(flag == 1)
-        {
-            next_semi();
-            continue;
-        }
-        if(symbol.compare("SEMI")!=0)
-        {
-            error(12);
-        }
-        cout << "This is var define!" <<" in line "<< line_num  << endl;
-        nextsym();
-    }
+	while ((symbol.compare("INTSY") == 0) || (symbol.compare("CHARSY") == 0))
+	{
+		string type = symbol;
+		nextsym();
+		if (symbol.compare("IDSY") == 0)
+		{
+			string Name = string(IDNAME);
+			nextsym();
+			if (symbol.compare("LBRACKET") == 0)
+			{
+				nextsym();
+				if ((symbol.compare("NUMSY") == 0) && ((*pre1p) != '0'))
+				{
+					int Length = num;
+					nextsym();
+					if (symbol.compare("RBRACKET") != 0)
+					{
+						error(13);               //È±ÉÙ]
+						next_semi();
+						continue;
+					}
+					///////////////////////Ç·²å
+					//////////////////////Ç·ÖĞ¼ä´úÂë
+					////////////////////
+					nextsym();
+				}
+				else
+				{
+					error(9);
+					next_semi();
+					continue;
+				}
+			}
+			else if (symbol.compare("LPAR") == 0)
+			{
+				recallsym();
+				recallsym();
+				recallsym();
+				nextsym();
+				return;
+			}
+			else
+			{
+				///////////////////////Ç·²å
+				//////////////////////Ç·ÖĞ¼ä´úÂë
+				////////////////////
+			}
+		}
+		else
+		{
+			error(8);
+			nextsym();
+			continue;
+		}
+		int flag = 0;
+		while (symbol.compare("COMMA") == 0)
+		{
+			nextsym();
+			if (symbol.compare("IDSY") == 0)
+			{
+				string Name = string(IDNAME);
+				nextsym();
+				if (symbol.compare("LBRACKET") == 0)
+				{
+					nextsym();
+					if ((symbol.compare("NUMSY") == 0) && ((*pre1p) != '0'))
+					{
+						int Length = num;
+						nextsym();
+						if (symbol.compare("RBRACKET") != 0)
+						{
+							error(13);               //È±ÉÙ]
+							flag = 1;
+							break;
+						}
+						///////////////////////Ç·²å
+						//////////////////////Ç·ÖĞ¼ä´úÂë
+						////////////////////
+						nextsym();
+					}
+					else
+					{
+						error(9);
+						flag = 1;
+						break;
+					}
+				}
+				else
+				{
+					///////////////////////Ç·²å
+					//////////////////////Ç·ÖĞ¼ä´úÂë
+					////////////////////
+				}
+			}
+			else
+			{
+				error(8);
+				flag = 1;
+				break;
+			}
+		}
+		if (flag == 1)
+		{
+			next_semi();
+			continue;
+		}
+		if (symbol.compare("SEMI") != 0)
+		{
+			error(12);
+		}
+		cout << "This is var define!" << " in line " << line_num << endl;
+		nextsym();
+	}
 }
 
 int paratable()
 {
-    int paranumber = 0;
-    if((symbol.compare("INTSY")==0) || (symbol.compare("CHARSY")==0))
-    {
-        string type = symbol;
-        nextsym();
-        if(symbol.compare("IDSY")==0)
-        {
-            string Name = string(IDNAME);
-            ////////////////////Ç·Ò»¸ö·ûºÅ±í²åÈë
-            /////////////////////Ç·ÖĞ¼ä´úÂë¼°ÓïÒå
-            paranumber++;
-            nextsym();
-        }
-        else
-        {
-            error(8);
-        }
-    }
-    else if(symbol.compare("RPAR")==0)
-    {
-        cout << "This paratable!" <<" in line "<< line_num  << endl;
-        return paranumber;
-    }
-    else
-    {
-        error(6);
-    }
-    while(symbol.compare("COMMA")==0)
-    {
-        nextsym();
-        if((symbol.compare("INTSY")==0) || (symbol.compare("CHARSY")==0))
-        {
-            string type = symbol;
-            nextsym();
-            if(symbol.compare("IDSY")==0)
-            {
-                string Name = string(IDNAME);
-                ////////////////////Ç·Ò»¸ö·ûºÅ±í²åÈë
-                /////////////////////Ç·ÖĞ¼ä´úÂë¼°ÓïÒå
-                paranumber++;
-                nextsym();
-            }
-            else
-            {
-                error(8);
-                break;
-            }
-        }
-        else
-        {
-            error(6);
-            break;
-        }
-    }
-    next_RPAR();
-    cout << "This paratable!" <<" in line "<< line_num  << endl;
-    return paranumber;
+	int paranumber = 0;
+	if ((symbol.compare("INTSY") == 0) || (symbol.compare("CHARSY") == 0))
+	{
+		string type = symbol;
+		nextsym();
+		if (symbol.compare("IDSY") == 0)
+		{
+			string Name = string(IDNAME);
+			////////////////////Ç·Ò»¸ö·ûºÅ±í²åÈë
+			/////////////////////Ç·ÖĞ¼ä´úÂë¼°ÓïÒå
+			paranumber++;
+			nextsym();
+		}
+		else
+		{
+			error(8);
+		}
+	}
+	else if (symbol.compare("RPAR") == 0)
+	{
+		cout << "This paratable!" << " in line " << line_num << endl;
+		return paranumber;
+	}
+	else
+	{
+		error(6);
+	}
+	while (symbol.compare("COMMA") == 0)
+	{
+		nextsym();
+		if ((symbol.compare("INTSY") == 0) || (symbol.compare("CHARSY") == 0))
+		{
+			string type = symbol;
+			nextsym();
+			if (symbol.compare("IDSY") == 0)
+			{
+				string Name = string(IDNAME);
+				////////////////////Ç·Ò»¸ö·ûºÅ±í²åÈë
+				/////////////////////Ç·ÖĞ¼ä´úÂë¼°ÓïÒå
+				paranumber++;
+				nextsym();
+			}
+			else
+			{
+				error(8);
+				break;
+			}
+		}
+		else
+		{
+			error(6);
+			break;
+		}
+	}
+	next_RPAR();
+	cout << "This paratable!" << " in line " << line_num << endl;
+	return paranumber;
 }
 
 void functioncall()        ///////////////////»¹È±ÁËÒ»¸öÅĞ¶ÏÊÇ·ñÓĞ·µ»ØÖµµÄµ÷ÓÃµÄ±êÖ¾
 {
-    int realparanum = 0;
-    if(symbol.compare("IDSY")==0)
-    {
-        string Name = string(IDNAME);
-        nextsym();
-        if(symbol.compare("LPAR")==0)
-        {
-            nextsym();
-            if(symbol.compare("RPAR")==0)
-            {
-                nextsym();
-                cout << "This function call!" <<" in line "<< line_num  << endl;
-                return;
-            }
-            expression();
-            realparanum ++;
-            ///////////////
-            ////////////Ç·ÁËºÜ¶àÓïÒåºÍ·ûºÅ±í²åÈë
-            ////////////
-            while(symbol.compare("COMMA")==0)
-            {
-                nextsym();
-                expression();
-                realparanum++;
-            }
-            if(symbol.compare("RPAR")!=0)
-            {
-                error(15);
-                next_semi();
-                return;
-            }
-            /////////////////////
-            ////////////////////Ç·ÁËºÜ¶àÓïÒåºÍ·ûºÅ±í²åÈë
-            ////////////////////
-            nextsym();
-            cout << "This function call!" <<" in line "<< line_num   << endl;
-            return ;
-        }
-        else
-        {
-            error(16);
-            next_semi();
-        }
-    }
-    else
-    {
-        error(5);
-        next_semi();
-    }
+	int realparanum = 0;
+	if (symbol.compare("IDSY") == 0)
+	{
+		string Name = string(IDNAME);
+		nextsym();
+		if (symbol.compare("LPAR") == 0)
+		{
+			nextsym();
+			if (symbol.compare("RPAR") == 0)
+			{
+				nextsym();
+				cout << "This function call!" << " in line " << line_num << endl;
+				return;
+			}
+			expression();
+			realparanum++;
+			///////////////
+			////////////Ç·ÁËºÜ¶àÓïÒåºÍ·ûºÅ±í²åÈë
+			////////////
+			while (symbol.compare("COMMA") == 0)
+			{
+				nextsym();
+				expression();
+				realparanum++;
+			}
+			if (symbol.compare("RPAR") != 0)
+			{
+				error(15);
+				next_semi();
+				return;
+			}
+			/////////////////////
+			////////////////////Ç·ÁËºÜ¶àÓïÒåºÍ·ûºÅ±í²åÈë
+			////////////////////
+			nextsym();
+			cout << "This function call!" << " in line " << line_num << endl;
+			return;
+		}
+		else
+		{
+			error(16);
+			next_semi();
+		}
+	}
+	else
+	{
+		error(5);
+		next_semi();
+	}
 }
 
 int expression()
 {
-    int result=0;
-    int flag = 1;
-    ////////////
-    /////////////
-    if((symbol.compare("PLUS")==0) || (symbol.compare("MINUS")==0))
-    {
-        if(symbol.compare("MINUS")==0)
-        {
-            //////////////
-            flag = -1;
-            nextsym();
-            /////////////
-            /////////////
-            /////////////
-        }
-        else
-        {
-            nextsym();
-            ////////////
-            ////////////
-            ///////////
-        }
-    }
-    term();   ///////////////////////×¢Òâ£¬ÕâÀï¿ÉÄÜĞèÒªÔÚÓïÒåÊ±½«term·ÅÔÚÃ¿¸ö·ÖÇé¿öÖĞÌÖÂÛ
-    while((symbol.compare("PLUS")==0) || (symbol.compare("MINUS")==0))
-    {
-        ////////////
-        ////////////
-        if(symbol.compare("PLUS")==0)
-        {
-            nextsym();
-            term();
-            /////////////////
-            //////////////////
-            ///////////////////
-        }
-        else
-        {
-            nextsym();
-            term();
-            /////////////////
-            ////////////////////
-            ///////////////////
-        }
-    }
-    cout << "This expression!" <<" in line "<< line_num   << endl;
-    return result;
+	int result = 0;
+	int flag = 1;
+	////////////
+	/////////////
+	if ((symbol.compare("PLUS") == 0) || (symbol.compare("MINUS") == 0))
+	{
+		if (symbol.compare("MINUS") == 0)
+		{
+			//////////////
+			flag = -1;
+			nextsym();
+			/////////////
+			/////////////
+			/////////////
+		}
+		else
+		{
+			nextsym();
+			////////////
+			////////////
+			///////////
+		}
+	}
+	term();   ///////////////////////×¢Òâ£¬ÕâÀï¿ÉÄÜĞèÒªÔÚÓïÒåÊ±½«term·ÅÔÚÃ¿¸ö·ÖÇé¿öÖĞÌÖÂÛ
+	while ((symbol.compare("PLUS") == 0) || (symbol.compare("MINUS") == 0))
+	{
+		////////////
+		////////////
+		if (symbol.compare("PLUS") == 0)
+		{
+			nextsym();
+			term();
+			/////////////////
+			//////////////////
+			///////////////////
+		}
+		else
+		{
+			nextsym();
+			term();
+			/////////////////
+			////////////////////
+			///////////////////
+		}
+	}
+	cout << "This expression!" << " in line " << line_num << endl;
+	return result;
 }
 
 int term()
 {
-    ////////////
-    factor();
-    ///////////
-    ///////////
-    //////////
-    while((symbol.compare("STAR")==0) || (symbol.compare("DIVIDE")==0))
-    {
-        /////
-        ////
-        int debugf = 0;
-        if((symbol.compare("STAR")==0) || (symbol.compare("DIVIDE")==0))
-        {
-            debugf++;
-        }
-        if(symbol.compare("STAR")==0)
-        {
-            nextsym();
-            factor();
-            ////////////////
-            /////////////////
-            //////////////////
-        }
-        else if(symbol.compare("DIVIDE")==0)
-        {
-            nextsym();
-            factor();
-            //////////
-            /////////
-            ////////
-        }
-    }
-    ///////////
-    cout << "This term!" <<" in line "<< line_num   << endl;
-    return 0;
+	////////////
+	factor();
+	///////////
+	///////////
+	//////////
+	while ((symbol.compare("STAR") == 0) || (symbol.compare("DIVIDE") == 0))
+	{
+		/////
+		////
+		int debugf = 0;
+		if ((symbol.compare("STAR") == 0) || (symbol.compare("DIVIDE") == 0))
+		{
+			debugf++;
+		}
+		if (symbol.compare("STAR") == 0)
+		{
+			nextsym();
+			factor();
+			////////////////
+			/////////////////
+			//////////////////
+		}
+		else if (symbol.compare("DIVIDE") == 0)
+		{
+			nextsym();
+			factor();
+			//////////
+			/////////
+			////////
+		}
+	}
+	///////////
+	cout << "This term!" << " in line " << line_num << endl;
+	return 0;
 }
 
 int factor()
 {
-    if(symbol.compare("IDSY")==0)
-    {
-        string Name = string(IDNAME);
-        nextsym();
-        if(symbol.compare("LBRACKET")==0)
-        {
-            nextsym();
-            expression();
-            if(symbol.compare("RBRACKET")!=0)
-            {
-                error(13);
-            }
-            nextsym();
-            ///////////////////////
-            ///////////////////////È´Ò»´ó¶ÑÓïÒå·ÖÎöºÍ·ûºÅ±í
-            ////////////////////////
-            cout << "This is factor" <<" in line "<< line_num   << endl;
-            return 1;
-        }
-        else if(symbol.compare("LPAR")==0)
-        {
-            recallsym();
-            recallsym();
-            nextsym();
-            //////////
-            //////////////
-            //////////////È±Ò»´ó¶ÑÓïÒå·ÖÎö
-            functioncall();
-            //////////////
-            //////////////È±Ò»´ó¶ÑÓïÒå·ÖÎö
-            ///////////////
-            cout << "This is factor" <<" in line "<< line_num   << endl;
-            return 1;
-        }
-        else
-        {
-            ////////////È´Ò»´ó¶ÑÓïÒå·ÖÎö
-            cout << "This is factor" <<" in line "<< line_num   << endl;
-            return 1;
-        }
-    }
-    else if((symbol.compare("PLUS")==0) || (symbol.compare("MINUS")==0) || (symbol.compare("NUMSY")==0))
-    {
-        int NUM;
-        NUM = integer();
-        ///////////////
-        //////////////
-        /////////////
-        cout << "This is factor" <<" in line "<< line_num   << endl;
-        return 1;
-    }
-    else if(symbol.compare("CHARASCII")==0)
-    {
-        char tempchar = singleCHAR;
-        nextsym();
-        /////////////////
-        /////////////////
-        //////////////////
-        cout << "This is factor" <<" in line "<< line_num   << endl;
-        return tempchar;
-    }
-    else if(symbol.compare("LPAR")==0)
-    {
-        nextsym();
-        if(symbol.compare("RPAR")==0)
-        {
-            error(20);
-            nextsym();
-            return 0;
-        }
-        int e_value;
-        e_value=expression();
-        if(symbol.compare("RPAR")!=0)
-        {
-            error(15);
-            nextsym();
-            return 0;
-        }
-        nextsym();
-        ////////////////////
-        cout << "This is factor" <<" in line "<< line_num   << endl;
-        return e_value;
-    }
-    else
-    {
-        error(21);           //////////////////////////////////////////////////////////////////
-        nextsym();
-        return 0;
-    }
+	if (symbol.compare("IDSY") == 0)
+	{
+		string Name = string(IDNAME);
+		nextsym();
+		if (symbol.compare("LBRACKET") == 0)
+		{
+			nextsym();
+			expression();
+			if (symbol.compare("RBRACKET") != 0)
+			{
+				error(13);
+			}
+			nextsym();
+			///////////////////////
+			///////////////////////È´Ò»´ó¶ÑÓïÒå·ÖÎöºÍ·ûºÅ±í
+			////////////////////////
+			cout << "This is factor" << " in line " << line_num << endl;
+			return 1;
+		}
+		else if (symbol.compare("LPAR") == 0)
+		{
+			recallsym();
+			recallsym();
+			nextsym();
+			//////////
+			//////////////
+			//////////////È±Ò»´ó¶ÑÓïÒå·ÖÎö
+			functioncall();
+			//////////////
+			//////////////È±Ò»´ó¶ÑÓïÒå·ÖÎö
+			///////////////
+			cout << "This is factor" << " in line " << line_num << endl;
+			return 1;
+		}
+		else
+		{
+			////////////È´Ò»´ó¶ÑÓïÒå·ÖÎö
+			cout << "This is factor" << " in line " << line_num << endl;
+			return 1;
+		}
+	}
+	else if ((symbol.compare("PLUS") == 0) || (symbol.compare("MINUS") == 0) || (symbol.compare("NUMSY") == 0))
+	{
+		int NUM;
+		NUM = integer();
+		///////////////
+		//////////////
+		/////////////
+		cout << "This is factor" << " in line " << line_num << endl;
+		return 1;
+	}
+	else if (symbol.compare("CHARASCII") == 0)
+	{
+		char tempchar = singleCHAR;
+		nextsym();
+		/////////////////
+		/////////////////
+		//////////////////
+		cout << "This is factor" << " in line " << line_num << endl;
+		return tempchar;
+	}
+	else if (symbol.compare("LPAR") == 0)
+	{
+		nextsym();
+		if (symbol.compare("RPAR") == 0)
+		{
+			error(20);
+			nextsym();
+			return 0;
+		}
+		int e_value;
+		e_value = expression();
+		if (symbol.compare("RPAR") != 0)
+		{
+			error(15);
+			nextsym();
+			return 0;
+		}
+		nextsym();
+		////////////////////
+		cout << "This is factor" << " in line " << line_num << endl;
+		return e_value;
+	}
+	else
+	{
+		error(21);           //////////////////////////////////////////////////////////////////
+		nextsym();
+		return 0;
+	}
 }
 
 void compoundstatement()
 {
-    if(symbol.compare("CONSTSY")==0)
-    {
-        constdefine();
-    }
-    if((symbol.compare("INTSY")==0) || (symbol.compare("CHARSY")==0))
-    {
-        vardefine();
-    }
-    statementlist();
+	if (symbol.compare("CONSTSY") == 0)
+	{
+		constdefine();
+	}
+	if ((symbol.compare("INTSY") == 0) || (symbol.compare("CHARSY") == 0))
+	{
+		vardefine();
+	}
+	statementlist();
 }
 
 void statementlist()
 {
-    while((symbol.compare("IFSY")==0) || (symbol.compare("DOSY")==0) || (symbol.compare("SWITCHSY")==0) ||
-          (symbol.compare("LBRACE")==0) || (symbol.compare("IDSY")==0) || (symbol.compare("SCANFSY")==0) ||
-          (symbol.compare("PRINTSY")==0) || (symbol.compare("SEMI")==0) || (symbol.compare("RETURNSY")==0))
-    {
-        statement();
-            ///////////////Ç·Êä³ö
-    }
-    cout << "This is statementlist!" <<" in line "<< line_num  << endl;
+	while ((symbol.compare("IFSY") == 0) || (symbol.compare("DOSY") == 0) || (symbol.compare("SWITCHSY") == 0) ||
+		(symbol.compare("LBRACE") == 0) || (symbol.compare("IDSY") == 0) || (symbol.compare("SCANFSY") == 0) ||
+		(symbol.compare("PRINTSY") == 0) || (symbol.compare("SEMI") == 0) || (symbol.compare("RETURNSY") == 0))
+	{
+		statement();
+		///////////////Ç·Êä³ö
+	}
+	cout << "This is statementlist!" << " in line " << line_num << endl;
 }
 
 void statement()
 {
-    if(symbol.compare("IFSY")==0)
-    {
-        conditionalstatement();
-    }
-    else if(symbol.compare("DOSY")==0)
-    {
-        loopstatement();
-    }
-    else if(symbol.compare("SWITCHSY")==0)
-    {
-        casestatement();
-    }
-    else if(symbol.compare("LBRACE")==0)
-    {
-        nextsym();
-        statementlist();
-        if(symbol.compare("RBRACE")!=0)
-        {
-            error(17);
-            recallsym();
-        }
-        nextsym();
-    }
-    else if(symbol.compare("IDSY")==0)
-    {
-        string Name = string(IDNAME);
-        nextsym();
-        if(symbol.compare("LBRACKET")==0)
-        {
-            recallsym();
-            recallsym();
-            nextsym();
-            assignmentstatement();
-            /////////////////
-            /////////////////
-            /////////////////
-            if(symbol.compare("SEMI")!=0)
-            {
-                error(12);
-                recallsym();
-            }
-            nextsym();
-        }
-        else if(symbol.compare("LPAR")==0)
-        {
-            recallsym();
-            recallsym();
-            nextsym();
-            functioncall();
-            ////////////////////
-            /////////////////
-            ////////////////////
-            if(symbol.compare("SEMI")!=0)
-            {
-                error(12);
-                recallsym();
-            }
-            nextsym();
-        }
-        else if(symbol.compare("EQUAL")==0)
-        {
-            recallsym();
-            recallsym();
-            nextsym();
-            assignmentstatement();
-            ///////////////
-            /////////////
-            ////////////////
-            if(symbol.compare("SEMI")!=0)
-            {
-                error(12);
-                recallsym();
-            }
-            nextsym();
-        }
-        else
-        {
-            error(22);
-            next_semi();
-        }
-    }
-    else if(symbol.compare("SCANFSY")==0)
-    {
-        readstatement();
-        if(symbol.compare("SEMI")!=0)
-        {
-            error(12);
-            recallsym();
-        }
-        nextsym();
-    }
-    else if(symbol.compare("PRINTSY")==0)
-    {
-        writestatement();
-        if(symbol.compare("SEMI")!=0)
-        {
-            error(12);
-            recallsym();
-        }
-        nextsym();
-    }
-    else if(symbol.compare("RETURNSY")==0)
-    {
-        returnstatement();
-        if(symbol.compare("SEMI")!=0)
-        {
-            error(12);
-            recallsym();
-        }
-        nextsym();
-    }
-    else if(symbol.compare("SEMI")==0)
-    {
-        nextsym();
-    }
-    else
-    {
-        error(23);
-        next_semi();
-    }
+	if (symbol.compare("IFSY") == 0)
+	{
+		conditionalstatement();
+	}
+	else if (symbol.compare("DOSY") == 0)
+	{
+		loopstatement();
+	}
+	else if (symbol.compare("SWITCHSY") == 0)
+	{
+		casestatement();
+	}
+	else if (symbol.compare("LBRACE") == 0)
+	{
+		nextsym();
+		statementlist();
+		if (symbol.compare("RBRACE") != 0)
+		{
+			error(17);
+			recallsym();
+		}
+		nextsym();
+	}
+	else if (symbol.compare("IDSY") == 0)
+	{
+		string Name = string(IDNAME);
+		nextsym();
+		if (symbol.compare("LBRACKET") == 0)
+		{
+			recallsym();
+			recallsym();
+			nextsym();
+			assignmentstatement();
+			/////////////////
+			/////////////////
+			/////////////////
+			if (symbol.compare("SEMI") != 0)
+			{
+				error(12);
+				recallsym();
+			}
+			nextsym();
+		}
+		else if (symbol.compare("LPAR") == 0)
+		{
+			recallsym();
+			recallsym();
+			nextsym();
+			functioncall();
+			////////////////////
+			/////////////////
+			////////////////////
+			if (symbol.compare("SEMI") != 0)
+			{
+				error(12);
+				recallsym();
+			}
+			nextsym();
+		}
+		else if (symbol.compare("EQUAL") == 0)
+		{
+			recallsym();
+			recallsym();
+			nextsym();
+			assignmentstatement();
+			///////////////
+			/////////////
+			////////////////
+			if (symbol.compare("SEMI") != 0)
+			{
+				error(12);
+				recallsym();
+			}
+			nextsym();
+		}
+		else
+		{
+			error(22);
+			next_semi();
+		}
+	}
+	else if (symbol.compare("SCANFSY") == 0)
+	{
+		readstatement();
+		if (symbol.compare("SEMI") != 0)
+		{
+			error(12);
+			recallsym();
+		}
+		nextsym();
+	}
+	else if (symbol.compare("PRINTSY") == 0)
+	{
+		writestatement();
+		if (symbol.compare("SEMI") != 0)
+		{
+			error(12);
+			recallsym();
+		}
+		nextsym();
+	}
+	else if (symbol.compare("RETURNSY") == 0)
+	{
+		returnstatement();
+		if (symbol.compare("SEMI") != 0)
+		{
+			error(12);
+			recallsym();
+		}
+		nextsym();
+	}
+	else if (symbol.compare("SEMI") == 0)
+	{
+		nextsym();
+	}
+	else
+	{
+		error(23);
+		next_semi();
+	}
 }
 
 void condition()
 {
-    ////////////////
-    ////////////////
-    ///////////////
-    expression();
-    ////////////
-    /////////////
-    /////////////
-    if(symbol.compare("RPAR")==0)
-    {
-        cout << "This is condition" <<" in line "<< line_num  << endl;
-        return;
-    }
-    else if((symbol.compare("SMALLER")==0) || (symbol.compare("SMALLEREQ")==0) || (symbol.compare("BIGGER")==0) ||
-       (symbol.compare("BIGGEREQ")==0) || (symbol.compare("NEQUAL")==0) || (symbol.compare("REALEQ")==0))
-    {
-        ////////////////////
-        ////////////////////
-        nextsym();
-        expression();
-        cout << "This is condition" <<" in line "<< line_num   << endl;
-    }
-    else
-    {
-        error(24);
-        next_statement();
-    }
+	////////////////
+	////////////////
+	///////////////
+	expression();
+	////////////
+	/////////////
+	/////////////
+	if (symbol.compare("RPAR") == 0)
+	{
+		cout << "This is condition" << " in line " << line_num << endl;
+		return;
+	}
+	else if ((symbol.compare("SMALLER") == 0) || (symbol.compare("SMALLEREQ") == 0) || (symbol.compare("BIGGER") == 0) ||
+		(symbol.compare("BIGGEREQ") == 0) || (symbol.compare("NEQUAL") == 0) || (symbol.compare("REALEQ") == 0))
+	{
+		////////////////////
+		////////////////////
+		nextsym();
+		expression();
+		cout << "This is condition" << " in line " << line_num << endl;
+	}
+	else
+	{
+		error(24);
+		next_statement();
+	}
 }
 
 void conditionalstatement()
 {
-    if(symbol.compare("IFSY")==0)
-    {
-        nextsym();
-        if(symbol.compare("LPAR")==0)
-        {
-            nextsym();
-            condition();
-            if(symbol.compare("RPAR")!=0)
-            {
-                error(15);
-                recallsym();
-            }
-            nextsym();
-            ////////
-            /////////
-            statement();
-            /////////////
-            ///////////
-            cout << "This is conditional statement!" <<" in line "<< line_num << endl;
-        }
-        else
-        {
-            error(16);
-            recallsym();
-            nextsym();
-            condition();          ///////////////////
-            if(symbol.compare("RPAR")!=0)
-            {
-                error(15);
-                recallsym();
-            }
-            nextsym();
-            ////////
-            /////////
-            statement();
-            ////////////////
-            //////////////////
-        }
-    }
+	if (symbol.compare("IFSY") == 0)
+	{
+		nextsym();
+		if (symbol.compare("LPAR") == 0)
+		{
+			nextsym();
+			condition();
+			if (symbol.compare("RPAR") != 0)
+			{
+				error(15);
+				recallsym();
+			}
+			nextsym();
+			////////
+			/////////
+			statement();
+			/////////////
+			///////////
+			cout << "This is conditional statement!" << " in line " << line_num << endl;
+		}
+		else
+		{
+			error(16);
+			recallsym();
+			nextsym();
+			condition();          ///////////////////
+			if (symbol.compare("RPAR") != 0)
+			{
+				error(15);
+				recallsym();
+			}
+			nextsym();
+			////////
+			/////////
+			statement();
+			////////////////
+			//////////////////
+		}
+	}
 }
 
 void loopstatement()
 {
-    cout << "This is enter loop statement" <<" in line "<< line_num   << endl;
-    if(symbol.compare("DOSY")==0)
-    {
-        ///////////////////
-        ////////////////
-        nextsym();
-        statement();
-        if(symbol.compare("WHILESY")==0)
-        {
-            nextsym();
-            //////////////
-            ///////////////
-            if(symbol.compare("LPAR")==0)
-            {
-                nextsym();
-                condition();
-                if(symbol.compare("RPAR")!=0)
-                {
-                    error(15);
-                    recallsym();
-                }
-                nextsym();
-                cout << "This is loop statement" <<" in line "<< line_num << endl;
-            }
-            else
-            {
-                error(16);
-                next_statement();
-                return ;
-            }
-        }
-        else
-        {
-            error(25);
-            next_statement();
-            return;
-        }
-    }
+	cout << "This is enter loop statement" << " in line " << line_num << endl;
+	if (symbol.compare("DOSY") == 0)
+	{
+		///////////////////
+		////////////////
+		nextsym();
+		statement();
+		if (symbol.compare("WHILESY") == 0)
+		{
+			nextsym();
+			//////////////
+			///////////////
+			if (symbol.compare("LPAR") == 0)
+			{
+				nextsym();
+				condition();
+				if (symbol.compare("RPAR") != 0)
+				{
+					error(15);
+					recallsym();
+				}
+				nextsym();
+				cout << "This is loop statement" << " in line " << line_num << endl;
+			}
+			else
+			{
+				error(16);
+				next_statement();
+				return;
+			}
+		}
+		else
+		{
+			error(25);
+			next_statement();
+			return;
+		}
+	}
 }
 
 void casestatement()
 {
-    if(symbol.compare("SWITCHSY")==0)
-    {
-        nextsym();
-        if(symbol.compare("LPAR")==0)
-        {
-            nextsym();
-            //////////////
-            //////////////
-            expression();
-            ////////////
-            if(symbol.compare("RPAR")!=0)
-            {
-                error(15);
-                next_LBRACE();
-            }
-            nextsym();
-            if(symbol.compare("LBRACE")==0)
-            {
-                nextsym();
-                casetable();
-                if(symbol.compare("RBRACE")!=0)
-                {
-                    error(17);
-                    next_statement();
-                }
-                nextsym();
-                cout << "This is case statement" <<" in line "<< line_num << endl;
-            }
-            else
-            {
-                error(14);
-            }
-        }
-        else
-        {
-            error(16);
-        }
-    }
+	if (symbol.compare("SWITCHSY") == 0)
+	{
+		nextsym();
+		if (symbol.compare("LPAR") == 0)
+		{
+			nextsym();
+			//////////////
+			//////////////
+			expression();
+			////////////
+			if (symbol.compare("RPAR") != 0)
+			{
+				error(15);
+				next_LBRACE();
+			}
+			nextsym();
+			if (symbol.compare("LBRACE") == 0)
+			{
+				nextsym();
+				casetable();
+				if (symbol.compare("RBRACE") != 0)
+				{
+					error(17);
+					next_statement();
+				}
+				nextsym();
+				cout << "This is case statement" << " in line " << line_num << endl;
+			}
+			else
+			{
+				error(14);
+			}
+		}
+		else
+		{
+			error(16);
+		}
+	}
 }
 
 void casetable()
 {
-    if(symbol.compare("CASESY")==0)
-    {
-        nextsym();
-        if(symbol.compare("NUMSY")==0)
-        {
-            /////////
-            //////////
-            if((*pre1p =='0') && (p-pre1p>1))
-            {
-                error(9);
-            }
-            int NUM = num;
-            //////////////////
-            ///////////////////
-            nextsym();
-            if(symbol.compare("COLON")==0)
-            {
-                nextsym();
-                statement();
-                cout << "This is one of case table" <<" in line "<< line_num << endl;
-            }
-            else
-            {
-                error(26);
-                next_statement();
-            }
-        }
-        else if(symbol.compare("CHARASCII")==0)
-        {
-            /////////
-            //////////
-            char tempchar = singleCHAR;
-            //////////////////
-            ///////////////////
-            nextsym();
-            if(symbol.compare("COLON")==0)
-            {
-                nextsym();
-                statement();
-                cout << "This is one of case table" <<" in line "<< line_num << endl;
-            }
-            else
-            {
-                error(26);
-                next_statement();
-            }
-        }
-        else
-        {
-            error(27);
-        }
-    }
-    while(symbol.compare("CASESY")==0)
-    {
-        nextsym();
-        if(symbol.compare("NUMSY")==0)
-        {
-            /////////
-            //////////
-            if((*pre1p =='0') && (p-pre1p>1))
-            {
-                error(9);
-            }
-            int NUM = num;
-            //////////////////
-            ///////////////////
-            nextsym();
-            if(symbol.compare("COLON")==0)
-            {
-                nextsym();
-                statement();
-                cout << "This is one of case table" <<" in line "<< line_num << endl;
-            }
-            else
-            {
-                error(26);
-                next_statement();
-            }
-        }
-        else if(symbol.compare("CHARASCII")==0)
-        {
-            /////////
-            //////////
-            char tempchar = singleCHAR;
-            //////////////////
-            ///////////////////
-            nextsym();
-            if(symbol.compare("COLON")==0)
-            {
-                nextsym();
-                statement();
-                cout << "This is one of case table" <<" in line "<< line_num << endl;
-            }
-            else
-            {
-                error(26);
-                next_statement();
-            }
-        }
-        else
-        {
-            error(27);
-        }
-    }
+	if (symbol.compare("CASESY") == 0)
+	{
+		nextsym();
+		if (symbol.compare("NUMSY") == 0)
+		{
+			/////////
+			//////////
+			if ((*pre1p == '0') && (p - pre1p>1))
+			{
+				error(9);
+			}
+			int NUM = num;
+			//////////////////
+			///////////////////
+			nextsym();
+			if (symbol.compare("COLON") == 0)
+			{
+				nextsym();
+				statement();
+				cout << "This is one of case table" << " in line " << line_num << endl;
+			}
+			else
+			{
+				error(26);
+				next_statement();
+			}
+		}
+		else if (symbol.compare("CHARASCII") == 0)
+		{
+			/////////
+			//////////
+			char tempchar = singleCHAR;
+			//////////////////
+			///////////////////
+			nextsym();
+			if (symbol.compare("COLON") == 0)
+			{
+				nextsym();
+				statement();
+				cout << "This is one of case table" << " in line " << line_num << endl;
+			}
+			else
+			{
+				error(26);
+				next_statement();
+			}
+		}
+		else
+		{
+			error(27);
+		}
+	}
+	while (symbol.compare("CASESY") == 0)
+	{
+		nextsym();
+		if (symbol.compare("NUMSY") == 0)
+		{
+			/////////
+			//////////
+			if ((*pre1p == '0') && (p - pre1p>1))
+			{
+				error(9);
+			}
+			int NUM = num;
+			//////////////////
+			///////////////////
+			nextsym();
+			if (symbol.compare("COLON") == 0)
+			{
+				nextsym();
+				statement();
+				cout << "This is one of case table" << " in line " << line_num << endl;
+			}
+			else
+			{
+				error(26);
+				next_statement();
+			}
+		}
+		else if (symbol.compare("CHARASCII") == 0)
+		{
+			/////////
+			//////////
+			char tempchar = singleCHAR;
+			//////////////////
+			///////////////////
+			nextsym();
+			if (symbol.compare("COLON") == 0)
+			{
+				nextsym();
+				statement();
+				cout << "This is one of case table" << " in line " << line_num << endl;
+			}
+			else
+			{
+				error(26);
+				next_statement();
+			}
+		}
+		else
+		{
+			error(27);
+		}
+	}
 }
 
 void assignmentstatement()
 {
-    if(symbol.compare("IDSY")==0)
-    {
-        string Name = string(IDNAME);
-        //////////////////
-        //////////////////
-        nextsym();
-        if(symbol.compare("LBRACKET")==0)
-        {
-            nextsym();
-            ///////////////////
-            //////////////////
-            expression();
-            /////////////////
-            //////////////////
-            if(symbol.compare("RBRACKET")!=0)
-            {
-                error(13);
-                recallsym();
-            }
-            nextsym();
-            //////////
-            //////////
-            if(symbol.compare("EQUAL")!=0)
-            {
-                error(28);
-                recallsym();
-            }
-            nextsym();
-            expression();
-            cout << "This is array assign statement" <<" in line "<< line_num << endl;
-        }
-        else if(symbol.compare("EQUAL")==0)
-        {
-            nextsym();
-            ///////////////////////
-            ///////////////////////
-            expression();
-            ///////////////////////
-            ///////////////////////
-            cout << "This is assign satement" <<" in line "<< line_num<< endl;
-        }
-        else
-        {
-            error(29);
-        }
-    }
+	if (symbol.compare("IDSY") == 0)
+	{
+		string Name = string(IDNAME);
+		//////////////////
+		//////////////////
+		nextsym();
+		if (symbol.compare("LBRACKET") == 0)
+		{
+			nextsym();
+			///////////////////
+			//////////////////
+			expression();
+			/////////////////
+			//////////////////
+			if (symbol.compare("RBRACKET") != 0)
+			{
+				error(13);
+				recallsym();
+			}
+			nextsym();
+			//////////
+			//////////
+			if (symbol.compare("EQUAL") != 0)
+			{
+				error(28);
+				recallsym();
+			}
+			nextsym();
+			expression();
+			cout << "This is array assign statement" << " in line " << line_num << endl;
+		}
+		else if (symbol.compare("EQUAL") == 0)
+		{
+			nextsym();
+			///////////////////////
+			///////////////////////
+			expression();
+			///////////////////////
+			///////////////////////
+			cout << "This is assign satement" << " in line " << line_num << endl;
+		}
+		else
+		{
+			error(29);
+		}
+	}
 }
 
 void readstatement()
 {
-    if(symbol.compare("SCANFSY")==0)
-    {
-        nextsym();
-        if(symbol.compare("LPAR")==0)
-        {
-            nextsym();
-            string Name;
-            if(symbol.compare("IDSY")==0)
-            {
-                Name = string(IDNAME);
-                ///////////////////
-                /////////////////////
-                nextsym();
+	if (symbol.compare("SCANFSY") == 0)
+	{
+		nextsym();
+		if (symbol.compare("LPAR") == 0)
+		{
+			nextsym();
+			string Name;
+			if (symbol.compare("IDSY") == 0)
+			{
+				Name = string(IDNAME);
+				///////////////////
+				/////////////////////
+				nextsym();
 
-            }
-            else
-            {
-                error(8);
-                next_semi();
-                return ;
-            }
-            while(symbol.compare("COMMA")==0)
-            {
-                nextsym();
-                if(symbol.compare("IDSY")==0)
-                {
-                    Name = string(IDNAME);
-                    ///////////////////
-                    /////////////////////
-                    nextsym();
+			}
+			else
+			{
+				error(8);
+				next_semi();
+				return;
+			}
+			while (symbol.compare("COMMA") == 0)
+			{
+				nextsym();
+				if (symbol.compare("IDSY") == 0)
+				{
+					Name = string(IDNAME);
+					///////////////////
+					/////////////////////
+					nextsym();
 
-                }
-                else
-                {
-                    error(8);
-                    next_semi;
-                    return ;
-                }
-            }
-            if(symbol.compare("RPAR")!=0)
-            {
-                error(15);
-                next_semi();
-                return ;
-            }
-            nextsym();
-            cout << "This is read statement" <<" in line "<< line_num << endl;
-        }
-        else
-        {
-            error(16);
-            next_semi();
-            return ;
-        }
-    }
+				}
+				else
+				{
+					error(8);
+					next_semi();
+					return;
+				}
+			}
+			if (symbol.compare("RPAR") != 0)
+			{
+				error(15);
+				next_semi();
+				return;
+			}
+			nextsym();
+			cout << "This is read statement" << " in line " << line_num << endl;
+		}
+		else
+		{
+			error(16);
+			next_semi();
+			return;
+		}
+	}
 }
 
 void writestatement()
 {
-    if(symbol.compare("PRINTSY")==0)
-    {
-        nextsym();
-        if(symbol.compare("LPAR")==0)
-        {
-            nextsym();
-            if(symbol.compare("STRINGSY")==0)
-            {
-                nextsym();
-                if(symbol.compare("COMMA")==0)
-                {
-                    nextsym();
-                    expression();
-                }
+	if (symbol.compare("PRINTSY") == 0)
+	{
+		nextsym();
+		if (symbol.compare("LPAR") == 0)
+		{
+			nextsym();
+			if (symbol.compare("STRINGSY") == 0)
+			{
+				nextsym();
+				if (symbol.compare("COMMA") == 0)
+				{
+					nextsym();
+					expression();
+				}
 
-            }
-            else
-            {
-                expression();
-            }
-            if(symbol.compare("RPAR")!=0)
-            {
-                error(15);
-                recallsym();
-            }
-            nextsym();
-            cout << "This is write statement£¡" <<" in line "<< line_num << endl;
-        }
-        else
-        {
-            error(16);
-            next_semi();
-            return ;
-        }
-    }
+			}
+			else
+			{
+				expression();
+			}
+			if (symbol.compare("RPAR") != 0)
+			{
+				error(15);
+				recallsym();
+			}
+			nextsym();
+			cout << "This is write statement£¡" << " in line " << line_num << endl;
+		}
+		else
+		{
+			error(16);
+			next_semi();
+			return;
+		}
+	}
 }
 
 void returnstatement()
 {
-    if(symbol.compare("RETURNSY")==0)
-    {
-        nextsym();
-        return_flag = true;
-        if(symbol.compare("LPAR")==0)
-        {
-            nextsym();
-            expression();
-            return_expression = true;
-            if(symbol.compare("RPAR")!=0)
-            {
-                error(15);
-                recallsym();
-            }
-            nextsym();
-            cout << "This is return statement" <<" in line "<< line_num << endl;
-        }
-        else if(symbol.compare("SEMI")==0)
-        {
-            cout << "This is return statement" <<" in line "<< line_num << endl;
-            return;
-        }
-        else
-        {
-            ///////////////
-            if(return_type.compare("VOIDSY")!=0)
-                error(18);
-        }
-    }
+	if (symbol.compare("RETURNSY") == 0)
+	{
+		nextsym();
+		return_flag = true;
+		if (symbol.compare("LPAR") == 0)
+		{
+			nextsym();
+			expression();
+			return_expression = true;
+			if (symbol.compare("RPAR") != 0)
+			{
+				error(15);
+				recallsym();
+			}
+			nextsym();
+			cout << "This is return statement" << " in line " << line_num << endl;
+		}
+		else if (symbol.compare("SEMI") == 0)
+		{
+			cout << "This is return statement" << " in line " << line_num << endl;
+			return;
+		}
+		else
+		{
+			///////////////
+			if (return_type.compare("VOIDSY") != 0)
+				error(18);
+		}
+	}
 }
 //£¼³ÌĞò£¾    ::= £Û£¼³£Á¿ËµÃ÷£¾£İ£Û£¼±äÁ¿ËµÃ÷£¾£İ{£¼ÓĞ·µ»ØÖµº¯Êı¶¨Òå£¾|£¼ÎŞ·µ»ØÖµº¯Êı¶¨Òå£¾}£¼Ö÷º¯Êı£¾
 //£¼³£Á¿ËµÃ÷£¾ ::=  const£¼³£Á¿¶¨Òå£¾;{ const£¼³£Á¿¶¨Òå£¾;}
 //£¼³£Á¿¶¨Òå£¾   ::=   int£¼±êÊ¶·û£¾£½£¼ÕûÊı£¾{,£¼±êÊ¶·û£¾£½£¼ÕûÊı£¾}
-     //                       | char£¼±êÊ¶·û£¾£½£¼×Ö·û£¾{,£¼±êÊ¶·û£¾£½£¼×Ö·û£¾}
+//                       | char£¼±êÊ¶·û£¾£½£¼×Ö·û£¾{,£¼±êÊ¶·û£¾£½£¼×Ö·û£¾}
 //£¼ÓĞ·µ»ØÖµº¯Êı¶¨Òå£¾  ::=  £¼ÉùÃ÷Í·²¿£¾¡®(¡¯£¼²ÎÊı±í£¾¡®)¡¯ ¡®{¡¯£¼¸´ºÏÓï¾ä£¾¡®}¡¯
 //£¼ÎŞ·µ»ØÖµº¯Êı¶¨Òå£¾  ::= void£¼±êÊ¶·û£¾¡®(¡¯£¼²ÎÊı±í£¾¡®)¡¯¡®{¡¯£¼¸´ºÏÓï¾ä£¾¡®}¡¯
 
@@ -1468,125 +1469,125 @@ void returnstatement()
 
 void program()         //³ÌĞòµÄÓï·¨ÈçÉÏ
 {
-    Ch = *p;
-    nextsym();
-    while(1)
-    {
-        if(symbol.compare("CONSTSY") == 0)
-        {
-            constdefine();
-        }
-        if((symbol.compare("INTSY")==0) || (symbol.compare("CHARSY")==0))
-        {
-            nextsym();
-            if(symbol.compare("IDSY")==0)
-            {
-                nextsym();
-                if(symbol.compare("LPAR")==0)
-                {
-                    recallsym();
-                    recallsym();
-                    recallsym();
-                    nextsym();
-                    functiondefine();
-                    mainfunction();
-                    return;
-                }
-                else if((symbol.compare("COMMA")==0) || (symbol.compare("SEMI")==0) || (symbol.compare("LBRACKET")==0))
-                {
-                    recallsym();
-                    recallsym();
-                    recallsym();
-                    nextsym();
-                    vardefine();
-                    if((symbol.compare("INTSY")==0) || (symbol.compare("CHARSY")==0))
-                    {
-                        functiondefine();
-                        mainfunction();
-                        return;
-                    }
-                    else if( symbol.compare("VOIDSY")==0)
-                    {
-                        nextsym();
-                        if(symbol.compare("MAINSY")==0)
-                        {
-                            recallsym();
-                            recallsym();
-                            nextsym();
-                            mainfunction();
-                            return;
-                        }
-                        else if(symbol.compare("IDSY")==0)
-                        {
-                            recallsym();
-                            recallsym();
-                            nextsym();
-                            functiondefine();
-                            mainfunction();
-                            return;
-                        }
-                        else
-                        {
-                            error(5);
-                            next_declare_head();
-                            continue;
-                        }
-                    }
-                    else
-                    {
-                        error(6);
-                        next_declare_head();
-                        continue;
-                    }
-                }
-                else
-                {
-                    error(7);
-                    next_declare_head();
-                    continue;
-                }
+	Ch = *p;
+	nextsym();
+	while (true)
+	{
+		if (symbol.compare("CONSTSY") == 0)
+		{
+			constdefine();
+		}
+		if ((symbol.compare("INTSY") == 0) || (symbol.compare("CHARSY") == 0))
+		{
+			nextsym();
+			if (symbol.compare("IDSY") == 0)
+			{
+				nextsym();
+				if (symbol.compare("LPAR") == 0)
+				{
+					recallsym();
+					recallsym();
+					recallsym();
+					nextsym();
+					functiondefine();
+					mainfunction();
+					return;
+				}
+				else if ((symbol.compare("COMMA") == 0) || (symbol.compare("SEMI") == 0) || (symbol.compare("LBRACKET") == 0))
+				{
+					recallsym();
+					recallsym();
+					recallsym();
+					nextsym();
+					vardefine();
+					if ((symbol.compare("INTSY") == 0) || (symbol.compare("CHARSY") == 0))
+					{
+						functiondefine();
+						mainfunction();
+						return;
+					}
+					else if (symbol.compare("VOIDSY") == 0)
+					{
+						nextsym();
+						if (symbol.compare("MAINSY") == 0)
+						{
+							recallsym();
+							recallsym();
+							nextsym();
+							mainfunction();
+							return;
+						}
+						else if (symbol.compare("IDSY") == 0)
+						{
+							recallsym();
+							recallsym();
+							nextsym();
+							functiondefine();
+							mainfunction();
+							return;
+						}
+						else
+						{
+							error(5);
+							next_declare_head();
+							continue;
+						}
+					}
+					else
+					{
+						error(6);
+						next_declare_head();
+						continue;
+					}
+				}
+				else
+				{
+					error(7);
+					next_declare_head();
+					continue;
+				}
 
-            }
-            else
-            {
-                error(8);
-                next_declare_head();
-                continue;
-            }
-        }
-        else if(symbol.compare("VOIDSY")==0) /////////////////////
-        {
-            nextsym();
-            if(symbol.compare("MAINSY")==0)
-            {
-                recallsym();
-                recallsym();
-                nextsym();
-                mainfunction();
-                return;
-            }
-            else if(symbol.compare("IDSY")==0)
-            {
-                recallsym();
-                recallsym();
-                nextsym();
-                functiondefine();
-                mainfunction();
-                return;
-            }
-            else
-            {
-                error(5);
-                next_declare_head();
-                continue;
-            }
-        }
-        else         //////////////////
-        {
-            error(6);
-            next_declare_head();
-            continue;
-        }
-    }
+			}
+			else
+			{
+				error(8);
+				next_declare_head();
+				continue;
+			}
+		}
+		else if (symbol.compare("VOIDSY") == 0) /////////////////////
+		{
+			nextsym();
+			if (symbol.compare("MAINSY") == 0)
+			{
+				recallsym();
+				recallsym();
+				nextsym();
+				mainfunction();
+				return;
+			}
+			else if (symbol.compare("IDSY") == 0)
+			{
+				recallsym();
+				recallsym();
+				nextsym();
+				functiondefine();
+				mainfunction();
+				return;
+			}
+			else
+			{
+				error(5);
+				next_declare_head();
+				continue;
+			}
+		}
+		else         //////////////////
+		{
+			error(6);
+			next_declare_head();
+			continue;
+		}
+	}
 }
 

@@ -46,9 +46,9 @@ int clearToken();
 
 extern int flag_for_interger2const;
 extern int level;
-extern bool return_flag ;
+extern bool return_flag;
 extern bool return_expression;
-extern string return_type ;
+extern string return_type;
 
 int integer();
 void constdefine();
@@ -76,21 +76,52 @@ void program();
 
 typedef struct symnode
 {
-    string name;
-    string kind;           //const£¬var....
-    string type;           //int char string...
-    int value;
-    int symindex;
-    bool arr;
-    int length;
-    int level;
-    int depth;
+	string name;
+	string kind;           //const£¬var....
+	string type;           //int char string...
+	int value;
+	bool arr;
+	int length;
+	int level;
+	int depth;
 }symele;
 extern vector<symele> symboltable;
 
-int checkname();
-void insertsymboltable();
-int getsymindex();
+extern int tablelength;
+extern int procedure_num;
+extern int procedure_end_index[100];
+
+int checkname(string name, int level);
+void insertsymboltable(string name, string kind, string type, int value, bool arr, int length, int level, int depth);
+int getsymindex(string name,string kind);
 void deletefunction();
+
+typedef struct middle
+{
+	string op;
+	string ob1;
+	string ob2;
+	string ob3;
+}midcode;
+
+extern int midcode_length = 0;
+extern vector<midcode> middlecode_list;
+
+void ConstMidCode(string op, string type, int num, string name);
+void VarMidCode(string type, int length, string name);
+void FunctionMidCode(string name);
+void ParaMidCode(string type, string name);
+void SetParaMidCode(string t_para);
+void CallReturnFunctionMidCode(string name, string V);
+void CallFunctionMidcode(string name);
+void ExpressionMidCode(string op, string ob1, string ob2, string V);
+void AssignmentMidCode(string op, string ob1, string ob2, string ob3);
+void JumpMidCode(string op, string ob1, string ob2, string label);
+void LabelMidCode(string label);
+void ScanfMidCode(string name);
+void PrintfMidCode(string str, string name);
+void ReturnMidCode(string name);
+void FstartMidCode();
+void FendMidCode();
 
 #endif // GLOBAL_H_INCLUDED
