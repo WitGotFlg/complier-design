@@ -104,7 +104,7 @@ typedef struct middle
 	string ob3;
 }midcode;
 
-extern int midcode_length = 0;
+extern int midcode_length;
 extern vector<midcode> middlecode_list;
 
 void ConstMidCode(string op, string type, int num, string name);

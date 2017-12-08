@@ -23,7 +23,7 @@ extern char Ch; //存放当前读入的字符
 extern char IDNAME[100];
 extern char singleCHAR; //用于存放当读到‘c’单个字符的情况
 extern char singleC[5];  //专门用于方便词法分析程序输出的
-extern char stringCHAR[100];   //在本程序中，将单字符和字符串的‘和”也放在了单词中，因为只有这个地方出现了，所以不会对其他语法造成影响
+extern char stringCHAR[100];   //在本程序中，将单字符和字符串的‘和”也放在了单词中，因为只有这个地方出现了，所以不会对其他语法造成影响、、此处更新后未将双引号放入
 extern int num; //存放当前读入的整型数值
 extern string symbol;
 extern int line_num;               //记录行数用于错误处理
@@ -102,6 +102,7 @@ extern string term_type;
 extern string factor_type;
 extern int label_num;
 extern int error_num;
+extern int tempvarnum;
 
 typedef struct middle
 {
@@ -131,4 +132,14 @@ void ReturnMidCode(string name);
 void FstartMidCode();
 void FendMidCode();
 
+typedef struct mipsnode
+{
+	string name;
+	string type;
+	string length;
+	string level;
+}mipsele;
+
+extern vector<mipsele> mipssymboltable;
+extern int mipstablelength;
 #endif // GLOBAL_H_INCLUDED

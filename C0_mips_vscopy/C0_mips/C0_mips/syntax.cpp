@@ -1,6 +1,8 @@
 #include "stdafx.h"
 #include "global.h"
 
+using namespace std;
+
 char* pre1p;
 char* pre2p;
 char* pre3p;
@@ -17,6 +19,7 @@ string factor_type = string("INTSY");
 int label_num = 0;
 int error_num = 0;
 
+int tempvarnum = 0;
 
 void nextsym()            //语法分析取单词，3个prep用于标识符，数组，函数区分时必要的预读
 {
@@ -120,7 +123,7 @@ int integer()
 		if (*pre1p != '0' || (p - pre1p)<2)
 		{
 			NUM = flag*num;
-			cout << "This is integer" << " in line " << line_num << endl;
+			//cout << "This is integer" << " in line " << line_num << endl;
 			nextsym();
 		}
 		else
@@ -157,10 +160,10 @@ void constdefine()
 					}
 					insertsymboltable(Name, string("CONST"), type, NUM, false, 0, level, 0);
 					ConstMidCode(string("CONST"), type, NUM, Name);
-					cout << middlecode_list[midcode_length-1].op << " " 
+					/*cout << middlecode_list[midcode_length-1].op << " " 
 						<< middlecode_list[midcode_length-1].ob1 << " " 
 						<< middlecode_list[midcode_length-1].ob2 << " " 
-						<< middlecode_list[midcode_length-1].ob3 << endl;
+						<< middlecode_list[midcode_length-1].ob3 << endl;*/
 				}
 				else
 				{
@@ -193,10 +196,10 @@ void constdefine()
 						}
 						insertsymboltable(Name, string("CONST"), type, NUM, false, 0, level, 0);
 						ConstMidCode(string("CONST"), type, NUM, Name);
-						cout << middlecode_list[midcode_length-1].op << " "
+						/*cout << middlecode_list[midcode_length-1].op << " "
 							<< middlecode_list[midcode_length-1].ob1 << " "
 							<< middlecode_list[midcode_length-1].ob2 << " "
-							<< middlecode_list[midcode_length-1].ob3 << endl;
+							<< middlecode_list[midcode_length-1].ob3 << endl;*/
 					}
 					else
 					{
@@ -244,10 +247,10 @@ void constdefine()
 					}
 					insertsymboltable(Name, string("CONST"), type, ascii, false, 0, level, 0);
 					ConstMidCode(string("CONST"), type, ascii, Name);
-					cout << middlecode_list[midcode_length-1].op << " "
+					/*cout << middlecode_list[midcode_length-1].op << " "
 						<< middlecode_list[midcode_length-1].ob1 << " "
 						<< middlecode_list[midcode_length-1].ob2 << " "
-						<< middlecode_list[midcode_length-1].ob3 << endl;
+						<< middlecode_list[midcode_length-1].ob3 << endl;*/
 				}
 				else
 				{
@@ -288,10 +291,10 @@ void constdefine()
 						}
 						insertsymboltable(Name, string("CONST"), type, ascii, false, 0, level, 0);
 						ConstMidCode(string("CONST"), type, ascii, Name);
-						cout << middlecode_list[midcode_length-1].op << " "
+						/*cout << middlecode_list[midcode_length-1].op << " "
 							<< middlecode_list[midcode_length-1].ob1 << " "
 							<< middlecode_list[midcode_length-1].ob2 << " "
-							<< middlecode_list[midcode_length-1].ob3 << endl;
+							<< middlecode_list[midcode_length-1].ob3 << endl;*/
 					}
 					else
 					{
@@ -352,15 +355,15 @@ void functiondefine()
 			{
 				nextsym();
 				FstartMidCode();
-				cout << middlecode_list[midcode_length - 1].op << " "
+				/*cout << middlecode_list[midcode_length - 1].op << " "
 					<< middlecode_list[midcode_length - 1].ob1 << " "
 					<< middlecode_list[midcode_length - 1].ob2 << " "
-					<< middlecode_list[midcode_length - 1].ob3 << endl;
+					<< middlecode_list[midcode_length - 1].ob3 << endl;*/
 				LabelMidCode(Name);
-				cout << middlecode_list[midcode_length - 1].op << " "
+				/*cout << middlecode_list[midcode_length - 1].op << " "
 					<< middlecode_list[midcode_length - 1].ob1 << " "
 					<< middlecode_list[midcode_length - 1].ob2 << " "
-					<< middlecode_list[midcode_length - 1].ob3 << endl;
+					<< middlecode_list[midcode_length - 1].ob3 << endl;*/
 				int paranum = paratable();
 				if (symbol.compare("RPAR") == 0)
 				{
@@ -403,10 +406,10 @@ void functiondefine()
 		}
 		deletefunction();
 		FendMidCode();
-		cout << middlecode_list[midcode_length - 1].op << " "
+		/*cout << middlecode_list[midcode_length - 1].op << " "
 			<< middlecode_list[midcode_length - 1].ob1 << " "
 			<< middlecode_list[midcode_length - 1].ob2 << " "
-			<< middlecode_list[midcode_length - 1].ob3 << endl;
+			<< middlecode_list[midcode_length - 1].ob3 << endl;*/
 		//cout << "This is function define!" << " in line " << line_num << endl;
 		nextsym();      /////////暂时放在上面两个之后
 		level--;
@@ -430,16 +433,16 @@ void mainfunction()
 		{
 			FstartMidCode();
 			LabelMidCode(string("main"));
-			cout << middlecode_list[midcode_length - 1].op << " "
+			/*cout << middlecode_list[midcode_length - 1].op << " "
 				<< middlecode_list[midcode_length - 1].ob1 << " "
 				<< middlecode_list[midcode_length - 1].ob2 << " "
-				<< middlecode_list[midcode_length - 1].ob3 << endl;
+				<< middlecode_list[midcode_length - 1].ob3 << endl;*/
 			nextsym();
 			insertsymboltable(string("main"), string("FUNCTION"), string("VOIDSY"), -1, false, 0, level - 1, 0);
-			cout << middlecode_list[midcode_length - 1].op << " "
+			/*cout << middlecode_list[midcode_length - 1].op << " "
 				<< middlecode_list[midcode_length - 1].ob1 << " "
 				<< middlecode_list[midcode_length - 1].ob2 << " "
-				<< middlecode_list[midcode_length - 1].ob3 << endl;
+				<< middlecode_list[midcode_length - 1].ob3 << endl;*/
 			if (symbol.compare("LPAR") == 0)
 			{
 				nextsym();
@@ -478,10 +481,10 @@ void mainfunction()
 	}
 	deletefunction();
 	FendMidCode();
-	cout << middlecode_list[midcode_length - 1].op << " "
+	/*cout << middlecode_list[midcode_length - 1].op << " "
 		<< middlecode_list[midcode_length - 1].ob1 << " "
 		<< middlecode_list[midcode_length - 1].ob2 << " "
-		<< middlecode_list[midcode_length - 1].ob3 << endl;
+		<< middlecode_list[midcode_length - 1].ob3 << endl;*/
 	//cout << "This main function!" << " in line " << line_num << endl;
 	if ((return_flag == true) && (return_expression != false))
 	{
@@ -517,10 +520,10 @@ void vardefine()
 					}
 					insertsymboltable(Name, string("VAR"), type, 0, true, Length, level, 0);
 					VarMidCode(type, Length, Name);
-					cout << middlecode_list[midcode_length - 1].op << " "
+					/*cout << middlecode_list[midcode_length - 1].op << " "
 						<< middlecode_list[midcode_length - 1].ob1 << " "
 						<< middlecode_list[midcode_length - 1].ob2 << " "
-						<< middlecode_list[midcode_length - 1].ob3 << endl;
+						<< middlecode_list[midcode_length - 1].ob3 << endl;*/
 					nextsym();
 				}
 				else
@@ -542,10 +545,10 @@ void vardefine()
 			{
 				insertsymboltable(Name, string("VAR"), type, 0, false, 0, level, 0);
 				VarMidCode(type, 0, Name);
-				cout << middlecode_list[midcode_length - 1].op << " "
+				/*cout << middlecode_list[midcode_length - 1].op << " "
 					<< middlecode_list[midcode_length - 1].ob1 << " "
 					<< middlecode_list[midcode_length - 1].ob2 << " "
-					<< middlecode_list[midcode_length - 1].ob3 << endl;
+					<< middlecode_list[midcode_length - 1].ob3 << endl;*/
 			}
 		}
 		else
@@ -577,10 +580,10 @@ void vardefine()
 						}
 						insertsymboltable(Name, string("VAR"), type, 0, true, Length, level, 0);
 						VarMidCode(type, Length, Name);
-						cout << middlecode_list[midcode_length - 1].op << " "
+						/*cout << middlecode_list[midcode_length - 1].op << " "
 							<< middlecode_list[midcode_length - 1].ob1 << " "
 							<< middlecode_list[midcode_length - 1].ob2 << " "
-							<< middlecode_list[midcode_length - 1].ob3 << endl;
+							<< middlecode_list[midcode_length - 1].ob3 << endl;*/
 						nextsym();
 					}
 					else
@@ -594,10 +597,10 @@ void vardefine()
 				{
 					insertsymboltable(Name, string("VAR"), type, 0, false, 0, level, 0);
 					VarMidCode(type, 0, Name);
-					cout << middlecode_list[midcode_length - 1].op << " "
+					/*cout << middlecode_list[midcode_length - 1].op << " "
 						<< middlecode_list[midcode_length - 1].ob1 << " "
 						<< middlecode_list[midcode_length - 1].ob2 << " "
-						<< middlecode_list[midcode_length - 1].ob3 << endl;
+						<< middlecode_list[midcode_length - 1].ob3 << endl;*/
 				}
 			}
 			else
@@ -633,10 +636,10 @@ int paratable()
 			string Name = string(IDNAME);
 			insertsymboltable(Name, string("PARAMETER"), type, -1, false, 0, level, 0);
 			ParaMidCode(type, Name);
-			cout << middlecode_list[midcode_length - 1].op << " "
+			/*cout << middlecode_list[midcode_length - 1].op << " "
 				<< middlecode_list[midcode_length - 1].ob1 << " "
 				<< middlecode_list[midcode_length - 1].ob2 << " "
-				<< middlecode_list[midcode_length - 1].ob3 << endl;
+				<< middlecode_list[midcode_length - 1].ob3 << endl;*/
 			paranumber++;
 			nextsym();
 		}
@@ -666,10 +669,10 @@ int paratable()
 				string Name = string(IDNAME);
 				insertsymboltable(Name, string("PARAMETER"), type, -1, false, 0, level, 0);
 				ParaMidCode(type, Name);
-				cout << middlecode_list[midcode_length - 1].op << " "
+				/*cout << middlecode_list[midcode_length - 1].op << " "
 					<< middlecode_list[midcode_length - 1].ob1 << " "
 					<< middlecode_list[midcode_length - 1].ob2 << " "
-					<< middlecode_list[midcode_length - 1].ob3 << endl;
+					<< middlecode_list[midcode_length - 1].ob3 << endl;*/
 				paranumber++;
 				nextsym();
 			}
@@ -743,10 +746,10 @@ void functioncall(bool return_not)
 			for (int i = 0; i < realparanum; i++) /////////////////////////////////////////////////////////////
 			{
 				SetParaMidCode(realpara[i]);
-				cout << middlecode_list[midcode_length - 1].op << " "
+				/*cout << middlecode_list[midcode_length - 1].op << " "
 					<< middlecode_list[midcode_length - 1].ob1 << " "
 					<< middlecode_list[midcode_length - 1].ob2 << " "
-					<< middlecode_list[midcode_length - 1].ob3 << endl;
+					<< middlecode_list[midcode_length - 1].ob3 << endl;*/
 			}
 			nextsym();
 			//cout << "This function call!" << " in line " << line_num << endl;
@@ -768,94 +771,142 @@ void functioncall(bool return_not)
 int expression()
 {
 	int result = 0;
-	int flag = 1;
-	////////////
-	/////////////
+	//int flag = 1;
+	expression_type = string("INTSY");
+	string ob1, ob2, ob3;
 	if ((symbol.compare("PLUS") == 0) || (symbol.compare("MINUS") == 0))
 	{
 		if (symbol.compare("MINUS") == 0)
 		{
-			//////////////
-			flag = -1;
+			//flag = -1;
 			nextsym();
-			/////////////
-			/////////////
-			/////////////
+			term();
+			ob2 = operand;
+			stringstream temp_s;
+			temp_s << tempvarnum++;
+			ob3 = "TEMP" + temp_s.str();
+			insertsymboltable(ob3, string("VAR"), string("INTSY"), 0, false, 0, level, 0);
+			ExpressionMidCode(string("SUB"), string("0"), ob2, ob3);
+			/*cout << middlecode_list[midcode_length - 1].op << " "
+				<< middlecode_list[midcode_length - 1].ob1 << " "
+				<< middlecode_list[midcode_length - 1].ob2 << " "
+				<< middlecode_list[midcode_length - 1].ob3 << endl;*/
+			operand = ob3;
 		}
 		else
 		{
 			nextsym();
-			////////////
-			////////////
-			///////////
+			term();
+			ob3 = operand;
+			operand = ob3;
 		}
 	}
-	term();   ///////////////////////注意，这里可能需要在语义时将term放在每个分情况中讨论
+	else
+	{
+		term();
+		ob3 = operand;
+		operand = ob3;
+	}
+	if (term_type.compare("CHARSY") == 0)
+	{
+		expression_type = string("CHARSY");
+	}
 	while ((symbol.compare("PLUS") == 0) || (symbol.compare("MINUS") == 0))
 	{
-		////////////
-		////////////
+		ob1 = ob3;
+		expression_type = string("INTSY");
 		if (symbol.compare("PLUS") == 0)
 		{
 			nextsym();
 			term();
-			/////////////////
-			//////////////////
-			///////////////////
+			ob2 = operand;
+			stringstream temp_s;
+			temp_s << tempvarnum++;
+			ob3 = "TEMP" + temp_s.str();
+			insertsymboltable(ob3, string("VAR"), string("INTSY"), 0, false, 0, level, 0);
+			ExpressionMidCode(string("ADD"), ob1, ob2, ob3);
+			/*cout << middlecode_list[midcode_length - 1].op << " "
+				<< middlecode_list[midcode_length - 1].ob1 << " "
+				<< middlecode_list[midcode_length - 1].ob2 << " "
+				<< middlecode_list[midcode_length - 1].ob3 << endl;*/
+			operand = ob3;
 		}
 		else
 		{
 			nextsym();
 			term();
-			/////////////////
-			////////////////////
-			///////////////////
+			ob2 = operand;
+			stringstream temp_s;
+			temp_s << tempvarnum++;
+			ob3 = "TEMP" + temp_s.str();
+			insertsymboltable(ob3, string("VAR"), string("INTSY"), 0, false, 0, level, 0);
+			ExpressionMidCode(string("SUB"), ob1, ob2, ob3);
+			/*cout << middlecode_list[midcode_length - 1].op << " "
+				<< middlecode_list[midcode_length - 1].ob1 << " "
+				<< middlecode_list[midcode_length - 1].ob2 << " "
+				<< middlecode_list[midcode_length - 1].ob3 << endl;*/
+			operand = ob3;
 		}
 	}
-	cout << "This expression!" << " in line " << line_num << endl;
+	//cout << "This expression!" << " in line " << line_num << endl;
 	return result;
 }
 
 int term()
 {
-	////////////
+	term_type = string("INTSY");
 	factor();
-	///////////
-	///////////
-	//////////
+	string ob1, ob2, ob3;
+	if (factor_type.compare("CHARSY") == 0)
+	{
+		term_type = string("CHARSY");
+	}
+	ob3 = operand;
 	while ((symbol.compare("STAR") == 0) || (symbol.compare("DIVIDE") == 0))
 	{
-		/////
-		////
-		int debugf = 0;
-		if ((symbol.compare("STAR") == 0) || (symbol.compare("DIVIDE") == 0))
-		{
-			debugf++;
-		}
+		term_type = string("INTSY");
+		ob1 = ob3;
 		if (symbol.compare("STAR") == 0)
 		{
 			nextsym();
 			factor();
-			////////////////
-			/////////////////
-			//////////////////
+			ob2 = operand;
+			stringstream temp_s;
+			temp_s << tempvarnum++;
+			ob3 = "TEMP" + temp_s.str();
+			insertsymboltable(ob3, string("VAR"), string("INTSY"), 0, false, 0, level, 0);
+			ExpressionMidCode(string("MUL"), ob1, ob2, ob3);
+			/*cout << middlecode_list[midcode_length - 1].op << " "
+				<< middlecode_list[midcode_length - 1].ob1 << " "
+				<< middlecode_list[midcode_length - 1].ob2 << " "
+				<< middlecode_list[midcode_length - 1].ob3 << endl;*/
+			operand = ob3;
 		}
 		else if (symbol.compare("DIVIDE") == 0)
 		{
 			nextsym();
 			factor();
-			//////////
-			/////////
-			////////
+			ob2 = operand;
+			stringstream temp_s;
+			temp_s << tempvarnum++;
+			ob3 = "TEMP" + temp_s.str();
+			insertsymboltable(ob3, string("VAR"), string("INTSY"), 0, false, 0, level, 0);
+			ExpressionMidCode(string("DIV"), ob1, ob2, ob3);
+			/*cout << middlecode_list[midcode_length - 1].op << " "
+				<< middlecode_list[midcode_length - 1].ob1 << " "
+				<< middlecode_list[midcode_length - 1].ob2 << " "
+				<< middlecode_list[midcode_length - 1].ob3 << endl;*/
+			operand = ob3;
 		}
 	}
-	///////////
-	cout << "This term!" << " in line " << line_num << endl;
+	//cout << "This term!" << " in line " << line_num << endl;
 	return 0;
 }
 
 int factor()
 {
+	factor_type = string("INTSY");
+	string ob3;
 	if (symbol.compare("IDSY") == 0)
 	{
 		string Name = string(IDNAME);
@@ -868,11 +919,25 @@ int factor()
 			{
 				error(13);
 			}
+			int arr_index = getsymindex(Name, "VAR");
+			if (arr_index == -1)
+			{
+				error(32);
+				arr_index = tablelength - 1;
+			}
+			factor_type = symboltable[arr_index].type;
+			stringstream temp_s;
+			temp_s << tempvarnum++;
+			ob3 = "TEMP" + temp_s.str();
+			insertsymboltable(ob3, string("VAR"), factor_type, 0, false, 0, level, 0);
+			ExpressionMidCode(string("GETAR"), Name, operand, ob3);
+			/*cout << middlecode_list[midcode_length - 1].op << " "
+				<< middlecode_list[midcode_length - 1].ob1 << " "
+				<< middlecode_list[midcode_length - 1].ob2 << " "
+				<< middlecode_list[midcode_length - 1].ob3 << endl;*/
+			operand = ob3;
 			nextsym();
-			///////////////////////
-			///////////////////////却一大堆语义分析和符号表
-			////////////////////////
-			cout << "This is factor" << " in line " << line_num << endl;
+			//cout << "This is factor" << " in line " << line_num << endl;
 			return 1;
 		}
 		else if (symbol.compare("LPAR") == 0)
@@ -880,20 +945,37 @@ int factor()
 			recallsym();
 			recallsym();
 			nextsym();
-			//////////
-			//////////////
-			//////////////缺一大堆语义分析
-			functioncall();
-			//////////////
-			//////////////缺一大堆语义分析
-			///////////////
-			cout << "This is factor" << " in line " << line_num << endl;
+			int func_index = getsymindex(Name, string("FUNCTION"));
+			if (func_index == -1)
+			{
+				error(32);
+				func_index = tablelength - 1;
+			}
+			factor_type = symboltable[func_index].type;
+			functioncall(true);
+			stringstream temp_s;
+			temp_s << tempvarnum++;
+			ob3 = "TEMP" + temp_s.str();
+			insertsymboltable(ob3, string("VAR"), factor_type, 0, false, 0, level, 0);
+			CallReturnFunctionMidCode(Name, ob3);
+			/*cout << middlecode_list[midcode_length - 1].op << " "
+				<< middlecode_list[midcode_length - 1].ob1 << " "
+				<< middlecode_list[midcode_length - 1].ob2 << " "
+				<< middlecode_list[midcode_length - 1].ob3 << endl;*/
+			operand = ob3;
+			//cout << "This is factor" << " in line " << line_num << endl;
 			return 1;
 		}
 		else
 		{
-			////////////却一大堆语义分析
-			cout << "This is factor" << " in line " << line_num << endl;
+			int var_index = getsymindex(Name, string("VAR"));
+			if (var_index == -1)
+			{
+				error(32);
+				var_index = tablelength - 1;
+			}
+			operand = Name;
+			//cout << "This is factor" << " in line " << line_num << endl;
 			return 1;
 		}
 	}
@@ -901,20 +983,41 @@ int factor()
 	{
 		int NUM;
 		NUM = integer();
-		///////////////
-		//////////////
-		/////////////
-		cout << "This is factor" << " in line " << line_num << endl;
+		stringstream temp_s;
+		temp_s << NUM;
+		operand = temp_s.str();
+		temp_s.str("");            //清空stringstream
+		temp_s << tempvarnum++;
+		ob3 = "TEMP" + temp_s.str();
+		insertsymboltable(ob3, string("VAR"), string("INTSY"), 0, false, 0, level, 0);
+		AssignmentMidCode(string("ASN"), operand, string(""), ob3);
+		/*cout << middlecode_list[midcode_length - 1].op << " "
+			<< middlecode_list[midcode_length - 1].ob1 << " "
+			<< middlecode_list[midcode_length - 1].ob2 << " "
+			<< middlecode_list[midcode_length - 1].ob3 << endl;*/
+		operand = ob3;
+		//cout << "This is factor" << " in line " << line_num << endl;
 		return 1;
 	}
 	else if (symbol.compare("CHARASCII") == 0)
 	{
+		factor_type = string("CHARSY");
 		char tempchar = singleCHAR;
 		nextsym();
-		/////////////////
-		/////////////////
-		//////////////////
-		cout << "This is factor" << " in line " << line_num << endl;
+		stringstream temp_s;
+		temp_s << (int)tempchar;
+		operand = "\'" + temp_s.str() + "\'";
+		temp_s.str("");
+		temp_s << tempvarnum++;
+		ob3 = "TEMP" + temp_s.str();
+		insertsymboltable(ob3, string("VAR"), string("CHARSY"), 0, false, 0, level, 0);
+		AssignmentMidCode(string("ASN"), operand, string(""), ob3);
+		/*cout << middlecode_list[midcode_length - 1].op << " "
+			<< middlecode_list[midcode_length - 1].ob1 << " "
+			<< middlecode_list[midcode_length - 1].ob2 << " "
+			<< middlecode_list[midcode_length - 1].ob3 << endl;*/
+		operand = ob3;
+		//cout << "This is factor" << " in line " << line_num << endl;
 		return tempchar;
 	}
 	else if (symbol.compare("LPAR") == 0)
@@ -934,9 +1037,9 @@ int factor()
 			nextsym();
 			return 0;
 		}
+		factor_type = expression_type;
 		nextsym();
-		////////////////////
-		cout << "This is factor" << " in line " << line_num << endl;
+		//cout << "This is factor" << " in line " << line_num << endl;
 		return e_value;
 	}
 	else
@@ -969,7 +1072,7 @@ void statementlist()
 		statement();
 		///////////////欠输出
 	}
-	cout << "This is statementlist!" << " in line " << line_num << endl;
+	//cout << "This is statementlist!" << " in line " << line_num << endl;
 }
 
 void statement()
@@ -1007,9 +1110,6 @@ void statement()
 			recallsym();
 			nextsym();
 			assignmentstatement();
-			/////////////////
-			/////////////////
-			/////////////////
 			if (symbol.compare("SEMI") != 0)
 			{
 				error(12);
@@ -1022,10 +1122,12 @@ void statement()
 			recallsym();
 			recallsym();
 			nextsym();
-			functioncall();
-			////////////////////
-			/////////////////
-			////////////////////
+			functioncall(false);
+			CallFunctionMidcode(Name);
+			/*cout << middlecode_list[midcode_length - 1].op << " "
+				<< middlecode_list[midcode_length - 1].ob1 << " "
+				<< middlecode_list[midcode_length - 1].ob2 << " "
+				<< middlecode_list[midcode_length - 1].ob3 << endl;*/
 			if (symbol.compare("SEMI") != 0)
 			{
 				error(12);
@@ -1039,9 +1141,6 @@ void statement()
 			recallsym();
 			nextsym();
 			assignmentstatement();
-			///////////////
-			/////////////
-			////////////////
 			if (symbol.compare("SEMI") != 0)
 			{
 				error(12);
@@ -1096,7 +1195,7 @@ void statement()
 	}
 }
 
-void condition()
+/*void condition()
 {
 	////////////////
 	////////////////
@@ -1124,76 +1223,184 @@ void condition()
 		error(24);
 		next_statement();
 	}
-}
+}*/
 
 void conditionalstatement()
 {
 	if (symbol.compare("IFSY") == 0)
 	{
 		nextsym();
+		string ob1;
+		string ob2;
+		string label;
+		string compare_sym;
 		if (symbol.compare("LPAR") == 0)
 		{
 			nextsym();
-			condition();
+			expression();
+			ob1 = operand;
+			if (symbol.compare("RPAR") == 0)
+			{
+				stringstream temp_s;
+				temp_s << label_num++;
+				label = "label" + temp_s.str();
+				JumpMidCode(string("JE"), ob1, string("0"), label);
+			}
+			else if ((symbol.compare("SMALLER") == 0) || (symbol.compare("SMALLEREQ") == 0) || (symbol.compare("BIGGER") == 0) ||
+				(symbol.compare("BIGGEREQ") == 0) || (symbol.compare("NEQUAL") == 0) || (symbol.compare("REALEQ") == 0))
+			{
+				compare_sym = symbol;
+				nextsym();
+				expression();
+				ob2 = operand;
+				stringstream temp_s;
+				temp_s << label_num++;
+				label = "label" + temp_s.str();
+				if (compare_sym.compare("SMALLER") == 0)
+					JumpMidCode(string("JBE"), ob1, ob2, label);
+				else if(compare_sym.compare("SMALLEREQ") == 0)
+					JumpMidCode(string("JB"), ob1, ob2, label);
+				else if (compare_sym.compare("BIGGER") == 0)
+					JumpMidCode(string("JSE"), ob1, ob2, label);
+				else if (compare_sym.compare("BIGGEREQ") == 0)
+					JumpMidCode(string("JS"), ob1, ob2, label);
+				else if (compare_sym.compare("NEQUAL") == 0)
+					JumpMidCode(string("JE"), ob1, ob2, label);
+				else if (compare_sym.compare("REALEQ") == 0)
+					JumpMidCode(string("JNE"), ob1, ob2, label);
+				//cout << "This is condition" << " in line " << line_num << endl;
+			}
+			else
+			{
+				error(24);
+				next_statement();
+			}
 			if (symbol.compare("RPAR") != 0)
 			{
 				error(15);
 				recallsym();
 			}
 			nextsym();
-			////////
-			/////////
 			statement();
-			/////////////
-			///////////
-			cout << "This is conditional statement!" << " in line " << line_num << endl;
+			LabelMidCode(label);
+			//cout << "This is conditional statement!" << " in line " << line_num << endl;
 		}
 		else
 		{
 			error(16);
 			recallsym();
 			nextsym();
-			condition();          ///////////////////
+			expression();
+			ob1 = operand;
+			if (symbol.compare("RPAR") == 0)
+			{
+				stringstream temp_s;
+				temp_s << label_num++;
+				label = "label" + temp_s.str();
+				JumpMidCode(string("JE"), ob1, string("0"), label);
+			}
+			else if ((symbol.compare("SMALLER") == 0) || (symbol.compare("SMALLEREQ") == 0) || (symbol.compare("BIGGER") == 0) ||
+				(symbol.compare("BIGGEREQ") == 0) || (symbol.compare("NEQUAL") == 0) || (symbol.compare("REALEQ") == 0))
+			{
+				compare_sym = symbol;
+				nextsym();
+				expression();
+				ob2 = operand;
+				stringstream temp_s;
+				temp_s << label_num++;
+				label = "label" + temp_s.str();
+				if (compare_sym.compare("SMALLER") == 0)
+					JumpMidCode(string("JBE"), ob1, ob2, label);
+				else if (compare_sym.compare("SMALLEREQ") == 0)
+					JumpMidCode(string("JB"), ob1, ob2, label);
+				else if (compare_sym.compare("BIGGER") == 0)
+					JumpMidCode(string("JSE"), ob1, ob2, label);
+				else if (compare_sym.compare("BIGGEREQ") == 0)
+					JumpMidCode(string("JS"), ob1, ob2, label);
+				else if (compare_sym.compare("NEQUAL") == 0)
+					JumpMidCode(string("JE"), ob1, ob2, label);
+				else if (compare_sym.compare("REALEQ") == 0)
+					JumpMidCode(string("JNE"), ob1, ob2, label);
+				//cout << "This is condition" << " in line " << line_num << endl;
+			}
+			else
+			{
+				error(24);
+				next_statement();
+			}
 			if (symbol.compare("RPAR") != 0)
 			{
 				error(15);
 				recallsym();
 			}
 			nextsym();
-			////////
-			/////////
 			statement();
-			////////////////
-			//////////////////
+			LabelMidCode(label);
 		}
 	}
 }
 
 void loopstatement()
 {
-	cout << "This is enter loop statement" << " in line " << line_num << endl;
+	//cout << "This is enter loop statement" << " in line " << line_num << endl;
 	if (symbol.compare("DOSY") == 0)
 	{
-		///////////////////
-		////////////////
+		string ob1;
+		string ob2;
+		string label_loop;
+		//string label_break;
+		string compare_sym;
+		stringstream temp_s;
+		temp_s << label_num++;
+		label_loop = "label" + temp_s.str();
+		LabelMidCode(label_loop);
 		nextsym();
 		statement();
 		if (symbol.compare("WHILESY") == 0)
 		{
 			nextsym();
-			//////////////
-			///////////////
 			if (symbol.compare("LPAR") == 0)
 			{
 				nextsym();
-				condition();
+				expression();
+				ob1 = operand;
+				if (symbol.compare("RPAR") == 0)
+				{
+					JumpMidCode(string("JNE"), ob1, string("0"), label_loop);
+				}
+				else if ((symbol.compare("SMALLER") == 0) || (symbol.compare("SMALLEREQ") == 0) || (symbol.compare("BIGGER") == 0) ||
+					(symbol.compare("BIGGEREQ") == 0) || (symbol.compare("NEQUAL") == 0) || (symbol.compare("REALEQ") == 0))
+				{
+					compare_sym = symbol;
+					nextsym();
+					expression();
+					ob2 = operand;
+					if (compare_sym.compare("SMALLER") == 0)
+						JumpMidCode(string("JBE"), ob1, ob2, label_loop);
+					else if (compare_sym.compare("SMALLEREQ") == 0)
+						JumpMidCode(string("JB"), ob1, ob2, label_loop);
+					else if (compare_sym.compare("BIGGER") == 0)
+						JumpMidCode(string("JSE"), ob1, ob2, label_loop);
+					else if (compare_sym.compare("BIGGEREQ") == 0)
+						JumpMidCode(string("JS"), ob1, ob2, label_loop);
+					else if (compare_sym.compare("NEQUAL") == 0)
+						JumpMidCode(string("JE"), ob1, ob2, label_loop);
+					else if (compare_sym.compare("REALEQ") == 0)
+						JumpMidCode(string("JNE"), ob1, ob2, label_loop);
+					//cout << "This is condition" << " in line " << line_num << endl;
+				}
+				else
+				{
+					error(24);
+					next_statement();
+				}
 				if (symbol.compare("RPAR") != 0)
 				{
 					error(15);
 					recallsym();
 				}
 				nextsym();
-				cout << "This is loop statement" << " in line " << line_num << endl;
+				//cout << "This is loop statement" << " in line " << line_num << endl;
 			}
 			else
 			{
@@ -1215,14 +1422,18 @@ void casestatement()
 {
 	if (symbol.compare("SWITCHSY") == 0)
 	{
+		stringstream temp_s;
+		temp_s << label_num++;
+		string label_break;
+		label_break = "label" + temp_s.str();
+		temp_s.str("");
+		string ob1;
 		nextsym();
 		if (symbol.compare("LPAR") == 0)
 		{
 			nextsym();
-			//////////////
-			//////////////
 			expression();
-			////////////
+			ob1 = operand;
 			if (symbol.compare("RPAR") != 0)
 			{
 				error(15);
@@ -1232,14 +1443,124 @@ void casestatement()
 			if (symbol.compare("LBRACE") == 0)
 			{
 				nextsym();
-				casetable();
+				string label_case;
+				if (symbol.compare("CASESY") == 0)
+				{
+					nextsym();
+					string type;
+					int case_value;
+					temp_s.str("");
+					temp_s << label_num++;
+					label_case = "label" + temp_s.str();
+					if ((symbol.compare("NUMSY") == 0) || (symbol.compare("PLUS") == 0) || (symbol.compare("MINUS") == 0))
+					{
+						type = string("INTSY");
+						case_value = integer();
+						temp_s.str("");
+						temp_s << case_value;
+						JumpMidCode(string("JNEI"), ob1, temp_s.str(), label_case);
+						if (symbol.compare("COLON") == 0)
+						{
+							nextsym();
+							statement();
+							JumpMidCode(string("JUMP"), string(""), string(""), label_break);
+							//cout << "This is one of case table" << " in line " << line_num << endl;
+						}
+						else
+						{
+							error(26);
+							next_statement();
+						}
+					}
+					else if (symbol.compare("CHARASCII") == 0)
+					{
+						char tempchar = singleCHAR;
+						type = string("CHARSY");
+						temp_s.str("");
+						temp_s << tempchar;
+						JumpMidCode(string("JNEC"), ob1, temp_s.str(), label_case);
+						nextsym();
+						if (symbol.compare("COLON") == 0)
+						{
+							nextsym();
+							statement();
+							JumpMidCode(string("JUMP"), string(""), string(""), label_break);
+							//cout << "This is one of case table" << " in line " << line_num << endl;
+						}
+						else
+						{
+							error(26);
+							next_statement();
+						}
+					}
+					else
+					{
+						error(27);
+					}
+				}
+				while (symbol.compare("CASESY") == 0)
+				{
+					LabelMidCode(label_case);
+					string type;
+					int case_value;
+					temp_s.str("");
+					temp_s << label_num++;
+					label_case = "label" + temp_s.str();
+					nextsym();
+					if ((symbol.compare("NUMSY") == 0) || (symbol.compare("PLUS") == 0) || (symbol.compare("MINUS") == 0))
+					{
+						type = string("INTSY");
+						case_value = integer();
+						temp_s.str("");
+						temp_s << case_value;
+						JumpMidCode(string("JNEI"), ob1, temp_s.str(), label_case);
+						if (symbol.compare("COLON") == 0)
+						{
+							nextsym();
+							statement();
+							JumpMidCode(string("JUMP"), string(""), string(""), label_break);
+							//cout << "This is one of case table" << " in line " << line_num << endl;
+						}
+						else
+						{
+							error(26);
+							next_statement();
+						}
+					}
+					else if (symbol.compare("CHARASCII") == 0)
+					{
+						char tempchar = singleCHAR;
+						type = string("CHARSY");
+						temp_s.str("");
+						temp_s << tempchar;
+						JumpMidCode(string("JNEC"), ob1, temp_s.str(), label_case);
+						nextsym();
+						if (symbol.compare("COLON") == 0)
+						{
+							nextsym();
+							statement();
+							JumpMidCode(string("JUMP"), string(""), string(""), label_break);
+							//cout << "This is one of case table" << " in line " << line_num << endl;
+						}
+						else
+						{
+							error(26);
+							next_statement();
+						}
+					}
+					else
+					{
+						error(27);
+					}
+				}
 				if (symbol.compare("RBRACE") != 0)
 				{
 					error(17);
 					next_statement();
 				}
+				LabelMidCode(label_break);
 				nextsym();
-				cout << "This is case statement" << " in line " << line_num << endl;
+				//cout << "This is case statement" << " in line " << line_num << endl;
 			}
 			else
 			{
@@ -1253,7 +1574,7 @@ void casestatement()
 	}
 }
 
-void casetable()
+/*void casetable()
 {
 	if (symbol.compare("CASESY") == 0)
 	{
@@ -1359,32 +1680,31 @@ void casetable()
 			error(27);
 		}
 	}
-}
+}*/
 
 void assignmentstatement()
 {
 	if (symbol.compare("IDSY") == 0)
 	{
 		string Name = string(IDNAME);
-		//////////////////
-		//////////////////
 		nextsym();
 		if (symbol.compare("LBRACKET") == 0)
 		{
+			int arr_index = getsymindex(Name, string("VAR"));
+			if (arr_index == -1)
+			{
+				error(32);
+				arr_index = tablelength - 1;
+			}
 			nextsym();
-			///////////////////
-			//////////////////
 			expression();
-			/////////////////
-			//////////////////
+			string index = operand;
 			if (symbol.compare("RBRACKET") != 0)
 			{
 				error(13);
 				recallsym();
 			}
 			nextsym();
-			//////////
-			//////////
 			if (symbol.compare("EQUAL") != 0)
 			{
 				error(28);
@@ -1392,17 +1712,25 @@ void assignmentstatement()
 			}
 			nextsym();
 			expression();
-			cout << "This is array assign statement" << " in line " << line_num << endl;
+			AssignmentMidCode(string("ASNAR"), operand, index, Name);
+			//cout << "This is array assign statement" << " in line " << line_num << endl;
 		}
 		else if (symbol.compare("EQUAL") == 0)
 		{
+			int var_index = getsymindex(Name, string("VAR"));
+			if (var_index == -1)
+			{
+				error(32);
+				var_index = tablelength - 1;
+			}
+			if (symboltable[var_index].kind.compare("CONST") == 0)
+			{
+				error(35);
+			}
 			nextsym();
-			///////////////////////
-			///////////////////////
 			expression();
-			///////////////////////
-			///////////////////////
-			cout << "This is assign satement" << " in line " << line_num << endl;
+			AssignmentMidCode(string("ASN"), operand, string(""), Name);
+			//cout << "This is assign satement" << " in line " << line_num << endl;
 		}
 		else
 		{
@@ -1423,10 +1751,14 @@ void readstatement()
 			if (symbol.compare("IDSY") == 0)
 			{
 				Name = string(IDNAME);
-				///////////////////
-				/////////////////////
+				int index = getsymindex(Name, string("VAR"));
+				if (index == -1)
+				{
+					error(32);
+					index = tablelength - 1;
+				}
+				ScanfMidCode(Name);
 				nextsym();
-
 			}
 			else
 			{
@@ -1440,8 +1772,13 @@ void readstatement()
 				if (symbol.compare("IDSY") == 0)
 				{
 					Name = string(IDNAME);
-					///////////////////
-					/////////////////////
+					int index = getsymindex(Name, string("VAR"));
+					if (index == -1)
+					{
+						error(32);
+						index = tablelength - 1;
+					}
+					ScanfMidCode(Name);
 					nextsym();
 
 				}
@@ -1459,7 +1796,7 @@ void readstatement()
 				return;
 			}
 			nextsym();
-			cout << "This is read statement" << " in line " << line_num << endl;
+			//cout << "This is read statement" << " in line " << line_num << endl;
 		}
 		else
 		{
@@ -1485,12 +1822,17 @@ void writestatement()
 				{
 					nextsym();
 					expression();
+					PrintfMidCode(string(stringCHAR), operand);
 				}
-
+				else
+				{
+					PrintfMidCode(string(stringCHAR), string(""));
+				}
 			}
 			else
 			{
 				expression();
+				PrintfMidCode(string(""), operand);
 			}
 			if (symbol.compare("RPAR") != 0)
 			{
@@ -1498,7 +1840,7 @@ void writestatement()
 				recallsym();
 			}
 			nextsym();
-			cout << "This is write statement！" << " in line " << line_num << endl;
+			//cout << "This is write statement！" << " in line " << line_num << endl;
 		}
 		else
 		{
@@ -1517,8 +1859,13 @@ void returnstatement()
 		return_flag = true;
 		if (symbol.compare("LPAR") == 0)
 		{
+			if (return_type.compare("VOIDSY") == 0)
+			{
+				error(34);
+			}
 			nextsym();
 			expression();
+			ReturnMidCode(operand);
 			return_expression = true;
 			if (symbol.compare("RPAR") != 0)
 			{
@@ -1526,18 +1873,20 @@ void returnstatement()
 				recallsym();
 			}
 			nextsym();
-			cout << "This is return statement" << " in line " << line_num << endl;
+			//cout << "This is return statement" << " in line " << line_num << endl;
 		}
-		else if (symbol.compare("SEMI") == 0)
+		/*else if (symbol.compare("SEMI") == 0)
 		{
-			cout << "This is return statement" << " in line " << line_num << endl;
+
+			//cout << "This is return statement" << " in line " << line_num << endl;
 			return;
-		}
+		}*/
 		else
 		{
-			///////////////
+			ReturnMidCode(string(""));
 			if (return_type.compare("VOIDSY") != 0)
 				error(18);
+			return;
 		}
 	}
 }

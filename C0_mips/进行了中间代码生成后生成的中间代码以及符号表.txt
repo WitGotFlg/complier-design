@@ -1,0 +1,125 @@
+CONST INTSY 1 con_int1
+CONST INTSY -1 con_int2
+CONST INTSY 34 con_int3
+CONST INTSY 10 con_int4
+CONST CHARSY 65 con_ch4
+INTSY   index
+INTSY  10 var_arr
+INTSY   bigger_input
+CHARSY  10 var_arr_ch
+FSTART
+LABEL   find_bigger
+PARA INTSY  a
+PARA INTSY  b
+JS a b label0
+RETURN   a
+LABEL   label0
+ASN 1  TEMP0
+ADD a TEMP0 TEMP1
+PUSH   TEMP1
+PUSH   b
+RCALL find_bigger  TEMP2
+RETURN   TEMP2
+FEND
+FSTART
+LABEL   print_bigger
+PRINTF The bigger number is  bigger_input
+FEND
+FSTART
+LABEL   relation
+PARA INTSY  a
+PARA INTSY  b
+CONST INTSY 0 sml_eql
+CONST INTSY 1 bgr_eql
+INTSY   re
+JB a b label1
+ASN sml_eql  re
+PRINTF input3 is smaller OR equal than input4
+LABEL   label1
+JS a b label2
+ASN bgr_eql  re
+PRINTF input3 is bigger OR equal than input4
+LABEL   label2
+JE a b label3
+LABEL   label3
+JNE a b label4
+PRINTF input3 is equal to input4
+LABEL   label4
+JNEI re 0 label6
+JBE a b label7
+PRINTF input3 is smaller than input4
+LABEL   label7
+JUMP   label5
+LABEL   label6
+JNEI re 1 label8
+JS a b label9
+PRINTF input3 is bigger than input4
+LABEL   label9
+JUMP   label5
+LABEL   label5
+FEND
+FSTART
+LABEL   main
+INTSY   input1
+INTSY   input2
+INTSY   input3
+INTSY   input4
+SCANF   input1
+SCANF   input2
+SCANF   input3
+SCANF   input4
+ASN 0  TEMP3
+ASN TEMP3  index
+PUSH   input1
+PUSH   input2
+RCALL find_bigger  TEMP4
+ASN TEMP4  bigger_input
+CALL print_bigger
+PUSH   input3
+PUSH   input4
+CALL relation
+SUB 0 input3 TEMP5
+ASN -1  TEMP6
+DIV input3 TEMP6 TEMP7
+MUL input4 TEMP7 TEMP8
+ASN '97'  TEMP9
+MUL TEMP8 TEMP9 TEMP10
+ADD TEMP5 TEMP10 TEMP11
+PUSH   input3
+PUSH   input4
+RCALL find_bigger  TEMP12
+ASN 7  TEMP13
+MUL TEMP12 TEMP13 TEMP14
+ADD TEMP11 TEMP14 TEMP15
+PRINTF  TEMP15
+LABEL   label10
+ASN 2  TEMP16
+MUL index TEMP16 TEMP17
+ASN 1  TEMP18
+ADD TEMP17 TEMP18 TEMP19
+ASNAR TEMP19 index var_arr
+ADD con_ch4 index TEMP20
+ASNAR TEMP20 index var_arr_ch
+GETAR var_arr index TEMP21
+PRINTF  TEMP21
+GETAR var_arr_ch index TEMP22
+PRINTF  TEMP22
+ASN 1  TEMP23
+ADD index TEMP23 TEMP24
+ASN TEMP24  index
+JBE index con_int4 label10
+FEND
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+con_int1 CONST INTSY 0
+con_int2 CONST INTSY 0
+con_int3 CONST INTSY 0
+con_int4 CONST INTSY 0
+con_ch4 CONST CHARSY 0
+index VAR INTSY 0
+var_arr VAR INTSY 10
+bigger_input VAR INTSY 0
+var_arr_ch VAR CHARSY 10
+find_bigger FUNCTION INTSY 2
+print_bigger FUNCTION VOIDSY 0
+relation FUNCTION VOIDSY 2
+main FUNCTION VOIDSY 0

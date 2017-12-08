@@ -1445,16 +1445,17 @@ void returnstatement()
 			nextsym();
 			cout << "This is return statement" << " in line " << line_num << endl;
 		}
-		else if (symbol.compare("SEMI") == 0)
+		/*else if (symbol.compare("SEMI") == 0)
 		{
 			cout << "This is return statement" << " in line " << line_num << endl;
 			return;
-		}
+		}*/
 		else
 		{
-			///////////////
+			cout << "This is return statement" << " in line " << line_num << endl;
 			if (return_type.compare("VOIDSY") != 0)
 				error(18);
+            return;
 		}
 	}
 }
