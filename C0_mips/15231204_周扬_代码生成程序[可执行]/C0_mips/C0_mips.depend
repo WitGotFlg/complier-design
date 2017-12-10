@@ -1,0 +1,61 @@
+# depslib dependency file v1.0
+1512907731 source:f:\缩小版备份\北航\编译原理\2017年编译技术课设\compiler-design\c0_mips\c0_mips\lexical.cpp
+	"global.h"
+
+1512906871 f:\缩小版备份\北航\编译原理\2017年编译技术课设\compiler-design\c0_mips\c0_mips\global.h
+	<iostream>
+	<fstream>
+	<cassert>
+	<string>
+	<map>
+	<stdlib.h>
+	<string.h>
+	<sstream>
+	<vector>
+	<algorithm>
+
+1512906795 source:f:\缩小版备份\北航\编译原理\2017年编译技术课设\compiler-design\c0_mips\c0_mips\main.cpp
+	"global.h"
+
+1512906757 source:f:\缩小版备份\北航\编译原理\2017年编译技术课设\compiler-design\c0_mips\c0_mips\syntax.cpp
+	"global.h"
+
+1512906821 source:f:\缩小版备份\北航\编译原理\2017年编译技术课设\compiler-design\c0_mips\c0_mips\symboltable.cpp
+	"global.h"
+
+1512908209 source:f:\缩小版备份\北航\编译原理\2017年编译技术课设\compiler-design\c0_mips\c0_mips\middlecode.cpp
+	"global.h"
+
+1512908021 source:f:\缩小版备份\北航\编译原理\2017年编译技术课设\compiler-design\c0_mips\c0_mips\mips.cpp
+	"global.h"
+
+1512907731 source:f:\缩小版备份\北航\编译原理\2017年编译技术课设\compiler-design\c0_mips\15231204_周扬_代码生成程序[可执行]\c0_mips\lexical.cpp
+	"global.h"
+
+1512906871 f:\缩小版备份\北航\编译原理\2017年编译技术课设\compiler-design\c0_mips\15231204_周扬_代码生成程序[可执行]\c0_mips\global.h
+	<iostream>
+	<fstream>
+	<cassert>
+	<string>
+	<map>
+	<stdlib.h>
+	<string.h>
+	<sstream>
+	<vector>
+	<algorithm>
+
+1512906795 source:f:\缩小版备份\北航\编译原理\2017年编译技术课设\compiler-design\c0_mips\15231204_周扬_代码生成程序[可执行]\c0_mips\main.cpp
+	"global.h"
+
+1512908209 source:f:\缩小版备份\北航\编译原理\2017年编译技术课设\compiler-design\c0_mips\15231204_周扬_代码生成程序[可执行]\c0_mips\middlecode.cpp
+	"global.h"
+
+1512908021 source:f:\缩小版备份\北航\编译原理\2017年编译技术课设\compiler-design\c0_mips\15231204_周扬_代码生成程序[可执行]\c0_mips\mips.cpp
+	"global.h"
+
+1512906821 source:f:\缩小版备份\北航\编译原理\2017年编译技术课设\compiler-design\c0_mips\15231204_周扬_代码生成程序[可执行]\c0_mips\symboltable.cpp
+	"global.h"
+
+1512906757 source:f:\缩小版备份\北航\编译原理\2017年编译技术课设\compiler-design\c0_mips\15231204_周扬_代码生成程序[可执行]\c0_mips\syntax.cpp
+	"global.h"
+

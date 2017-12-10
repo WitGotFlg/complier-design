@@ -10,7 +10,7 @@ char Ch; //存放当前读入的字符
 char IDNAME[100];
 char singleCHAR; //用于存放当读到‘c’单个字符的情况
 char singleC[5];  //专门用于方便词法分析程序输出的
-char stringCHAR[100];   //在本程序中，将单字符和字符串的‘和”也放在了单词中，因为只有这个地方出现了，所以不会对其他语法造成影响
+char stringCHAR[100];   //在本程序中，将单字符和字符串的‘和”也放在了单词中，因为只有这个地方出现了，所以不会对其他语法造成影响//此处更新后未将双引号放入
 int num; //存放当前读入的整型数值
 string symbol = string("null");
 int line_num = 1;               //记录行数用于错误处理
@@ -579,7 +579,7 @@ int getsym()
 		else
 		{
 			retract();
-			symbol = "BIGGEREQ";
+			symbol = "BIGGER";
 		}
 	}
 	else if (isSQuote())                 /////////////////////////
@@ -615,7 +615,7 @@ int getsym()
 	{
 		Getchar();
 		int stringcount = 0;
-		stringCHAR[stringcount++] = '\"';
+		//stringCHAR[stringcount++] = '\"';
 		while (isStringChar() && stringcount < 98)
 		{
 			stringCHAR[stringcount++] = Ch;
@@ -627,7 +627,7 @@ int getsym()
 		{
 			if (isDQuote())
 			{
-				stringCHAR[stringcount++] = '\"';
+				//stringCHAR[stringcount++] = '\"';
 				stringCHAR[stringcount] = '\0';
 				symbol = "STRINGSY";
 			}

@@ -9,7 +9,7 @@ void ConstMidCode(string op, string type, int num, string name)
 	code.op = op;
 	code.ob1 = type;
 	stringstream s_num;
-	s_num << num;
+	s_num << (int)num;
 	code.ob2 = s_num.str();
 	code.ob3 = name;
 	middlecode_list.push_back(code);
@@ -24,7 +24,7 @@ void VarMidCode(string type, int length, string name)
 	if (length != 0)
 	{
 		stringstream s_length;
-		s_length << length;
+		s_length << (int)length;
 		code.ob2 = s_length.str();
 	}
 	else
@@ -137,6 +137,7 @@ void LabelMidCode(string label)
 
 void ScanfMidCode(string name)
 {
+	//cout << "~~~~~~~~~~~~~~~~~~~~~~" << name << endl;
 	midcode code;
 	code.op = "SCANF";
 	code.ob1 = "";
@@ -144,6 +145,7 @@ void ScanfMidCode(string name)
 	code.ob3 = name;
 	middlecode_list.push_back(code);
 	midcode_length++;
+	//cout << midcode_length << endl;
 }
 
 void PrintfMidCode(string str, string name)
