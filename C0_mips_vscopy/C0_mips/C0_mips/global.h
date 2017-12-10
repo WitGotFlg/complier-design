@@ -142,4 +142,13 @@ typedef struct mipsnode
 
 extern vector<mipsele> mipssymboltable;
 extern int mipstablelength;
+extern int mipslevel;
+extern int register_used;
+
+void insertmipssymboltable(string name, string type, string length, int level);
+int getMIPSindex(string name);          //getMIPSlocation
+string getaddress(string name);      //得到变量在栈中与fp的相对地址
+
+void defineGlobalMIPS(string name, string value, string length);
+void mips_generate();
 #endif // GLOBAL_H_INCLUDED

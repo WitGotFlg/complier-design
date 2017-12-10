@@ -88,3 +88,55 @@ void deletefunction()
 	symboltable[after_length - 1].depth = stack_depth;
 	tablelength = after_length;
 }
+
+
+void insertmipssymboltable(string name, string type, string length, int level)
+{
+	mipsele mipsc;
+	mipsc.name = name;
+	mipsc.type = type;
+	mipsc.length = length;
+	stringstream temp_s;
+	temp_s << level;
+	mipsc.level = temp_s.str();
+	mipssymboltable.push_back(mipsc);
+	mipstablelength++;
+}
+
+int getMIPSindex(string name)          //getMIPSlocation
+{
+	int i = mipstablelength - 1;
+	while (i >= 0)
+	{
+		if (mipssymboltable[i].name.compare(name) == 0)
+		{
+			break;
+		}
+		i--;
+	}
+	return i;
+}
+
+
+string getaddress(string name)      //得到变量在栈中与fp的相对地址
+{
+	int index = getMIPSindex(name);
+	int addr = 0;            //有多少变量
+	string temp_level;
+	int i = index - 1;
+	while (i >= 0)
+	{
+		temp_level = mipssymboltable[i].level;
+		if (temp_level.compare("1") != 0)
+			break;
+		if (mipssymboltable[i].length.compare("0") == 0)
+			addr++;
+		else
+			addr = addr + atoi(mipssymboltable[i].length.c_str());
+		i--;
+	}
+	addr = addr * 4;   //四字节一个变量
+	stringstream temp_s;
+	temp_s << addr;
+	return temp_s.str();
+}

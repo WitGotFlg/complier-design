@@ -1376,17 +1376,17 @@ void loopstatement()
 					expression();
 					ob2 = operand;
 					if (compare_sym.compare("SMALLER") == 0)
-						JumpMidCode(string("JBE"), ob1, ob2, label_loop);
-					else if (compare_sym.compare("SMALLEREQ") == 0)
-						JumpMidCode(string("JB"), ob1, ob2, label_loop);
-					else if (compare_sym.compare("BIGGER") == 0)
-						JumpMidCode(string("JSE"), ob1, ob2, label_loop);
-					else if (compare_sym.compare("BIGGEREQ") == 0)
 						JumpMidCode(string("JS"), ob1, ob2, label_loop);
+					else if (compare_sym.compare("SMALLEREQ") == 0)
+						JumpMidCode(string("JSE"), ob1, ob2, label_loop);
+					else if (compare_sym.compare("BIGGER") == 0)
+						JumpMidCode(string("JB"), ob1, ob2, label_loop);
+					else if (compare_sym.compare("BIGGEREQ") == 0)
+						JumpMidCode(string("JBE"), ob1, ob2, label_loop);
 					else if (compare_sym.compare("NEQUAL") == 0)
-						JumpMidCode(string("JE"), ob1, ob2, label_loop);
-					else if (compare_sym.compare("REALEQ") == 0)
 						JumpMidCode(string("JNE"), ob1, ob2, label_loop);
+					else if (compare_sym.compare("REALEQ") == 0)
+						JumpMidCode(string("JE"), ob1, ob2, label_loop);
 					//cout << "This is condition" << " in line " << line_num << endl;
 				}
 				else
@@ -1452,6 +1452,7 @@ void casestatement()
 					temp_s.str("");
 					temp_s << label_num++;
 					label_case = "label" + temp_s.str();
+
 					if ((symbol.compare("NUMSY") == 0) || (symbol.compare("PLUS") == 0) || (symbol.compare("MINUS") == 0))
 					{
 						type = string("INTSY");
@@ -1553,6 +1554,7 @@ void casestatement()
 						error(27);
 					}
 				}
+				LabelMidCode(label_case);
 				if (symbol.compare("RBRACE") != 0)
 				{
 					error(17);
