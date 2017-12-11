@@ -273,6 +273,7 @@ void getarrMIPS(string ob1, string ob2, string ob3)
 	}
 	else
 	{
+		//cout << "in aetarrMIPS" << endl;
 		int ob2_index = getMIPSindex(ob2);
 		if (ob2_index == -1)
 		{
