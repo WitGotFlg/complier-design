@@ -1,6 +1,6 @@
 const int maxsize = 100;
 const int MAXNUM = 100000,MINNUM = -100000;
-int array[maxsize];
+int array[100];
 int O_left, O_right,O_sum;
 char name[24];
 void find_max_crossing_subarray(int left_index, int right_index)

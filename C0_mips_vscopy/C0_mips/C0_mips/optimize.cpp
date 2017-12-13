@@ -39,7 +39,7 @@ bool if_exit_vector(string obj, vector<string> &vec, int length)
 	{
 		if (vec[i].compare(obj) == 0)
 		{
-			cout << "in if_exist_vector true" << endl;
+			//cout << "in if_exist_vector true" << endl;
 			return true;
 		}
 	}
@@ -64,10 +64,10 @@ int vectorToSet(vector<string> &vec, int length)    //去除vector中相同的元素，使
 	return length;
 }
 
-int calculatein(vector<string> &in, vector<string> &use, int usenum, vector<string> &out, int outnum, vector<string> &def, int defnum)
+int calculatein(vector<string> &in, int innum, vector<string> &use, int usenum, vector<string> &out, int outnum, vector<string> &def, int defnum)
 {
-	in.clear();
-	in.shrink_to_fit();
+	//in.clear();
+	//in.shrink_to_fit();
 	int new_innum = 0;
 	for (int i = 0; i < outnum; i++)
 	{
@@ -90,7 +90,7 @@ int calculatein(vector<string> &in, vector<string> &use, int usenum, vector<stri
 		in.push_back(use[i]);
 		new_innum++;
 	}
-	return vectorToSet(in, new_innum);
+	return vectorToSet(in,innum+new_innum);
 }
 
 void dataflowanalysis(int start)
@@ -308,7 +308,7 @@ void dataflowanalysis(int start)
 				}
 			}
 			blocklist[i].outnum = vectorToSet(blocklist[i].out, len);
-			int newinnum = calculatein(blocklist[i].in,blocklist[i].use,blocklist[i].usenum,blocklist[i].out,blocklist[i].outnum,blocklist[i].def,blocklist[i].defnum);
+			int newinnum = calculatein(blocklist[i].in, blocklist[i].innum, blocklist[i].use, blocklist[i].usenum, blocklist[i].out, blocklist[i].outnum, blocklist[i].def, blocklist[i].defnum);
 			if (blocklist[i].innum != newinnum)
 			{
 				blocklist[i].inchanged = 1;
@@ -326,7 +326,7 @@ void dataflowanalysis(int start)
 				break;
 		}
 		if (ier == blocklistlength)
-			return ;                  //////////////////////
+			break ;                  //////////////////////
 	}
 }
 
@@ -399,6 +399,7 @@ void REGISTERallocation(int start)
 							cout << "error in REGISTERallocation!!" << endl;
 							exit(1);
 						}
+						//cout << "uuuuuuuuuuuuu "<<temp1<<" uuuuuuuuuu "<<temp2<<" uuuuuuu"<<endl;
 						conflict_graph[temp1][temp2] = 1;
 						conflict_graph[temp2][temp1] = 1;
 						conflict_graph_2[temp1][temp2] = 1;
@@ -434,6 +435,7 @@ void REGISTERallocation(int start)
 							cout << "error in REGISTERallocation!!" << endl;
 							exit(1);
 						}
+						//cout << "uuuuuuuuuuuuu " << temp1 << " uuuuuuuuuu " << temp2 << " uuuuuuu" << endl;
 						conflict_graph[temp1][temp2] = 1;
 						conflict_graph[temp2][temp1] = 1;
 						conflict_graph_2[temp1][temp2] = 1;
@@ -443,6 +445,20 @@ void REGISTERallocation(int start)
 			}
 		}
 	}
+
+/*	cout << "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~" << endl;
+	cout << "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~" << endl;
+	for (int i = 0; i < varnum; i++)
+	{
+		cout << varlist[i] << endl;
+	}
+	cout << "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~" << endl;
+	cout << conflict_graph_2[4][6] << endl;
+	cout << conflict_graph_2[6][4] << endl;
+	cout << conflict_graph_2[3][5] << endl;
+	cout << conflict_graph_2[5][3] << endl;
+	cout << "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~" << endl;
+	cout << "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~" << endl;*/
 	//////////////////////////对冲突图进行处理，去除一部分冲突较为严重的节点，使得剩下的节点能够最大化地利用寄存器
 	int varnum2 = varnum;
 	int conflicttime[100] = { 0 };   //保存着每一个变量的冲突数（边数）
@@ -539,9 +555,10 @@ void REGISTERallocation(int start)
 /////////////////////////////////////着色
 	vector<string> alreadyallocated;
 	int alreadynum = 0;
+	int usedsign[8] = { 0 };
 	for (int i = stackTop - 1; i >= 0; i--)
 	{
-		int usedsign[8] = { 0 };
+		
 		for (int j = 0; j < alreadynum; j++)
 		{
 			int temp1 = getvectorINDEX(stack[i], varlist, varnum);
@@ -551,9 +568,9 @@ void REGISTERallocation(int start)
 				cout << "error in allocating register color" << endl;
 				exit(1);
 			}
-			if (conflict_graph_2[temp1][temp2] == 1)
+			if (conflict_graph_2[temp1][temp2] == 1 || conflict_graph_2[temp2][temp1] == 1)
 			{
-				string reg = REGISTER[varlist[temp2]];
+				string reg = REGISTER[alreadyallocated[j]];
 				int temp_num;
 				stringstream temp_s;
 				temp_s << reg.erase(0,2);
@@ -561,7 +578,8 @@ void REGISTERallocation(int start)
 				usedsign[temp_num] = 1;
 			}
 		}
-		for (int j = 0; j < 8; j++)
+		int j;
+		for (j = 0; j < 8; j++)
 		{
 			if (usedsign[j] == 0)
 			{
@@ -573,6 +591,8 @@ void REGISTERallocation(int start)
 				break;
 			}
 		}
+		if (j == 8)
+			break;
 	}
 
 /*	map<string,string>::iterator  it=REGISTER.begin();

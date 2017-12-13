@@ -177,7 +177,7 @@ lw $t0,-0($fp)
 addi $s2,$t0,0
 lw $t0,-4($fp)
 addi $s1,$t0,0
-addi $s0,$zero,0
+addi $s4,$zero,0
 addi $t0,$zero,0
 sw $t0,-8($fp)
 addi $s3,$zero,1
@@ -185,7 +185,7 @@ addi $t0,$zero,1
 sw $t0,-12($fp)
 sub $t2,$s2,$s1
 bgtz $t2,label1
-addi $s0,$s0,0
+addi $s0,$s4,0
 addi $a0,$zero,105
 addi $v0,$zero,11
 syscall

@@ -474,7 +474,7 @@ void scanfMIPS(string ob3)
 	mipsfile << "syscall" << endl;
 	if (REGISTER.find(ob3) != REGISTER.end())
 	{
-		mipsfile << "addi " << REGISTER[ob3] << ",$V0,0" << endl;
+		mipsfile << "addi " << REGISTER[ob3] << ",$v0,0" << endl;
 	}
 	else
 	{
