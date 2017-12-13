@@ -680,9 +680,9 @@ void readCodeFile()
 	string infileName;
 
 	cout << "Please input the original code file: " << endl;
-	getline(cin, infileName);
+	//getline(cin, infileName);
 
-	infile.open(infileName.c_str());           //infileName.c_str()
+	infile.open("15231204_test.txt");           //infileName.c_str()
 	assert(infile.is_open());
 
 	char c;

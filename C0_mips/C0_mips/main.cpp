@@ -22,7 +22,8 @@ int main()
 		cout << symboltable[i].name << " "
 			<< symboltable[i].kind << " "
 			<< symboltable[i].type << " "
-			<< symboltable[i].length << endl;
+			<< symboltable[i].length << " "
+			<< symboltable[i].level << endl;
 	}
 /*	insertsymboltable("name1", "var", "int", 12, false, -1, 0, 0);
 	cout << symboltable.size() << endl;

@@ -56,7 +56,7 @@ void functiondefine();
 void mainfunction();
 void vardefine();
 int paratable();
-void functioncall();
+void functioncall(bool return_not);
 int expression();
 int term();
 int factor();
@@ -151,4 +151,29 @@ string getaddress(string name);      //得到变量在栈中与fp的相对地址
 
 void defineGlobalMIPS(string name, string value, string length);
 void mips_generate();
+
+extern map<string, string>REGISTER;
+
+typedef struct blockinf
+{
+	vector<string> pre;
+	vector<string> suc;
+	int prenum;
+	int sucnum;
+	string label;
+	vector<string> def;
+	int defnum;
+	vector<string> use;
+	int usenum;
+	vector<string> in;
+	int innum;
+	vector<string> out;
+	int outnum;
+	int inchanged;
+}block;
+
+extern vector<block> blocklist;
+extern int blocklistlength;
+
+void REGISTERallocation(int start);
 #endif // GLOBAL_H_INCLUDED

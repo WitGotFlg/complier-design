@@ -29,6 +29,7 @@ void insertsymboltable(string name, string kind,string type,int value,bool arr,i
 		new_sym.value = value;
 		new_sym.arr = arr;
 		new_sym.length = length;
+		new_sym.level = level;
 		new_sym.depth = depth;
 		symboltable.push_back(new_sym);
 		tablelength++;

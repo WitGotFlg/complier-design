@@ -9,7 +9,7 @@ ofstream mipsfile;
 map<string, string>REGISTER;
 
 int mipslevel = 0;
-int register_used = 0;
+//int register_used = 0;
 
 void defineGlobalMIPS(string name,string value,string length)
 {
@@ -27,8 +27,8 @@ void defineMIPS(string name, string value)      //fp为此时的函数运行起始地址，sw
 {
 	mipsfile << "addi $t0,$zero," << value <<endl;
 	string addr = getaddress(name);
-	mipsfile << "addi $t1,$fp,-" << addr << endl;
-	mipsfile << "sw $t0,0($t1)" << endl;
+	//mipsfile << "addi $t1,$fp,-" << addr << endl;
+	mipsfile << "sw $t0,-" << addr << "($fp)" << endl;
 }
 
 void returnMIPS()
@@ -65,6 +65,7 @@ void savestackMIPS()
 void calculateMIPS(string op,string ob1,string ob2,string ob3)
 {
 	string cal1, cal2, cal3;
+	string ob3_addr;
 	int index;
 	if (REGISTER.find(ob1) != REGISTER.end())
 	{
@@ -95,8 +96,8 @@ void calculateMIPS(string op,string ob1,string ob2,string ob3)
 			else
 			{
 				string addr = getaddress(ob1);
-				mipsfile << "addi $t0,$fp,-" << addr << endl;
-				mipsfile << "lw $t0,0($t0)" << endl;
+				//mipsfile << "addi $t0,$fp,-" << addr << endl;
+				mipsfile << "lw $t0,-" << addr << "($fp)" << endl;
 			}
 		}
 		cal1 = string("$t0");
@@ -130,8 +131,8 @@ void calculateMIPS(string op,string ob1,string ob2,string ob3)
 			else
 			{
 				string addr = getaddress(ob2);
-				mipsfile << "addi $t1,$fp,-" << addr << endl;
-				mipsfile << "lw $t1,0($t1)" << endl;
+				//mipsfile << "addi $t1,$fp,-" << addr << endl;
+				mipsfile << "lw $t1,-" << addr << "($fp)" << endl;
 			}
 		}
 		cal2 = string("$t1");
@@ -154,8 +155,8 @@ void calculateMIPS(string op,string ob1,string ob2,string ob3)
 		}
 		else
 		{
-			string addr = getaddress(ob3);
-			mipsfile << "addi $t2,$fp,-" << addr << endl;              //$t2中保存着ob3的保存地址
+			ob3_addr = getaddress(ob3);
+			//mipsfile << "addi $t2,$fp,-" << addr << endl;              //$t2中保存着ob3的保存地址
 		}
 		cal3 = string("$t3");                       //t3保存算出来的值
 	}
@@ -179,7 +180,7 @@ void calculateMIPS(string op,string ob1,string ob2,string ob3)
 	}
 	if (REGISTER.find(ob3) == REGISTER.end())
 	{
-		mipsfile << "sw $t3,0($t2)" << endl;
+		mipsfile << "sw $t3,-" << ob3_addr << "($fp)" << endl;
 	}
 }
 
@@ -214,8 +215,9 @@ void assignarrMIPS(string ob1, string ob2, string ob3)
 			else
 			{
 				string addr = getaddress(ob2);
-				mipsfile << "addi $t0,$fp,-" << addr << endl;
-				mipsfile << "lw $t0,0($t0)" << endl;
+				//mipsfile << "addi $t0,$fp,-" << addr << endl;
+				//cout << "~~~~~~~~~~~~~~~" << addr <<"!!!!!!!!!!!!!!!!!!!!!" <<endl;
+				mipsfile << "lw $t0,,-" << addr << "($fp)" << endl;
 				mipsfile << "addi $t1,$zero,4" << endl;
 				mipsfile << "mult $t0,$t1" << endl;
 				mipsfile << "mflo $t0" << endl;
@@ -255,8 +257,8 @@ void assignarrMIPS(string ob1, string ob2, string ob3)
 			else
 			{
 				string addr = getaddress(ob1);
-				mipsfile << "addi $t1,$fp,-" << addr << endl;
-				mipsfile << "lw $t1,0($t1)" << endl;
+				//mipsfile << "addi $t1,$fp,-" << addr << endl;
+				mipsfile << "lw $t1,,-" << addr << "($fp)" << endl;
 			}
 		}
 		mipsfile << "sw $t1,0($t0)" << endl;
@@ -295,8 +297,8 @@ void getarrMIPS(string ob1, string ob2, string ob3)
 			else
 			{
 				string addr = getaddress(ob2);
-				mipsfile << "addi $t0,$fp,-" << addr << endl;
-				mipsfile << "lw $t0,0($t0)" << endl;
+				//mipsfile << "addi $t0,$fp,-" << addr << endl;
+				mipsfile << "lw $t0,-" << addr << "($fp)" << endl;
 				mipsfile << "addi $t1,$zero,4" << endl;
 				mipsfile << "mult $t0,$t1" << endl;
 				mipsfile << "mflo $t0" << endl;
@@ -338,8 +340,8 @@ void getarrMIPS(string ob1, string ob2, string ob3)
 		else
 		{
 			string addr = getaddress(ob3);
-			mipsfile << "addi $t1,$fp,-" << addr << endl;
-			mipsfile << "sw $t0,0($t1)" << endl;
+			//mipsfile << "addi $t1,$fp,-" << addr << endl;
+			mipsfile << "sw $t0,-" << addr << "($fp)" << endl;
 		}
 	}
 }
@@ -379,8 +381,8 @@ void assignMIPS(string ob1, string ob3)
 			else
 			{
 				string addr = getaddress(ob1);
-				mipsfile << "addi $t0,$fp,-" << addr << endl;
-				mipsfile << "lw $t0,0($t0)" << endl;
+				//mipsfile << "addi $t0,$fp,-" << addr << endl;
+				mipsfile << "lw $t0,-" << addr << "($fp)" << endl;
 			}
 			ob3type = mipssymboltable[ob1_index].type;                //要时刻记住类型
 		}
@@ -433,8 +435,8 @@ void assignMIPS(string ob1, string ob3)
 			else
 			{
 				string addr = getaddress(ob1);
-				mipsfile << "addi $t0,$fp,-" << addr << endl;
-				mipsfile << "lw $t0,0($t0)" << endl;
+				//mipsfile << "addi $t0,$fp,-" << addr << endl;
+				mipsfile << "lw $t0,-" << addr << "($fp)" << endl;
 			}
 			ob3type = mipssymboltable[ob1_index].type;                //要时刻记住类型
 		}
@@ -484,8 +486,8 @@ void scanfMIPS(string ob3)
 		else
 		{
 			string addr = getaddress(ob3);
-			mipsfile << "addi $t0,$fp,-" << addr << endl;
-			mipsfile << "sw $v0,0($t0)" << endl;
+			//mipsfile << "addi $t0,$fp,-" << addr << endl;
+			mipsfile << "sw $v0,-" << addr << "($fp)" << endl;
 		}
 	}
 }
@@ -516,8 +518,8 @@ void printfMIPS(string ob1, string ob2)
 			else
 			{
 				string addr = getaddress(ob2);
-				mipsfile << "addi $t0,$fp,-" << addr << endl;
-				mipsfile << "lw $t0,0($t0)" << endl;
+				//mipsfile << "addi $t0,$fp,-" << addr << endl;
+				mipsfile << "lw $t0,-" << addr << "($fp)" << endl;
 			}
 			mipsfile << "addi $a0,$t0,0" << endl;
 		}
@@ -561,8 +563,8 @@ void jumpMIPS(string op, string ob1, string ob2, string ob3)
 			else
 			{
 				string addr = getaddress(ob1);
-				mipsfile << "addi $t0,$fp,-" << addr << endl;
-				mipsfile << "lw $t0,0($t0)" << endl;
+				//mipsfile << "addi $t0,$fp,-" << addr << endl;
+				mipsfile << "lw $t0,-" << addr << "($fp)" << endl;
 			}
 		}
 		cal1 = string("$t0");
@@ -588,8 +590,8 @@ void jumpMIPS(string op, string ob1, string ob2, string ob3)
 			else
 			{
 				string addr = getaddress(ob2);
-				mipsfile << "addi $t1,$fp,-" << addr << endl;
-				mipsfile << "lw $t1,0($t1)" << endl;
+				//mipsfile << "addi $t1,$fp,-" << addr << endl;
+				mipsfile << "lw $t1,-" << addr << "($fp)" << endl;
 			}
 		}
 		cal2 = string("$t1");
@@ -643,8 +645,8 @@ void jumpswitchMIPS(string op, string ob1, string ob2, string ob3)
 		else
 		{
 			string addr = getaddress(ob1);
-			mipsfile << "addi $t0,$fp,-" << addr << endl;
-			mipsfile << "lw $t0,0($t0)" << endl;
+			//mipsfile << "addi $t0,$fp,-" << addr << endl;
+			mipsfile << "lw $t0,-" << addr << "($fp)" << endl;
 		}
 		cal1 = string("$t0");
 	}
@@ -678,7 +680,7 @@ void mips_generate()
 			{
 				mipsfile << "addi " << REGISTER[middlecode_list[i].ob3] << "," << "$zero" << "," << middlecode_list[i].ob2 << endl;
 			}
-			else      //初步的全局寄存器分配，并未做优化
+/*			else      //初步的全局寄存器分配，并未做优化
 			{
 				if (register_used < 8)
 				{
@@ -688,7 +690,7 @@ void mips_generate()
 					register_used++;
 					mipsfile << "addi " << REGISTER[middlecode_list[i].ob3] << "," << "$zero" << "," << middlecode_list[i].ob2 << endl;
 				}
-			}
+			}*/
 			if (mipslevel == 0)
 			{
 				insertmipssymboltable(middlecode_list[i].ob3, middlecode_list[i].ob1, string("0"), mipslevel);
@@ -734,7 +736,19 @@ void mips_generate()
 			mipslevel++;
 			basepoint = mipstablelength;
 			REGISTER.clear();
-			register_used = 0;
+			//REGISTER.erase(REGISTER.begin(), REGISTER.end());
+			map<string, string>::iterator  it = REGISTER.begin();
+			for (; it != REGISTER.end(); ++it)
+				cout << "key:" << it->first << " "
+				<< "value:" << it->second << endl;
+			cout << "----------------" << endl;
+	//		register_used = 0;
+			REGISTERallocation(i);
+			it = REGISTER.begin();
+			for (; it != REGISTER.end(); ++it)
+				cout << "key:" << it->first << " "
+				<< "value:" << it->second << endl;
+			cout << "----------------" << endl;
 		}
 		else if (middlecode_list[i].op.compare("FEND") == 0)
 		{
@@ -809,8 +823,8 @@ void mips_generate()
 						else
 						{
 							string addr = getaddress(mipssymboltable[index].name);
-							mipsfile << "addi $t0,$fp,-" << addr << endl;
-							mipsfile << "lw $t0,0($t0)"<< endl;
+							//mipsfile << "addi $t0,$fp,-" << addr << endl;
+							mipsfile << "lw $t0,-" << addr << "($fp)" << endl;
 						}
 					}
 					mipsfile << "sw $t0," << -4 * word_offset << "($sp)" << endl;
@@ -837,14 +851,14 @@ void mips_generate()
 				{
 					mipsfile << "addi " << REGISTER[middlecode_list[i].ob3] << ",$v0,0" << endl;
 				}
-				else if (register_used < 8)
+/*				else if (register_used < 8)
 				{
 					stringstream temp_s;
 					temp_s << register_used;
 					REGISTER.insert(make_pair(middlecode_list[i].ob3, "$s" + temp_s.str()));
 					register_used++;
 					mipsfile << "addi " << REGISTER[middlecode_list[i].ob3] << ",$v0,0" << endl;
-				}
+				}*/
 				else
 				{
 					/*if (register_used < 8)
@@ -882,11 +896,11 @@ void mips_generate()
 			if (REGISTER.find(middlecode_list[i].ob3) != REGISTER.end())
 			{
 				string addr = getaddress(middlecode_list[i].ob3);
-				mipsfile << "addi $t0,$fp,-" << addr << endl;
-				mipsfile << "lw $t0,0($t0)" << endl;
+				//mipsfile << "addi $t0,$fp,-" << addr << endl;
+				mipsfile << "lw $t0,-" << addr << "($fp)" << endl;
 				mipsfile << "addi " << REGISTER[middlecode_list[i].ob3] << ",$t0,0" << endl;
 			}
-			else
+		/*	else
 			{
 				if (register_used < 8)
 				{
@@ -895,11 +909,11 @@ void mips_generate()
 					REGISTER.insert(make_pair(middlecode_list[i].ob3, "$s" + temp_s.str()));
 					register_used++;
 					string addr = getaddress(middlecode_list[i].ob3);
-					mipsfile << "addi $t0,$fp,-" << addr << endl;
-					mipsfile << "lw $t0,0($t0)" << endl;
+					//mipsfile << "addi $t0,$fp,-" << addr << endl;
+					mipsfile << "lw $t0,-" << addr << "($fp)" << endl;
 					mipsfile << "addi " << REGISTER[middlecode_list[i].ob3] << ",$t0,0" << endl;
 				}
-			}
+			}*/
 		}
 		else if ((middlecode_list[i].op.compare("ADD") == 0) || (middlecode_list[i].op.compare("SUB") == 0) ||
 			(middlecode_list[i].op.compare("MUL") == 0) || (middlecode_list[i].op.compare("DIV") == 0))
@@ -943,8 +957,8 @@ void mips_generate()
 					else
 					{
 						string addr = getaddress(middlecode_list[i].ob3);
-						mipsfile << "addi $t0,$fp,-" << addr << endl;
-						mipsfile << "lw $t0,0($t0)" << endl;
+						//mipsfile << "addi $t0,$fp,-" << addr << endl;
+						mipsfile << "lw $t0,-" << addr << "($fp)" << endl;
 						mipsfile << "addi $v0,$t0,0" << endl;
 					}
 				}
