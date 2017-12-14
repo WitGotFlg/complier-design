@@ -1,2 +1,3 @@
-﻿  lexical.cpp
+﻿  mips.cpp
+f:\缩小版备份\北航\编译原理\2017年编译技术课设\compiler-design\c0_mips_vscopy\c0_mips\c0_mips\mips.cpp(787): warning C4018: “<”: 有符号/无符号不匹配
   C0_mips.vcxproj -> F:\缩小版备份\北航\编译原理\2017年编译技术课设\compiler-design\C0_mips_vscopy\C0_mips\Debug\C0_mips.exe

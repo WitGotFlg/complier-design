@@ -33,9 +33,9 @@ void defineMIPS(string name, string value)      //fp为此时的函数运行起始地址，sw
 
 void returnMIPS()
 {
-	mipsfile << "addi $sp,$fp,40" << endl;//返回上一层函数的sp值
-	mipsfile << "lw $fp,-32($sp)" << endl;//返回上一层函数的fp值
-	mipsfile << "lw $ra,-36($sp)" << endl;//将返回后指令的地址重新加载入ra
+	mipsfile << "addi $sp,$fp,76" << endl;//返回上一层函数的sp值
+	mipsfile << "lw $fp,-68($sp)" << endl;//返回上一层函数的fp值
+	mipsfile << "lw $ra,-72($sp)" << endl;//将返回后指令的地址重新加载入ra
 	mipsfile << "lw $s0,0($sp)" << endl;
 	mipsfile << "lw $s1,-4($sp)" << endl;
 	mipsfile << "lw $s2,-8($sp)" << endl;
@@ -44,6 +44,17 @@ void returnMIPS()
 	mipsfile << "lw $s5,-20($sp)" << endl;
 	mipsfile << "lw $s6,-24($sp)" << endl;
 	mipsfile << "lw $s7,-28($sp)" << endl;
+	//////////////////////////////////////////
+	mipsfile << "lw $t4,-32($sp)" << endl;
+	mipsfile << "lw $t5,-36($sp)" << endl;
+	mipsfile << "lw $t6,-40($sp)" << endl;
+	mipsfile << "lw $t7,-44($sp)" << endl;
+	mipsfile << "lw $t8,-48($sp)" << endl;
+	mipsfile << "lw $t9,-52($sp)" << endl;
+	mipsfile << "lw $a1,-56($sp)" << endl;
+	mipsfile << "lw $a2,-60($sp)" << endl;
+	mipsfile << "lw $a3,-64($sp)" << endl;
+	/////////////////////////////////////
 	mipsfile << "jr $ra" << endl;
 }
 
@@ -57,9 +68,20 @@ void savestackMIPS()
 	mipsfile << "sw $s5,-20($sp)" << endl;
 	mipsfile << "sw $s6,-24($sp)" << endl;
 	mipsfile << "sw $s7,-28($sp)" << endl;
-	mipsfile << "sw $fp,-32($sp)" << endl;
-	mipsfile << "sw $fp,-32($sp)" << endl;
-	mipsfile << "addi $sp,$sp,-40" << endl;
+	//////////////////////////////////////////
+	mipsfile << "sw $t4,-32($sp)" << endl;
+	mipsfile << "sw $t5,-36($sp)" << endl;
+	mipsfile << "sw $t6,-40($sp)" << endl;
+	mipsfile << "sw $t7,-44($sp)" << endl;
+	mipsfile << "sw $t8,-48($sp)" << endl;
+	mipsfile << "sw $t9,-52($sp)" << endl;
+	mipsfile << "sw $a1,-56($sp)" << endl;
+	mipsfile << "sw $a2,-60($sp)" << endl;
+	mipsfile << "sw $a3,-64($sp)" << endl;
+	////////////////////////////////////////////
+	mipsfile << "sw $fp,-68($sp)" << endl;
+	mipsfile << "sw $fp,-68($sp)" << endl;
+	mipsfile << "addi $sp,$sp,-76" << endl;
 }
 
 void calculateMIPS(string op,string ob1,string ob2,string ob3)

@@ -474,7 +474,7 @@ void REGISTERallocation(int start)
 	{
 		if (i == 0)
 			flag = 0;
-		if (conflicttime[i] < 8 && !if_exit_vector(varlist[i], stack, stackTop))
+		if (conflicttime[i] < 17 && !if_exit_vector(varlist[i], stack, stackTop))
 		{
 			flag = 1;
 			for (int j = 0; j < varnum; j++)
@@ -526,7 +526,7 @@ void REGISTERallocation(int start)
 		{
 			if (i == 0)
 				flag = 0;
-			if (conflicttime[i] < 8 &&
+			if (conflicttime[i] < 17 &&
 				!if_exit_vector(varlist[i], stack, stackTop) &&
 				!if_exit_vector(varlist[i], abandonstack, abandonstackTop))
 			{
@@ -555,7 +555,7 @@ void REGISTERallocation(int start)
 /////////////////////////////////////×ÅÉ«
 	vector<string> alreadyallocated;
 	int alreadynum = 0;
-	int usedsign[8] = { 0 };
+	int usedsign[17] = { 0 };
 	for (int i = stackTop - 1; i >= 0; i--)
 	{
 		
@@ -571,27 +571,77 @@ void REGISTERallocation(int start)
 			if (conflict_graph_2[temp1][temp2] == 1 || conflict_graph_2[temp2][temp1] == 1)
 			{
 				string reg = REGISTER[alreadyallocated[j]];
-				int temp_num;
 				stringstream temp_s;
-				temp_s << reg.erase(0,2);
+				if (reg.substr(0, 2).compare("$s") == 0)
+				{
+					int temp_num;
+					temp_s << reg.erase(0, 2);
+					temp_s >> temp_num;
+					usedsign[temp_num] = 1;
+				}
+				else if (reg.substr(0, 2).compare("$t") == 0)
+				{
+					int temp_num;
+					temp_s << reg.erase(0, 2);
+					temp_s >> temp_num;
+					temp_num = temp_num + 4;
+					usedsign[temp_num] = 1;
+				}
+				else if (reg.substr(0, 2).compare("$a") == 0)
+				{
+
+					int temp_num;
+					temp_s << reg.erase(0, 2);
+					temp_s >> temp_num;
+					temp_num = temp_num + 13;
+					usedsign[temp_num] = 1;
+				}
+			/*	temp_s << reg.erase(0,2);
 				temp_s >> temp_num;
-				usedsign[temp_num] = 1;
+				usedsign[temp_num] = 1;*/
 			}
 		}
 		int j;
-		for (j = 0; j < 8; j++)
+		for (j = 0; j < 17; j++)
 		{
 			if (usedsign[j] == 0)
 			{
-				stringstream temp_s;
+				if (j < 8)
+				{
+					stringstream temp_s;
+					temp_s << j;
+					REGISTER.insert(make_pair(stack[i], "$s" + temp_s.str()));
+					alreadyallocated.push_back(stack[i]);
+					alreadynum++;
+					break;
+				}
+				else if (j >= 8 && j < 14)
+				{
+					stringstream temp_s;
+					temp_s << j - 4;
+					REGISTER.insert(make_pair(stack[i], "$t" + temp_s.str()));
+					alreadyallocated.push_back(stack[i]);
+					alreadynum++;
+					break;
+				}
+				else if(j >=14 && j < 17)
+				{
+					stringstream temp_s;
+					temp_s << j - 13;
+					REGISTER.insert(make_pair(stack[i], "$a" + temp_s.str()));
+					alreadyallocated.push_back(stack[i]);
+					alreadynum++;
+					break;
+				}
+/*				stringstream temp_s;
 				temp_s << j;
 				REGISTER.insert(make_pair(stack[i], "$s" + temp_s.str()));
 				alreadyallocated.push_back(stack[i]);
 				alreadynum++;
-				break;
+				break;    */
 			}
 		}
-		if (j == 8)
+		if (j == 17)
 			break;
 	}
 
