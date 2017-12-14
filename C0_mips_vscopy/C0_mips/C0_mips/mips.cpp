@@ -9,6 +9,7 @@ ofstream mipsfile;
 map<string, string>REGISTER;
 
 int mipslevel = 0;
+int stringcount = 0;
 //int register_used = 0;
 
 void defineGlobalMIPS(string name,string value,string length)
@@ -517,10 +518,21 @@ void scanfMIPS(string ob3)
 void printfMIPS(string ob1, string ob2)
 {
 	int strlength = ob1.length();
-	for (int i = 0; i < strlength; i++)
+	//for (int i = 0; i < strlength; i++)
+	if (strlength > 0)
 	{
-		mipsfile << "addi $a0,$zero," << ob1[i] - 'A' + 65 << endl;
+	/*	mipsfile << "addi $a0,$zero," << ob1[i] - 'A' + 65 << endl;
 		mipsfile << "addi $v0,$zero,11" << endl;
+		mipsfile << "syscall" << endl;*/
+		///////////////////////////////////
+		stringstream temp_s;
+		temp_s << stringcount++;
+		string stringLabel = "string" + temp_s.str();
+		mipsfile << ".data" << endl;
+		mipsfile << stringLabel << ": .asciiz \"" << ob1 << "\"" << endl;
+		mipsfile << ".text" << endl;
+		mipsfile << "la $a0," << stringLabel << endl;
+		mipsfile << "addi $v0,$zero,4" << endl;
 		mipsfile << "syscall" << endl;
 	}
 	int ob2_index = getMIPSindex(ob2);
