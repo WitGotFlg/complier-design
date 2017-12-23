@@ -568,7 +568,7 @@ void REGISTERallocation(int start)
 				cout << "error in allocating register color" << endl;
 				exit(1);
 			}
-			if (conflict_graph_2[temp1][temp2] == 1 || conflict_graph_2[temp2][temp1] == 1)
+			if (conflict_graph_2[temp1][temp2] == 1)
 			{
 				string reg = REGISTER[alreadyallocated[j]];
 				stringstream temp_s;
@@ -608,6 +608,7 @@ void REGISTERallocation(int start)
 			{
 				if (j < 8)
 				{
+					usedsign[j] = 1;
 					stringstream temp_s;
 					temp_s << j;
 					REGISTER.insert(make_pair(stack[i], "$s" + temp_s.str()));
@@ -617,6 +618,7 @@ void REGISTERallocation(int start)
 				}
 				else if (j >= 8 && j < 14)
 				{
+					usedsign[j] = 1;
 					stringstream temp_s;
 					temp_s << j - 4;
 					REGISTER.insert(make_pair(stack[i], "$t" + temp_s.str()));
@@ -626,6 +628,7 @@ void REGISTERallocation(int start)
 				}
 				else if(j >=14 && j < 17)
 				{
+					usedsign[j] = 1;
 					stringstream temp_s;
 					temp_s << j - 13;
 					REGISTER.insert(make_pair(stack[i], "$a" + temp_s.str()));
@@ -652,4 +655,450 @@ void REGISTERallocation(int start)
 	cout<<"----------------"<<endl;*/
 
 	return;
+}
+
+/////////////////////////////////////
+/////////////////////////////////////         dag图消除公共子表达式
+bool search_dag(dagtree* tree, string name, dagele** ob)
+{
+	for (int i = 0; i < tree->element.size(); i++)
+	{
+		for (int j = 0; j < tree->element[i]->var.size(); j++)
+		{
+			if ((tree->element[i]->var[j].compare(name) == 0) && !(name[0] >= '0'&&name[0] <= '9'))
+			{
+				*ob = tree->element[i];
+				return true;
+			}
+		}
+	}
+	return false;
+}
+
+bool search_op_dag(dagtree* tree,string op,string name,dagele* ob1,dagele* ob2,dagnode** ob)
+{
+	for (int i = 0; i < tree->element.size(); i++)
+	{
+		if ((tree->element[i]->nodevalue.compare(op) == 0) &&
+			(tree->element[i]->leftChild == ob1) &&
+			(tree->element[i]->rightChild == ob2))
+		{
+			dagele* obdagele;
+			if (search_dag(tree, name, &obdagele))
+			{
+				for (int var_index = 0; var_index < obdagele->var.size(); var_index++)
+				{
+					if (obdagele->var[var_index].compare(name) == 0)
+					{
+						obdagele->var[var_index] = obdagele->var[var_index] + "$";
+						if (obdagele->father.size() == 0)     //说明这一个赋值没有被应用到，可以直接删去
+						{
+							obdagele->var.erase(obdagele->var.begin() + var_index);
+						}
+					}
+				}
+			}
+			tree->element[i]->var.push_back(name);
+			*ob = tree->element[i];
+			return true;
+		}
+	}
+	return false;
+}
+
+void dag_opt()
+{
+	int blockcount = -1;
+	for (int i = 0; i < midcode_length; i++)
+	{
+		if (middlecode_list[i].op.compare("FSTART") == 0)
+		{
+			blockcount = -1;
+		}
+		if (middlecode_list[i].op.compare("LABEL") == 0)
+		{
+			blockcount++;
+		}
+
+		vector<dagtree*> dagtreelist;
+		int codecount = 0;
+		for (; (middlecode_list[i].op.compare("ADD") == 0) ||
+			(middlecode_list[i].op.compare("SUB") == 0) ||
+			(middlecode_list[i].op.compare("MUL") == 0) ||
+			(middlecode_list[i].op.compare("DIV") == 0) ||
+			(middlecode_list[i].op.compare("ASN") == 0) ||
+			(middlecode_list[i].op.compare("GETAR") == 0); i++)
+		{
+			codecount++;
+			if ((middlecode_list[i].op.compare("ADD") == 0) ||
+				(middlecode_list[i].op.compare("SUB") == 0) ||
+				(middlecode_list[i].op.compare("MUL") == 0) ||
+				(middlecode_list[i].op.compare("DIV") == 0) ||
+				(middlecode_list[i].op.compare("GETAR") == 0))
+			{
+				bool flag = false;
+				dagele* ob1 = NULL;
+				for (int j = 0; j < dagtreelist.size(); j++)
+				{
+					flag = search_dag(dagtreelist[j], middlecode_list[i].ob1, &ob1);
+					if (flag)
+						break;
+				}
+				if (!flag)
+				{
+					ob1 = new dagele;
+					ob1->nodevalue = middlecode_list[i].ob1;
+					ob1->var.push_back(middlecode_list[i].ob1);
+					dagtree* new_dagTREE = new dagtree;
+					new_dagTREE->element.push_back(ob1);
+					dagtreelist.push_back(new_dagTREE);
+				}
+				///////////////
+				flag = false;
+				dagele* ob2 = NULL;
+				for (int j = 0; j < dagtreelist.size(); j++)
+				{
+					flag = search_dag(dagtreelist[j], middlecode_list[i].ob2, &ob2);
+					if (flag)
+						break;
+				}
+				if (!flag)
+				{
+					ob2 = new dagele;
+					ob2->nodevalue = middlecode_list[i].ob2;
+					ob2->var.push_back(middlecode_list[i].ob2);
+					dagtree* new_dagTREE = new dagtree;
+					new_dagTREE->element.push_back(ob2);
+					dagtreelist.push_back(new_dagTREE);
+				}
+				///////////////
+				flag = false;
+				dagele* ob3;
+				for (int j = 0; j < dagtreelist.size(); j++)
+				{
+					flag = search_op_dag(dagtreelist[j], middlecode_list[i].op, middlecode_list[i].ob3, ob1, ob2, &ob3);
+					if (flag)
+						break;
+				}
+				if (!flag)     //没有找到符合条件的，即左右子孩子都符合条件且op也符合条件
+				{
+					dagele* obdagele;
+					for (int tree_index = 0; tree_index < dagtreelist.size(); tree_index++)
+					{
+						if (search_dag(dagtreelist[tree_index], middlecode_list[i].ob3, &obdagele))
+						{
+							for (int var_index = 0; var_index < obdagele->var.size(); var_index++)
+							{
+								if (obdagele->var[var_index].compare(middlecode_list[i].ob3) == 0)
+								{
+									obdagele->var[var_index] = obdagele->var[var_index] + "$";
+									if (obdagele->father.size() == 0)
+									{
+										obdagele->var.erase(obdagele->var.begin() + var_index);
+									}
+								}
+							}
+						}
+					}
+					ob3 = new dagele;
+					ob3->nodevalue = middlecode_list[i].op;
+					ob3->var.push_back(middlecode_list[i].ob3);
+					ob3->leftChild = ob1;
+					ob3->rightChild = ob2;
+					ob1->father.push_back(ob3);
+					ob2->father.push_back(ob3);
+					int j;
+					for (j = 0; j < dagtreelist.size(); j++)
+					{
+						bool breakflag = false;
+						for (int p = 0; p < dagtreelist[j]->element.size(); p++)
+						{
+							if (dagtreelist[j]->element[p] == ob1)
+							{
+								breakflag = true;
+								break;
+							}
+						}
+						if (breakflag)
+							break;
+					}
+					int k;
+					for (k = 0; k < dagtreelist.size(); k++)
+					{
+						bool breakflag = false;
+						for (int p = 0; p < dagtreelist[k]->element.size(); p++)
+						{
+							if (dagtreelist[k]->element[p] == ob2)
+							{
+								breakflag = true;
+								break;
+							}
+						}
+						if (breakflag)
+							break;
+					}
+
+					dagtreelist[j]->element.push_back(ob3);
+					if (j != k&&j < dagtreelist.size() && k < dagtreelist.size())   //将两棵树合并
+					{
+						for (int move = 0; move < dagtreelist[k]->element.size(); move++)
+						{
+							dagtreelist[j]->element.push_back(dagtreelist[k]->element[move]);
+						}
+						dagtreelist.erase(dagtreelist.begin() + k);
+					}
+
+				}
+
+			}
+			else
+			{
+				bool flag = false;
+				dagele* ob1 = NULL;
+				for (int j = 0; j < dagtreelist.size(); j++)
+				{
+					flag = search_dag(dagtreelist[j], middlecode_list[i].ob1, &ob1);
+					if (flag)
+						break;
+				}
+				if (!flag)
+				{
+					ob1 = new dagele;
+					ob1->nodevalue = middlecode_list[i].ob1;
+					ob1->var.push_back(middlecode_list[i].ob1);
+					dagtree* new_dagTREE = new dagtree;
+					new_dagTREE->element.push_back(ob1);
+					dagtreelist.push_back(new_dagTREE);
+				}
+				///////////////
+				dagele* obdagele;
+				for (int tree_index = 0; tree_index < dagtreelist.size(); tree_index++)
+				{
+					if (search_dag(dagtreelist[tree_index], middlecode_list[i].ob3, &obdagele))
+					{
+						for (int var_index = 0; var_index < obdagele->var.size(); var_index++)
+						{
+							if (obdagele->var[var_index].compare(middlecode_list[i].ob3) == 0)
+							{
+								obdagele->var[var_index] = obdagele->var[var_index] + "$";
+								if (obdagele->father.size() == 0)
+								{
+									obdagele->var.erase(obdagele->var.begin() + var_index);
+								}
+							}
+						}
+					}
+				}
+				ob1->var.push_back(middlecode_list[i].ob3);
+			}
+		}
+
+		//cout << "在生成dag图的for成功跳出" << endl;
+		///////////////////dag节点入栈
+		///////////////////
+		vector<dagele*> elestack;
+		for (int j = 0; j < dagtreelist.size(); j++)
+		{
+			int k = dagtreelist[j]->element.size() - 1;
+			while (1)
+			{
+				if (dagtreelist[j]->element.size() == 0)
+					break;
+				if (dagtreelist[j]->element[k]->father.size() == 0)
+				{
+					dagele* ele;
+					ele = dagtreelist[j]->element[k];
+					elestack.push_back(ele);
+					dagtreelist[j]->element.erase(dagtreelist[j]->element.begin() + k);
+					if (dagtreelist[j]->element.size() == 0)
+						break;
+					if (ele->leftChild != NULL)
+					{
+						//vector<dagele*>::iterator iter = ele->leftChild->father.begin();
+						for (int iter = 0; iter < ele->leftChild->father.size();)
+						{
+							if (ele->leftChild->father[iter] == ele)
+							{
+								ele->leftChild->father.erase(ele->leftChild->father.begin() + iter);
+							}
+							else
+								iter++;
+						}
+					}
+					if (ele->rightChild != NULL)
+					{
+						//vector<dagele*>::iterator iter = ele->rightChild->father.begin();
+						for (int iter = 0; iter < ele->rightChild->father.size();)
+						{
+							if (ele->rightChild->father[iter] == ele)
+							{
+								ele->rightChild->father.erase(ele->rightChild->father.begin() + iter);
+							}
+							else
+								iter++;
+						}
+					}
+					while ((ele->leftChild != NULL) && (ele->leftChild->father.size() == 0))
+					{
+						ele = ele->leftChild;
+						for (int iter = 0; iter < dagtreelist[j]->element.size(); iter++)
+						{
+							if (dagtreelist[j]->element[iter] == ele)
+							{
+								elestack.push_back(ele);
+								dagtreelist[j]->element.erase(dagtreelist[j]->element.begin() + iter);
+								break;
+							}
+						}
+						if (dagtreelist[j]->element.size() == 0)
+							break;
+						if (ele->leftChild != NULL)
+						{
+							//vector<dagele*>::iterator iter = ele->leftChild->father.begin();
+							for (int iter = 0; iter < ele->leftChild->father.size();)
+							{
+								if (ele->leftChild->father[iter] == ele)
+								{
+									ele->leftChild->father.erase(ele->leftChild->father.begin() + iter);
+								}
+								else
+									iter++;
+							}
+						}
+						if (ele->rightChild != NULL)
+						{
+							//vector<dagele*>::iterator iter = ele->rightChild->father.begin();
+							for (int iter = 0; iter < ele->rightChild->father.size();)
+							{
+								if (ele->rightChild->father[iter] == ele)
+								{
+									ele->rightChild->father.erase(ele->rightChild->father.begin() + iter);
+								}
+								else
+									iter++;
+							}
+						}
+
+					}
+					k = dagtreelist[j]->element.size();
+				}
+				//cout << dagtreelist[j]->element.size() << endl;
+				//cout << k << endl;
+				///////////////////////
+				k = (k == 0) ? dagtreelist[j]->element.size() - 1 : k - 1;
+				cout << k << endl;
+			}
+			cout << "在生成dag图的for中的while成功跳出" << endl;
+		}
+		cout << "在dag图的入栈for成功跳出" << endl;
+/////////////////////////////////////////////////用得到的stack重新生成中间代码
+		int countfinecode = 0;
+		for (int k = elestack.size() - 1; k >= 0; k--)
+		{
+			if ((elestack[k]->nodevalue.compare("ADD") == 0) ||
+				(elestack[k]->nodevalue.compare("SUB") == 0) ||
+				(elestack[k]->nodevalue.compare("MUL") == 0) ||
+				(elestack[k]->nodevalue.compare("DIV") == 0) ||
+				(elestack[k]->nodevalue.compare("GETAR") == 0))
+			{
+				for (int var_count = 0; var_count < elestack[k]->var.size(); var_count++)
+				{
+					if (var_count == 0)
+					{
+						midcode code;
+						code.op = elestack[k]->nodevalue;
+						code.ob1 = elestack[k]->leftChild->var[0];
+						code.ob2 = elestack[k]->rightChild->var[0];
+						code.ob3 = elestack[k]->var[var_count];
+						////////////////
+						if (code.ob1.c_str()[strlen(code.ob1.c_str()) - 1] == '$')
+						{
+							code.ob1.erase(strlen(code.ob1.c_str()) - 1, 1);
+						}
+						if (code.ob2.c_str()[strlen(code.ob2.c_str()) - 1] == '$')
+						{
+							code.ob2.erase(strlen(code.ob2.c_str()) - 1, 1);
+						}
+						if (code.ob3.c_str()[strlen(code.ob3.c_str()) - 1] == '$')
+						{
+							code.ob3.erase(strlen(code.ob3.c_str()) - 1, 1);
+						}
+
+						if (code.ob1[0] == '\'')
+						{
+							code.ob1.erase(0, 1);
+							code.ob1.erase(strlen(code.ob1.c_str()) - 1, 1);
+						}
+						if (code.ob2[0] == '\'')
+						{
+							code.ob2.erase(0, 1);
+							code.ob2.erase(strlen(code.ob2.c_str()) - 1, 1);
+						}
+						middlecode_list[i - codecount + countfinecode] = code;
+						countfinecode++;
+					}
+					else if (elestack[k]->var[var_count].substr(0, 4).compare("TEMP") != 0)
+					{
+						midcode code;
+						code.op = string("ASN");
+						code.ob1 = elestack[k]->var[0];
+						code.ob2 = string("");
+						code.ob3 = elestack[k]->var[var_count];
+						////////////////
+						if (code.ob1.c_str()[strlen(code.ob1.c_str()) - 1] == '$')
+						{
+							code.ob1.erase(strlen(code.ob1.c_str()) - 1, 1);
+						}
+						if (code.ob3.c_str()[strlen(code.ob3.c_str()) - 1] == '$')
+						{
+							code.ob3.erase(strlen(code.ob3.c_str()) - 1, 1);
+						}
+
+						if (code.ob1[0] == '\'')
+						{
+							code.ob1.erase(0, 1);
+							code.ob1.erase(strlen(code.ob1.c_str()) - 1, 1);
+						}
+						middlecode_list[i - codecount + countfinecode] = code;
+						countfinecode++;
+					}
+				}
+			}
+			else
+			{
+				for (int var_count = 1; var_count < elestack[k]->var.size(); var_count++)
+				{
+					midcode code;
+					code.op = string("ASN");
+					code.ob1 = elestack[k]->var[0];
+					code.ob2 = string("");
+					code.ob3 = elestack[k]->var[var_count];
+					////////////////
+					if (code.ob1.c_str()[strlen(code.ob1.c_str()) - 1] == '$')
+					{
+						code.ob1.erase(strlen(code.ob1.c_str()) - 1, 1);
+					}
+					if (code.ob3.c_str()[strlen(code.ob3.c_str()) - 1] == '$')
+					{
+						code.ob3.erase(strlen(code.ob3.c_str()) - 1, 1);
+					}
+		/*			if (code.ob1[0] == '\'')
+					{
+						code.ob1.erase(0, 1);
+						code.ob1.erase(code.ob1.length - 1, 1);
+					} */
+					middlecode_list[i - codecount + countfinecode] = code;
+					countfinecode++;
+				}
+			}
+		}
+
+		for (int k = i; k < midcode_length; k++)
+		{
+			middlecode_list[k - codecount + countfinecode] = middlecode_list[k];
+		}
+		midcode_length = midcode_length - codecount + countfinecode;
+
+	}
+	cout << "out 最外面的for" << endl;
 }

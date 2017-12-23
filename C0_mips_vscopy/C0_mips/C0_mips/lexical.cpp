@@ -16,7 +16,7 @@ char stringCHAR[100];   //在本程序中，将单字符和字符串的‘和”也放在了单词中，因
 int num; //存放当前读入的整型数值
 string symbol = string("null");
 int line_num = 1;               //记录行数用于错误处理
-char linebuf[100];              //行缓冲
+char linebuf[200];              //行缓冲
 int line_count = 0;
 int endNum = 0;
 map<string, int>symcode;
@@ -24,7 +24,8 @@ map<string, string>symvalue;
 
 int  code_count = 0;
 
-char code[10000];
+char code[12000];
+int errornum = 0;
 
 int Getchar()
 {
@@ -352,7 +353,7 @@ int reserver()
 }
 
 void symcodeinit()
-{
+{/*
 	symcode.insert(map<string, int>::value_type("CONSTSY", 1));
 	symcode.insert(map<string, int>::value_type("INTSY", 2));
 	symcode.insert(map<string, int>::value_type("CHARSY", 3));
@@ -392,7 +393,7 @@ void symcodeinit()
 	symcode.insert(map<string, int>::value_type("CHARASCII", 37));
 	symcode.insert(map<string, int>::value_type("STRINGSY", 38));
 	symcode.insert(map<string, int>::value_type("IDSY", 39));
-
+	*/
 	symvalue.insert(map<string, string>::value_type("CONSTSY", "const"));
 	symvalue.insert(map<string, string>::value_type("INTSY", "int"));
 	symvalue.insert(map<string, string>::value_type("CHARSY", "char"));
@@ -433,6 +434,7 @@ void symcodeinit()
 
 int error(int e)                    ////////////////////////////初步的报错
 {
+	errornum++;
 	switch (e)
 	{
 	case 1: cout << "error: " << " in line:" << line_num << " Missing \' in the singleCHAR" << endl;     break;
@@ -466,6 +468,10 @@ int error(int e)                    ////////////////////////////初步的报错
 	case 29: cout << "error: " << " in line:" << line_num << " Ileagal operation" << endl;      break;
 	case 30: cout << "error: " << " in line:" << line_num << " Redefine identified symbol!" << endl;      break;
 	case 31: cout << "error: " << " in line:" << line_num << " Procedure table overflow!" << endl;      break;
+	case 32: cout << "error: " << " in line:" << line_num << " The identification does not exist in the symbol table!" << endl;      break;
+	case 33: cout << "error: " << " in line:" << line_num << " The number of parameters is not matched!" << endl;      break;
+	case 34: cout << "error: " << " in line:" << line_num << " This called function has no return!" << endl;      break;
+	case 35: cout << "error: " << " in line:" << line_num << " The const can not be assigned again" << endl;      break;
 	}
 	cout << linebuf << endl;
 	return 0;
@@ -699,7 +705,7 @@ void readCodeFile()
 	}
 	code[code_count] = '\0';
 	infile.close();
-
+	cout << "infile !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!" << endl;
 	symcodeinit();
 	//Lexical_output();
 }

@@ -257,7 +257,7 @@ void assignarrMIPS(string ob1, string ob2, string ob3)
 	{
 		string addr = getaddress(ob3);
 		mipsfile << "addi $t1,$fp,-" << addr << endl;
-		mipsfile << "add $t0,$t1,$t0" << endl;
+		mipsfile << "sub $t0,$t1,$t0" << endl;
 	}
 	if (REGISTER.find(ob1) != REGISTER.end())
 	{
@@ -340,7 +340,7 @@ void getarrMIPS(string ob1, string ob2, string ob3)
 	{
 		string addr = getaddress(ob1);
 		mipsfile << "addi $t1,$fp,-" << addr << endl;
-		mipsfile << "add $t0,$t1,$t0" << endl;
+		mipsfile << "sub $t0,$t1,$t0" << endl;
 		mipsfile << "lw $t0,0($t0)" << endl;
 	}
 	if (REGISTER.find(ob3) != REGISTER.end())

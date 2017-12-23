@@ -27,7 +27,7 @@ extern char stringCHAR[100];   //ÔÚ±¾³ÌĞòÖĞ£¬½«µ¥×Ö·ûºÍ×Ö·û´®µÄ¡®ºÍ¡±Ò²·ÅÔÚÁËµ¥´
 extern int num; //´æ·Åµ±Ç°¶ÁÈëµÄÕûĞÍÊıÖµ
 extern string symbol;
 extern int line_num;               //¼ÇÂ¼ĞĞÊıÓÃÓÚ´íÎó´¦Àí
-extern char linebuf[100];              //ĞĞ»º³å
+extern char linebuf[200];              //ĞĞ»º³å
 extern int line_count;
 extern int endNum;
 extern map<string, int>symcode;
@@ -176,4 +176,21 @@ extern vector<block> blocklist;
 extern int blocklistlength;
 
 void REGISTERallocation(int start);
+
+typedef struct dagnode
+{
+	vector<string> var;
+	vector<dagnode*> father;
+	string nodevalue;
+	struct dagnode* leftChild = NULL;
+	struct dagnode* rightChild = NULL;
+}dagele;
+
+typedef struct DAG
+{
+	vector<dagele*> element;
+}dagtree;
+
+void dag_opt();
+extern int errornum ;
 #endif // GLOBAL_H_INCLUDED
