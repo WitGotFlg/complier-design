@@ -1,0 +1,14 @@
+void main()
+{
+    int a,b,c,d,e,f;
+    a = 1;
+    b = 2;
+    c = 1;
+    d = 1;
+    e  = 1;
+    f = b*(a+c+a+c+(d+e))+(d+e) + b*(a+c+a+c+(d+e));
+    c = a+c;
+    c = a + c;
+    printf(f);
+	printf(c);       
+}

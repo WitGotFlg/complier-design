@@ -1,0 +1,18 @@
+void main()
+{
+    const char ch = 'A';
+    const int in = 2;
+    int i;
+    int c;
+    printf("ABCDEFGHIJKLMNOPQRSTUVWXYZ abcdefghijklmnopqrstuvwxyz");
+    printf("!#$%&'()*+,-./:;<=>?@[]^_`{|}~");
+    printf("const ch and const in respectively are ");
+    printf(ch);
+    printf(in);
+    printf("Please input a number i ");
+    scanf(i);
+    c = -i*i*i*i/-1*i + i - i;
+    printf("i = ",i);
+    printf("c = -i*i*i*i/-1*i + i - i, after calculate , c = ");
+    printf(c);
+}

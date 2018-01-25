@@ -1,0 +1,47 @@
+int a, n;
+void switch_t(int t)
+{
+    switch(t)
+    {
+        case 1: printf("switch number is 1");
+	case 2: printf("switch number is 2");
+	case 3: printf("switch number is 3");
+	case 4: printf("switch number is 4");
+	case 5: printf("switch number is 5");
+	case 6: printf("switch number is 6");
+    }
+    switch('A'+ t - 1)
+    {
+	case 'A': printf("switch char is A");
+	case 'B': printf("switch char is B");
+	case 'C': printf("switch char is C");
+	case 'D': printf("switch char is D");
+	case 'E': printf("switch char is E");
+	case 'F': printf("switch char is F");
+    }
+}
+void main()
+{
+    a = 1;
+    n = 0;
+    if (a == 1) n = n + 1;
+    switch_t(n);
+    a = 2;
+    if (a > 1) n = n + 1;
+    switch_t(n);
+    a = 0;
+    if (a < 1) n = n + 1;
+    switch_t(n);
+    if (a != 1) n = n + 1;
+    switch_t(n);
+    if (a >= 0) n = n + 1;
+    switch_t(n);
+    if (a <= 0) {n = n + 1;}
+    switch_t(n);
+    if (n !=  6)
+    {        
+       printf("if statement error!");
+       return;
+    }
+    printf("if statement succeed!");
+}

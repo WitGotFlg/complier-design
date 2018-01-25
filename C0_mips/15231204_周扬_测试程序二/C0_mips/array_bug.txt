@@ -1,0 +1,26 @@
+const int con_int1 = +1, con_int2 = -1 , con_int3 = 34,con_int4 = 10;
+const char con_ch4 = 'A';                          
+
+int index , var_arr[10] , bigger_input;
+char var_arr_ch[10];                           
+
+void main()
+{
+    int input1,input2;
+    int input3,input4;
+
+    scanf(input1,input2);
+    scanf(input3,input4);         
+
+    index = 0;
+    do
+    {
+        var_arr[index] = index*2 + 1;
+        var_arr_ch[index] = con_ch4 + index;
+        printf(var_arr[index] );
+        printf(var_arr_ch[index]);         
+        index = index + 1;
+
+    }while(index < con_int4)       
+}
+

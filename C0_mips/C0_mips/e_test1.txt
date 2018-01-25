@@ -1,0 +1,6 @@
+int a;
+const int b = 1;
+void main()
+{
+    return(1);
+} 

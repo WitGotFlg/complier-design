@@ -138,7 +138,7 @@ void LabelMidCode(string label)
 
 void ScanfMidCode(string name)
 {
-	cout << "~~~~~~~~~~~~~~~~~~~~~~" << name << endl;
+//	cout << "~~~~~~~~~~~~~~~~~~~~~~" << name << endl;
 	midcode code;
 	code.op = "SCANF";
 	code.ob1 = "";
@@ -146,7 +146,7 @@ void ScanfMidCode(string name)
 	code.ob3 = name;
 	middlecode_list.push_back(code);
 	midcode_length++;
-	cout << midcode_length << endl;
+//	cout << midcode_length << endl;
 }
 
 void PrintfMidCode(string str, string name)

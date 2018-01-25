@@ -1,8 +1,8 @@
 # depslib dependency file v1.0
-1513254379 source:f:\缩小版备份\北航\编译原理\2017年编译技术课设\compiler-design\c0_mips\c0_mips\lexical.cpp
+1515399171 source:f:\缩小版备份\北航\编译原理\2017年编译技术课设\compiler-design\c0_mips\c0_mips\lexical.cpp
 	"global.h"
 
-1513258563 f:\缩小版备份\北航\编译原理\2017年编译技术课设\compiler-design\c0_mips\c0_mips\global.h
+1515396894 f:\缩小版备份\北航\编译原理\2017年编译技术课设\compiler-design\c0_mips\c0_mips\global.h
 	<iostream>
 	<fstream>
 	<cassert>
@@ -14,21 +14,21 @@
 	<vector>
 	<algorithm>
 
-1513254555 source:f:\缩小版备份\北航\编译原理\2017年编译技术课设\compiler-design\c0_mips\c0_mips\main.cpp
+1516018254 source:f:\缩小版备份\北航\编译原理\2017年编译技术课设\compiler-design\c0_mips\c0_mips\main.cpp
 	"global.h"
 
-1513254586 source:f:\缩小版备份\北航\编译原理\2017年编译技术课设\compiler-design\c0_mips\c0_mips\syntax.cpp
+1515399881 source:f:\缩小版备份\北航\编译原理\2017年编译技术课设\compiler-design\c0_mips\c0_mips\syntax.cpp
 	"global.h"
 
-1513254526 source:f:\缩小版备份\北航\编译原理\2017年编译技术课设\compiler-design\c0_mips\c0_mips\symboltable.cpp
+1515396929 source:f:\缩小版备份\北航\编译原理\2017年编译技术课设\compiler-design\c0_mips\c0_mips\symboltable.cpp
 	"global.h"
 
-1513254494 source:f:\缩小版备份\北航\编译原理\2017年编译技术课设\compiler-design\c0_mips\c0_mips\middlecode.cpp
+1515396914 source:f:\缩小版备份\北航\编译原理\2017年编译技术课设\compiler-design\c0_mips\c0_mips\middlecode.cpp
 	"global.h"
 
-1513254420 source:f:\缩小版备份\北航\编译原理\2017年编译技术课设\compiler-design\c0_mips\c0_mips\mips.cpp
+1516018236 source:f:\缩小版备份\北航\编译原理\2017年编译技术课设\compiler-design\c0_mips\c0_mips\mips.cpp
 	"global.h"
 
-1513262391 source:f:\缩小版备份\北航\编译原理\2017年编译技术课设\compiler-design\c0_mips\c0_mips\optimize.cpp
+1515396985 source:f:\缩小版备份\北航\编译原理\2017年编译技术课设\compiler-design\c0_mips\c0_mips\optimize.cpp
 	"global.h"
 

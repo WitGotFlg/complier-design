@@ -1,0 +1,2149 @@
+0 CONST INTSY 1 cst1
+1 CONST INTSY 2 cst2
+2 CONST INTSY 3 cst3
+3 CONST CHARSY 97 csta
+4 CONST CHARSY 98 cstb
+5 CONST CHARSY 99 cstc
+6 INTSY   g_a
+7 INTSY   g_b
+8 INTSY  2048 g_arr
+9 CHARSY  1024 g_stra
+10 CHARSY  2048 g_strb
+11 FSTART   
+12 LABEL   const_define
+13 CONST INTSY 1 a
+14 CONST INTSY 0 b
+15 CONST INTSY -1 c
+16 CONST CHARSY 120 cst23
+17 CONST CHARSY 122 cst24
+18 CONST CHARSY 65 consta0
+19 CONST CHARSY 49 csta1
+20 CONST CHARSY 47 cst_div
+21 PRINTF  a 
+22 PRINTF  cst_div 
+23 FEND   
+24 FSTART   
+25 LABEL   const_define_test
+26 CALL const_define  
+27 FEND   
+28 FSTART   
+29 LABEL   var_define
+30 INTSY   a
+31 INTSY  1 arr
+32 INTSY   _a
+33 INTSY  2 _arr
+34 INTSY   a1
+35 INTSY  3 arr1
+36 CHARSY   b
+37 CHARSY  1 strb
+38 CHARSY   _b
+39 CHARSY  2 _bstr
+40 CHARSY   _b1
+41 CHARSY  3 _bstr1
+42 INTSY   c
+43 CHARSY   z
+44 FEND   
+45 FSTART   
+46 LABEL   var_define_test
+47 CALL var_define  
+48 FEND   
+49 FSTART   
+50 LABEL   define
+51 CONST INTSY 1 int1
+52 CONST CHARSY 122 cst24
+53 CONST CHARSY 65 consta0
+54 INTSY   val1
+55 CHARSY   b
+56 CHARSY  1 strb
+57 FEND   
+58 FSTART   
+59 LABEL   define_test
+60 CALL var_define_test  
+61 CALL const_define_test  
+62 CALL define  
+63 PRINTF define test passed  
+64 FEND   
+65 FSTART   
+66 LABEL   operator
+67 INTSY   a
+68 INTSY   b
+69 INTSY   c
+70 INTSY   d
+71 INTSY   e
+72 INTSY   f
+73 ASN 1  TEMP0
+74 ASN TEMP0  a
+75 ASN 1  TEMP1
+76 ASN 2  TEMP2
+77 ADD TEMP1 TEMP2 TEMP3
+78 ASN TEMP3  b
+79 ASN 3  TEMP4
+80 ASN 1  TEMP5
+81 MUL TEMP4 TEMP5 TEMP6
+82 ASN TEMP6  c
+83 ASN 4  TEMP7
+84 SUB 0 TEMP7 TEMP8
+85 ASN TEMP8  d
+86 ASN 5  TEMP9
+87 ASN TEMP9  e
+88 ASN 6  TEMP10
+89 ASN TEMP10  f
+90 ASN 3  TEMP11
+91 MUL b TEMP11 TEMP12
+92 ADD TEMP12 c TEMP13
+93 ASN 4  TEMP14
+94 DIV d TEMP14 TEMP15
+95 SUB TEMP13 TEMP15 TEMP16
+96 DIV a a TEMP17
+97 ADD TEMP16 TEMP17 TEMP18
+98 ASN TEMP18  a
+99 ASN 0  TEMP19
+100 ADD TEMP19 a TEMP20
+101 ASN 3  TEMP21
+102 MUL a TEMP21 TEMP22
+103 ADD TEMP20 TEMP22 TEMP23
+104 ADD TEMP23 c TEMP24
+105 ASN 4  TEMP25
+106 DIV d TEMP25 TEMP26
+107 SUB TEMP24 TEMP26 TEMP27
+108 MUL e f TEMP28
+109 ADD TEMP27 TEMP28 TEMP29
+110 ASN TEMP29  b
+111 SUB 0 a TEMP30
+112 ASN 0  TEMP31
+113 MUL b TEMP31 TEMP32
+114 ADD TEMP30 TEMP32 TEMP33
+115 ASN 1  TEMP34
+116 ASN 0  TEMP35
+117 SUB TEMP34 TEMP35 TEMP36
+118 SUB TEMP33 TEMP36 TEMP37
+119 ASN TEMP37  e
+120 FEND   
+121 FSTART   
+122 LABEL   operator_test
+123 CALL operator  
+124 PRINTF operator test passed  
+125 FEND   
+126 FSTART   
+127 LABEL   string
+128 PRINTF ABCDEFGHIJKLMNOPQRSTUVWXYZ abcdefghijklmnopqrstuvwxyz  
+129 PRINTF !#$%&'()*+,-./:;<=>?@[]^_`{|}~  
+130 FEND   
+131 FSTART   
+132 LABEL   string_test
+133 CALL string  
+134 FEND   
+135 FSTART   
+136 LABEL   dowhile
+137 INTSY   i
+138 ASN 100  TEMP38
+139 ASN TEMP38  i
+140 LABEL   label0
+141 ASN 50  TEMP39
+142 JS i TEMP39 label1
+143 ASN 2  TEMP40
+144 DIV i TEMP40 TEMP41
+145 ASN TEMP41  i
+146 LABEL   label1
+147 ASN 50  TEMP42
+148 JBE i TEMP42 label2
+149 ASN 10  TEMP43
+150 ADD i TEMP43 TEMP44
+151 ASN 10  TEMP45
+152 DIV TEMP44 TEMP45 TEMP46
+153 ASN TEMP46  i
+154 LABEL   label2
+155 ASN 10  TEMP47
+156 JBE i TEMP47 label0
+157 LABEL   label3
+158 ASN 1  TEMP48
+159 SUB i TEMP48 TEMP49
+160 ASN TEMP49  i
+161 PRINTF dowhile test passed  
+162 ASN 0  TEMP50
+163 JNE TEMP50 0 label3
+164 FEND   
+165 FSTART   
+166 LABEL   dowhile_test
+167 CALL dowhile  
+168 FEND   
+169 FSTART   
+170 LABEL   ifcondition
+171 INTSY   a
+172 INTSY   rightnumber
+173 ASN 1  TEMP51
+174 ASN TEMP51  a
+175 ASN 0  TEMP52
+176 ASN TEMP52  rightnumber
+177 ASN 1  TEMP53
+178 JNE a TEMP53 label4
+179 ASN 1  TEMP54
+180 ADD rightnumber TEMP54 TEMP55
+181 ASN TEMP55  rightnumber
+182 LABEL   label4
+183 ASN 2  TEMP56
+184 ASN TEMP56  a
+185 ASN 1  TEMP57
+186 JSE a TEMP57 label5
+187 ASN 1  TEMP58
+188 ADD rightnumber TEMP58 TEMP59
+189 ASN TEMP59  rightnumber
+190 LABEL   label5
+191 ASN 0  TEMP60
+192 ASN TEMP60  a
+193 ASN 1  TEMP61
+194 JBE a TEMP61 label6
+195 ASN 1  TEMP62
+196 ADD rightnumber TEMP62 TEMP63
+197 ASN TEMP63  rightnumber
+198 LABEL   label6
+199 ASN 1  TEMP64
+200 JE a TEMP64 label7
+201 ASN 1  TEMP65
+202 ADD rightnumber TEMP65 TEMP66
+203 ASN TEMP66  rightnumber
+204 LABEL   label7
+205 ASN 0  TEMP67
+206 JS a TEMP67 label8
+207 ASN 1  TEMP68
+208 ADD rightnumber TEMP68 TEMP69
+209 ASN TEMP69  rightnumber
+210 LABEL   label8
+211 ASN 0  TEMP70
+212 JB a TEMP70 label9
+213 ASN 1  TEMP71
+214 ADD rightnumber TEMP71 TEMP72
+215 ASN TEMP72  rightnumber
+216 LABEL   label9
+217 ASN 1  TEMP73
+218 ASN 1  TEMP74
+219 ADD TEMP73 TEMP74 TEMP75
+220 ASN 1  TEMP76
+221 ADD TEMP75 TEMP76 TEMP77
+222 ASN 1  TEMP78
+223 ASN 3  TEMP79
+224 MUL TEMP78 TEMP79 TEMP80
+225 ADD TEMP77 TEMP80 TEMP81
+226 JE rightnumber TEMP81 label10
+227 PRINTF ifcondition clause error!  
+228 LABEL   label10
+229 JE rightnumber rightnumber label11
+230 PRINTF ifcondition clause error  
+231 LABEL   label11
+232 FEND   
+233 FSTART   
+234 LABEL   switchcodintionans
+235 PARA INTSY  x
+236 JNEI x 1 label13
+237 ASN 2  TEMP82
+238 RETURN   TEMP82
+239 JUMP   label12
+240 LABEL   label13
+241 JNEI x 2 label14
+242 ASN 3  TEMP83
+243 RETURN   TEMP83
+244 JUMP   label12
+245 LABEL   label14
+246 JNEI x 3 label15
+247 ASN 4  TEMP84
+248 RETURN   TEMP84
+249 JUMP   label12
+250 LABEL   label15
+251 LABEL   label12
+252 ASN 5  TEMP85
+253 RETURN   TEMP85
+254 FEND   
+255 FSTART   
+256 LABEL   switchcodintion
+257 INTSY   i
+258 INTSY   rightnumber
+259 ASN 1  TEMP86
+260 ASN TEMP86  i
+261 ASN 0  TEMP87
+262 ASN TEMP87  rightnumber
+263 LABEL   label16
+264 ASN 1  TEMP88
+265 ADD i TEMP88 TEMP89
+266 PUSH   i
+267 RCALL switchcodintionans  TEMP90
+268 JNE TEMP89 TEMP90 label17
+269 ASN 1  TEMP91
+270 ADD rightnumber TEMP91 TEMP92
+271 ASN TEMP92  rightnumber
+272 LABEL   label17
+273 ASN 1  TEMP93
+274 ADD i TEMP93 TEMP94
+275 ASN TEMP94  i
+276 ASN 5  TEMP95
+277 JS i TEMP95 label16
+278 ASN 4  TEMP96
+279 JE rightnumber TEMP96 label18
+280 PRINTF switchcodintion clause  error!  
+281 LABEL   label18
+282 JE rightnumber 0 label19
+283 RETURN   i
+284 LABEL   label19
+285 PRINTF switchcodintion clause  error!  
+286 FEND   
+287 FSTART   
+288 LABEL   condition
+289 CONST INTSY 5 intermax
+290 INTSY   iter
+291 ASN 0  TEMP97
+292 ASN TEMP97  iter
+293 LABEL   label20
+294 JNEI iter 0 label22
+295 ASN 0  TEMP98
+296 JE iter TEMP98 label23
+297 PRINTF error 0  
+298 LABEL   label23
+299 JUMP   label21
+300 LABEL   label22
+301 JNEI iter 1 label24
+302 ASN 1  TEMP99
+303 JE iter TEMP99 label25
+304 PRINTF error 1  
+305 LABEL   label25
+306 JUMP   label21
+307 LABEL   label24
+308 JNEI iter 2 label26
+309 ASN 2  TEMP100
+310 JE iter TEMP100 label27
+311 PRINTF error 2  
+312 LABEL   label27
+313 JUMP   label21
+314 LABEL   label26
+315 LABEL   label21
+316 ASN 1  TEMP101
+317 ADD iter TEMP101 TEMP102
+318 ASN TEMP102  iter
+319 JS iter intermax label20
+320 FEND   
+321 FSTART   
+322 LABEL   condition_test
+323 CALL ifcondition  
+324 CALL switchcodintion  
+325 CALL condition  
+326 PRINTF condition test passed  
+327 FEND   
+328 FSTART   
+329 LABEL   miscellaneous
+330 INTSY   _
+331 INTSY   a
+332 INTSY  23 array
+333 INTSY   i
+334 INTSY   endid
+335 CHARSY   ch1
+336 CHARSY  256 buf
+337 ASN 1  TEMP103
+338 ASN TEMP103  _
+339 ASN 2  TEMP104
+340 ASN TEMP104  a
+341 ASN 0  TEMP105
+342 ASN TEMP105  i
+343 LABEL   label28
+344 ASNAR i i array
+345 ASN 1  TEMP106
+346 ADD i TEMP106 TEMP107
+347 ASN TEMP107  i
+348 ASN 23  TEMP108
+349 JS i TEMP108 label28
+350 ASN '97'  TEMP109
+351 ASN TEMP109  ch1
+352 ASN 127  TEMP110
+353 ASN TEMP110  i
+354 ASN i  endid
+355 ASN 0  TEMP111
+356 ASN TEMP111  _
+357 LABEL   label29
+358 ASN 1  TEMP112
+359 MUL _ TEMP112 TEMP113
+360 SUB TEMP113 _ TEMP114
+361 ASN 1  TEMP115
+362 SUB TEMP114 TEMP115 TEMP116
+363 ASN 2  TEMP117
+364 ASN 1  TEMP118
+365 DIV TEMP117 TEMP118 TEMP119
+366 ADD TEMP116 TEMP119 TEMP120
+367 ASN 1  TEMP121
+368 SUB TEMP120 TEMP121 TEMP122
+369 ASN 2  TEMP123
+370 DIV TEMP122 TEMP123 TEMP124
+371 ASN '97'  TEMP125
+372 ASNAR TEMP125 TEMP124 buf
+373 ASN 1  TEMP126
+374 ADD _ TEMP126 TEMP127
+375 ASN TEMP127  _
+376 JS _ endid label29
+377 ASN 0  TEMP128
+378 GETAR buf TEMP128 TEMP129
+379 ASN '97'  TEMP130
+380 JNE TEMP129 TEMP130 label30
+381 PRINTF miscellaneous test passed  
+382 LABEL   label30
+383 FEND   
+384 FSTART   
+385 LABEL   miscellaneous_test
+386 CALL miscellaneous  
+387 FEND   
+388 FSTART   
+389 LABEL   fibonaci
+390 PARA INTSY  n
+391 JNEI n 0 label32
+392 ASN 0  TEMP131
+393 RETURN   TEMP131
+394 JUMP   label31
+395 LABEL   label32
+396 JNEI n 1 label33
+397 ASN 1  TEMP132
+398 RETURN   TEMP132
+399 JUMP   label31
+400 LABEL   label33
+401 JNEI n 2 label34
+402 ASN 1  TEMP133
+403 RETURN   TEMP133
+404 JUMP   label31
+405 LABEL   label34
+406 LABEL   label31
+407 ASN 1  TEMP134
+408 SUB n TEMP134 TEMP135
+409 PUSH   TEMP135
+410 RCALL fibonaci  TEMP136
+411 ASN 2  TEMP137
+412 SUB n TEMP137 TEMP138
+413 PUSH   TEMP138
+414 RCALL fibonaci  TEMP139
+415 ADD TEMP136 TEMP139 TEMP140
+416 RETURN   TEMP140
+417 FEND   
+418 FSTART   
+419 LABEL   fibonaci_test
+420 INTSY   n
+421 PRINTF Fibonaci: Please input a unsigned positive integer ?  
+422 SCANF   n
+423 LABEL   label35
+424 ASN 0  TEMP141
+425 JBE n TEMP141 label36
+426 PRINTF Input error, try again:  
+427 SCANF   n
+428 LABEL   label36
+429 ASN 0  TEMP142
+430 JS n TEMP142 label37
+431 PUSH   n
+432 RCALL fibonaci  TEMP143
+433 PRINTF The fibonaci's answer is  TEMP143 
+434 LABEL   label37
+435 ASN 0  TEMP144
+436 JS n TEMP144 label35
+437 FEND   
+438 FSTART   
+439 LABEL   mod
+440 PARA INTSY  n
+441 PARA INTSY  m
+442 DIV n m TEMP145
+443 MUL TEMP145 m TEMP146
+444 SUB n TEMP146 TEMP147
+445 RETURN   TEMP147
+446 FEND   
+447 FSTART   
+448 LABEL   gcd
+449 PARA INTSY  n
+450 PARA INTSY  m
+451 INTSY   rem
+452 ASN 0  TEMP148
+453 ASN TEMP148  rem
+454 ASN 0  TEMP149
+455 JNE n TEMP149 label38
+456 RETURN   m
+457 LABEL   label38
+458 ASN 0  TEMP150
+459 JNE m TEMP150 label39
+460 RETURN   n
+461 LABEL   label39
+462 PUSH   n
+463 PUSH   m
+464 RCALL mod  TEMP151
+465 PUSH   m
+466 PUSH   TEMP151
+467 RCALL gcd  TEMP152
+468 RETURN   TEMP152
+469 FEND   
+470 FSTART   
+471 LABEL   iswronggcd
+472 PARA INTSY  n
+473 PARA INTSY  m
+474 ASN 0  TEMP153
+475 JB n TEMP153 label40
+476 ASN 1  TEMP154
+477 RETURN   TEMP154
+478 LABEL   label40
+479 ASN 0  TEMP155
+480 JB m TEMP155 label41
+481 ASN 1  TEMP156
+482 RETURN   TEMP156
+483 LABEL   label41
+484 ASN 0  TEMP157
+485 RETURN   TEMP157
+486 FEND   
+487 FSTART   
+488 LABEL   gcd_test
+489 INTSY   n
+490 INTSY   m
+491 PRINTF GCD: Please input two unsigned positive integer ?  
+492 SCANF   n
+493 SCANF   m
+494 PUSH   n
+495 PUSH   m
+496 RCALL iswronggcd  TEMP158
+497 JE TEMP158 0 label42
+498 LABEL   label43
+499 PRINTF Input error, try Again:   
+500 SCANF   n
+501 SCANF   m
+502 PUSH   n
+503 PUSH   m
+504 RCALL iswronggcd  TEMP159
+505 JNE TEMP159 0 label43
+506 LABEL   label42
+507 PUSH   n
+508 PUSH   m
+509 RCALL gcd  TEMP160
+510 PRINTF The gcd's answer is  TEMP160 
+511 FEND   
+512 FSTART   
+513 LABEL   is_prime
+514 PARA INTSY  x
+515 INTSY   i
+516 ASN 2  TEMP161
+517 ASN TEMP161  i
+518 ASN 2  TEMP162
+519 JNE x TEMP162 label44
+520 ASN 1  TEMP163
+521 RETURN   TEMP163
+522 LABEL   label44
+523 LABEL   label45
+524 PUSH   x
+525 PUSH   i
+526 RCALL mod  TEMP164
+527 ASN 0  TEMP165
+528 JNE TEMP164 TEMP165 label46
+529 ASN 0  TEMP166
+530 RETURN   TEMP166
+531 LABEL   label46
+532 ASN 1  TEMP167
+533 ADD i TEMP167 TEMP168
+534 ASN TEMP168  i
+535 MUL i i TEMP169
+536 JS TEMP169 x label45
+537 ASN 1  TEMP170
+538 RETURN   TEMP170
+539 FEND   
+540 FSTART   
+541 LABEL   prime_factorization
+542 PARA INTSY  n
+543 INTSY   i
+544 INTSY   first
+545 ASN 2  TEMP171
+546 ASN TEMP171  i
+547 ASN 0  TEMP172
+548 ASN TEMP172  first
+549 ASN 1  TEMP173
+550 JNE n TEMP173 label47
+551 PRINTF 1  
+552 RETURN   
+553 LABEL   label47
+554 LABEL   label48
+555 PUSH   i
+556 RCALL is_prime  TEMP174
+557 ASN 1  TEMP175
+558 JNE TEMP174 TEMP175 label49
+559 PUSH   n
+560 PUSH   i
+561 RCALL mod  TEMP176
+562 ASN 0  TEMP177
+563 JNE TEMP176 TEMP177 label50
+564 LABEL   label51
+565 DIV n i TEMP178
+566 ASN TEMP178  n
+567 ASN 1  TEMP179
+568 JNE first TEMP179 label52
+569 PRINTF *  
+570 LABEL   label52
+571 ASN 1  TEMP180
+572 ASN TEMP180  first
+573 PRINTF  i 
+574 PUSH   n
+575 PUSH   i
+576 RCALL mod  TEMP181
+577 ASN 0  TEMP182
+578 JE TEMP181 TEMP182 label51
+579 LABEL   label50
+580 LABEL   label49
+581 ASN 1  TEMP183
+582 ADD i TEMP183 TEMP184
+583 ASN TEMP184  i
+584 MUL i i TEMP185
+585 JS TEMP185 n label48
+586 ASN 1  TEMP186
+587 JE n TEMP186 label53
+588 ASN 1  TEMP187
+589 JNE first TEMP187 label54
+590 PRINTF *  
+591 LABEL   label54
+592 PRINTF  n 
+593 LABEL   label53
+594 FEND   
+595 FSTART   
+596 LABEL   prime_factorization_test
+597 INTSY   n
+598 PRINTF prime_factorization: Please input a unsigned positive integer(<2^31-1) ?  
+599 SCANF   n
+600 LABEL   label55
+601 ASN 0  TEMP188
+602 JBE n TEMP188 label56
+603 PRINTF Input error, try again:  
+604 SCANF   n
+605 LABEL   label56
+606 ASN 0  TEMP189
+607 JS n TEMP189 label55
+608 PRINTF The factor of n is   
+609 PUSH   n
+610 CALL prime_factorization  
+611 FEND   
+612 FSTART   
+613 LABEL   iswrong
+614 PARA CHARSY  a
+615 ASN '69'  TEMP190
+616 JNE TEMP190 a label57
+617 ASN 0  TEMP191
+618 RETURN   TEMP191
+619 LABEL   label57
+620 ASN '77'  TEMP192
+621 JNE TEMP192 a label58
+622 ASN 0  TEMP193
+623 RETURN   TEMP193
+624 LABEL   label58
+625 ASN '72'  TEMP194
+626 JNE TEMP194 a label59
+627 ASN 0  TEMP195
+628 RETURN   TEMP195
+629 LABEL   label59
+630 ASN 1  TEMP196
+631 RETURN   TEMP196
+632 FEND   
+633 FSTART   
+634 LABEL   main
+635 CHARSY   kind
+636 PRINTF Please input Test Type:E(Easy), (M)Middle, H(Hard):   
+637 SCANF   kind
+638 PUSH   kind
+639 RCALL iswrong  TEMP197
+640 JE TEMP197 0 label60
+641 LABEL   label61
+642 PRINTF Try Again:   
+643 SCANF   kind
+644 PUSH   kind
+645 RCALL iswrong  TEMP198
+646 JNE TEMP198 0 label61
+647 LABEL   label60
+648 JNEC kind E label63
+649 CALL define_test  
+650 CALL operator_test  
+651 CALL fibonaci_test  
+652 JUMP   label62
+653 LABEL   label63
+654 JNEC kind M label64
+655 CALL dowhile_test  
+656 CALL condition_test  
+657 CALL string_test  
+658 CALL gcd_test  
+659 JUMP   label62
+660 LABEL   label64
+661 JNEC kind H label65
+662 CALL define_test  
+663 CALL operator_test  
+664 CALL dowhile_test  
+665 CALL condition_test  
+666 CALL string_test  
+667 CALL miscellaneous_test  
+668 CALL prime_factorization_test  
+669 JUMP   label62
+670 LABEL   label65
+671 LABEL   label62
+672 RETURN   
+673 FEND   
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+cst1 CONST INTSY 0
+cst2 CONST INTSY 0
+cst3 CONST INTSY 0
+csta CONST CHARSY 0
+cstb CONST CHARSY 0
+cstc CONST CHARSY 0
+g_a VAR INTSY 0
+g_b VAR INTSY 0
+g_arr VAR INTSY 2048
+g_stra VAR CHARSY 1024
+g_strb VAR CHARSY 2048
+const_define FUNCTION VOIDSY 0
+const_define_test FUNCTION VOIDSY 0
+var_define FUNCTION VOIDSY 0
+var_define_test FUNCTION VOIDSY 0
+define FUNCTION VOIDSY 0
+define_test FUNCTION VOIDSY 0
+operator FUNCTION VOIDSY 0
+operator_test FUNCTION VOIDSY 0
+string FUNCTION VOIDSY 0
+string_test FUNCTION VOIDSY 0
+dowhile FUNCTION VOIDSY 0
+dowhile_test FUNCTION VOIDSY 0
+ifcondition FUNCTION VOIDSY 0
+switchcodintionans FUNCTION INTSY 1
+switchcodintion FUNCTION INTSY 0
+condition FUNCTION VOIDSY 0
+condition_test FUNCTION VOIDSY 0
+miscellaneous FUNCTION VOIDSY 0
+miscellaneous_test FUNCTION VOIDSY 0
+fibonaci FUNCTION INTSY 1
+fibonaci_test FUNCTION VOIDSY 0
+mod FUNCTION INTSY 2
+gcd FUNCTION INTSY 2
+iswronggcd FUNCTION INTSY 2
+gcd_test FUNCTION VOIDSY 0
+is_prime FUNCTION INTSY 1
+prime_factorization FUNCTION VOIDSY 1
+prime_factorization_test FUNCTION VOIDSY 0
+iswrong FUNCTION INTSY 1
+main FUNCTION VOIDSY 0
+0 CONST
+enter CONST 
+1 CONST
+enter CONST 
+2 CONST
+enter CONST 
+3 CONST
+enter CONST 
+4 CONST
+enter CONST 
+5 CONST
+enter CONST 
+6 INTSY
+enter INTSY or CHARSY 
+7 INTSY
+enter INTSY or CHARSY 
+8 INTSY
+enter INTSY or CHARSY 
+9 CHARSY
+enter INTSY or CHARSY 
+10 CHARSY
+enter INTSY or CHARSY 
+11 FSTART
+enter FSTART 
+----------------
+key:a value:$s1
+key:cst_div value:$s0
+----------------
+12 LABEL
+enter LABEL 
+13 CONST
+enter CONST 
+14 CONST
+enter CONST 
+15 CONST
+enter CONST 
+16 CONST
+enter CONST 
+17 CONST
+enter CONST 
+18 CONST
+enter CONST 
+19 CONST
+enter CONST 
+20 CONST
+enter CONST 
+21 PRINTF
+enter PRINTF 
+22 PRINTF
+enter PRINTF 
+23 FEND
+enter FEND 
+24 FSTART
+enter FSTART 
+----------------
+----------------
+25 LABEL
+enter LABEL 
+26 CALL
+enter CALL or RCALL 
+27 FEND
+enter FEND 
+28 FSTART
+enter FSTART 
+----------------
+----------------
+29 LABEL
+enter LABEL 
+30 INTSY
+enter INTSY or CHARSY 
+31 INTSY
+enter INTSY or CHARSY 
+32 INTSY
+enter INTSY or CHARSY 
+33 INTSY
+enter INTSY or CHARSY 
+34 INTSY
+enter INTSY or CHARSY 
+35 INTSY
+enter INTSY or CHARSY 
+36 CHARSY
+enter INTSY or CHARSY 
+37 CHARSY
+enter INTSY or CHARSY 
+38 CHARSY
+enter INTSY or CHARSY 
+39 CHARSY
+enter INTSY or CHARSY 
+40 CHARSY
+enter INTSY or CHARSY 
+41 CHARSY
+enter INTSY or CHARSY 
+42 INTSY
+enter INTSY or CHARSY 
+43 CHARSY
+enter INTSY or CHARSY 
+44 FEND
+enter FEND 
+45 FSTART
+enter FSTART 
+----------------
+----------------
+46 LABEL
+enter LABEL 
+47 CALL
+enter CALL or RCALL 
+48 FEND
+enter FEND 
+49 FSTART
+enter FSTART 
+----------------
+----------------
+50 LABEL
+enter LABEL 
+51 CONST
+enter CONST 
+52 CONST
+enter CONST 
+53 CONST
+enter CONST 
+54 INTSY
+enter INTSY or CHARSY 
+55 CHARSY
+enter INTSY or CHARSY 
+56 CHARSY
+enter INTSY or CHARSY 
+57 FEND
+enter FEND 
+58 FSTART
+enter FSTART 
+----------------
+----------------
+59 LABEL
+enter LABEL 
+60 CALL
+enter CALL or RCALL 
+61 CALL
+enter CALL or RCALL 
+62 CALL
+enter CALL or RCALL 
+63 PRINTF
+enter PRINTF 
+64 FEND
+enter FEND 
+65 FSTART
+enter FSTART 
+----------------
+----------------
+66 LABEL
+enter LABEL 
+67 INTSY
+enter INTSY or CHARSY 
+68 INTSY
+enter INTSY or CHARSY 
+69 INTSY
+enter INTSY or CHARSY 
+70 INTSY
+enter INTSY or CHARSY 
+71 INTSY
+enter INTSY or CHARSY 
+72 INTSY
+enter INTSY or CHARSY 
+73 ASN
+enter ASN 
+74 ASN
+enter ASN 
+75 ASN
+enter ASN 
+76 ASN
+enter ASN 
+77 MUL
+enter CALCULATE 
+78 ASN
+enter ASN 
+79 ASN
+enter ASN 
+80 ASN
+enter ASN 
+81 SUB
+enter CALCULATE 
+82 ASN
+enter ASN 
+83 DIV
+enter CALCULATE 
+84 ASN
+enter ASN 
+85 ASN
+enter ASN 
+86 DIV
+enter CALCULATE 
+87 ASN
+enter ASN 
+88 ASN
+enter ASN 
+89 ADD
+enter CALCULATE 
+90 ASN
+enter ASN 
+91 MUL
+enter CALCULATE 
+92 ADD
+enter CALCULATE 
+93 SUB
+enter CALCULATE 
+94 ADD
+enter CALCULATE 
+95 ASN
+enter ASN 
+96 MUL
+enter CALCULATE 
+97 ASN
+enter ASN 
+98 DIV
+enter CALCULATE 
+99 ASN
+enter ASN 
+100 ASN
+enter ASN 
+101 ASN
+enter ASN 
+102 ASN
+enter ASN 
+103 MUL
+enter CALCULATE 
+104 ASN
+enter ASN 
+105 ASN
+enter ASN 
+106 ADD
+enter CALCULATE 
+107 ADD
+enter CALCULATE 
+108 ADD
+enter CALCULATE 
+109 SUB
+enter CALCULATE 
+110 ADD
+enter CALCULATE 
+111 ASN
+enter ASN 
+112 MUL
+enter CALCULATE 
+113 ASN
+enter ASN 
+114 ASN
+enter ASN 
+115 SUB
+enter CALCULATE 
+116 SUB
+enter CALCULATE 
+117 ADD
+enter CALCULATE 
+118 SUB
+enter CALCULATE 
+119 ASN
+enter ASN 
+120 FEND
+enter FEND 
+121 FSTART
+enter FSTART 
+----------------
+----------------
+122 LABEL
+enter LABEL 
+123 CALL
+enter CALL or RCALL 
+124 PRINTF
+enter PRINTF 
+125 FEND
+enter FEND 
+126 FSTART
+enter FSTART 
+----------------
+----------------
+127 LABEL
+enter LABEL 
+128 PRINTF
+enter PRINTF 
+129 PRINTF
+enter PRINTF 
+130 FEND
+enter FEND 
+131 FSTART
+enter FSTART 
+----------------
+----------------
+132 LABEL
+enter LABEL 
+133 CALL
+enter CALL or RCALL 
+134 FEND
+enter FEND 
+135 FSTART
+enter FSTART 
+----------------
+key:i value:$s0
+----------------
+136 LABEL
+enter LABEL 
+137 INTSY
+enter INTSY or CHARSY 
+138 ASN
+enter ASN 
+139 ASN
+enter ASN 
+140 LABEL
+enter LABEL 
+141 ASN
+enter ASN 
+142 JS
+enter jump 
+143 ASN
+enter ASN 
+144 DIV
+enter CALCULATE 
+145 ASN
+enter ASN 
+146 LABEL
+enter LABEL 
+147 ASN
+enter ASN 
+148 JBE
+enter jump 
+149 ASN
+enter ASN 
+150 ASN
+enter ASN 
+151 ADD
+enter CALCULATE 
+152 DIV
+enter CALCULATE 
+153 ASN
+enter ASN 
+154 LABEL
+enter LABEL 
+155 ASN
+enter ASN 
+156 JBE
+enter jump 
+157 LABEL
+enter LABEL 
+158 ASN
+enter ASN 
+159 SUB
+enter CALCULATE 
+160 ASN
+enter ASN 
+161 PRINTF
+enter PRINTF 
+162 ASN
+enter ASN 
+163 JNE
+enter jump 
+164 FEND
+enter FEND 
+165 FSTART
+enter FSTART 
+----------------
+----------------
+166 LABEL
+enter LABEL 
+167 CALL
+enter CALL or RCALL 
+168 FEND
+enter FEND 
+169 FSTART
+enter FSTART 
+----------------
+key:a value:$s0
+key:rightnumber value:$s1
+----------------
+170 LABEL
+enter LABEL 
+171 INTSY
+enter INTSY or CHARSY 
+172 INTSY
+enter INTSY or CHARSY 
+173 ASN
+enter ASN 
+174 ASN
+enter ASN 
+175 ASN
+enter ASN 
+176 ASN
+enter ASN 
+177 ASN
+enter ASN 
+178 JNE
+enter jump 
+179 ASN
+enter ASN 
+180 ADD
+enter CALCULATE 
+181 ASN
+enter ASN 
+182 LABEL
+enter LABEL 
+183 ASN
+enter ASN 
+184 ASN
+enter ASN 
+185 ASN
+enter ASN 
+186 JSE
+enter jump 
+187 ASN
+enter ASN 
+188 ADD
+enter CALCULATE 
+189 ASN
+enter ASN 
+190 LABEL
+enter LABEL 
+191 ASN
+enter ASN 
+192 ASN
+enter ASN 
+193 ASN
+enter ASN 
+194 JBE
+enter jump 
+195 ASN
+enter ASN 
+196 ADD
+enter CALCULATE 
+197 ASN
+enter ASN 
+198 LABEL
+enter LABEL 
+199 ASN
+enter ASN 
+200 JE
+enter jump 
+201 ASN
+enter ASN 
+202 ADD
+enter CALCULATE 
+203 ASN
+enter ASN 
+204 LABEL
+enter LABEL 
+205 ASN
+enter ASN 
+206 JS
+enter jump 
+207 ASN
+enter ASN 
+208 ADD
+enter CALCULATE 
+209 ASN
+enter ASN 
+210 LABEL
+enter LABEL 
+211 ASN
+enter ASN 
+212 JB
+enter jump 
+213 ASN
+enter ASN 
+214 ADD
+enter CALCULATE 
+215 ASN
+enter ASN 
+216 LABEL
+enter LABEL 
+217 ASN
+enter ASN 
+218 ASN
+enter ASN 
+219 ASN
+enter ASN 
+220 ASN
+enter ASN 
+221 MUL
+enter CALCULATE 
+222 ASN
+enter ASN 
+223 ADD
+enter CALCULATE 
+224 ADD
+enter CALCULATE 
+225 ADD
+enter CALCULATE 
+226 JE
+enter jump 
+227 PRINTF
+enter PRINTF 
+228 LABEL
+enter LABEL 
+229 JE
+enter jump 
+230 PRINTF
+enter PRINTF 
+231 LABEL
+enter LABEL 
+232 FEND
+enter FEND 
+233 FSTART
+enter FSTART 
+----------------
+key:x value:$s0
+----------------
+234 LABEL
+enter LABEL 
+235 PARA
+enter PARA 
+236 JNEI
+enter SWITCHJUMP 
+237 ASN
+enter ASN 
+238 RETURN
+enter RETURN 
+239 JUMP
+enter JUMP 
+240 LABEL
+enter LABEL 
+241 JNEI
+enter SWITCHJUMP 
+242 ASN
+enter ASN 
+243 RETURN
+enter RETURN 
+244 JUMP
+enter JUMP 
+245 LABEL
+enter LABEL 
+246 JNEI
+enter SWITCHJUMP 
+247 ASN
+enter ASN 
+248 RETURN
+enter RETURN 
+249 JUMP
+enter JUMP 
+250 LABEL
+enter LABEL 
+251 LABEL
+enter LABEL 
+252 ASN
+enter ASN 
+253 RETURN
+enter RETURN 
+254 FEND
+enter FEND 
+255 FSTART
+enter FSTART 
+----------------
+key:i value:$s1
+key:rightnumber value:$s0
+----------------
+256 LABEL
+enter LABEL 
+257 INTSY
+enter INTSY or CHARSY 
+258 INTSY
+enter INTSY or CHARSY 
+259 ASN
+enter ASN 
+260 ASN
+enter ASN 
+261 ASN
+enter ASN 
+262 ASN
+enter ASN 
+263 LABEL
+enter LABEL 
+264 ASN
+enter ASN 
+265 ADD
+enter CALCULATE 
+266 PUSH
+enter PUSH 
+267 RCALL
+enter CALL or RCALL 
+268 JNE
+enter jump 
+269 ASN
+enter ASN 
+270 ADD
+enter CALCULATE 
+271 ASN
+enter ASN 
+272 LABEL
+enter LABEL 
+273 ASN
+enter ASN 
+274 ASN
+enter ASN 
+275 ADD
+enter CALCULATE 
+276 ASN
+enter ASN 
+277 JS
+enter jump 
+278 ASN
+enter ASN 
+279 JE
+enter jump 
+280 PRINTF
+enter PRINTF 
+281 LABEL
+enter LABEL 
+282 JE
+enter jump 
+283 RETURN
+enter RETURN 
+284 LABEL
+enter LABEL 
+285 PRINTF
+enter PRINTF 
+286 FEND
+enter FEND 
+287 FSTART
+enter FSTART 
+----------------
+key:intermax value:$s1
+key:iter value:$s0
+----------------
+288 LABEL
+enter LABEL 
+289 CONST
+enter CONST 
+290 INTSY
+enter INTSY or CHARSY 
+291 ASN
+enter ASN 
+292 ASN
+enter ASN 
+293 LABEL
+enter LABEL 
+294 JNEI
+enter SWITCHJUMP 
+295 ASN
+enter ASN 
+296 JE
+enter jump 
+297 PRINTF
+enter PRINTF 
+298 LABEL
+enter LABEL 
+299 JUMP
+enter JUMP 
+300 LABEL
+enter LABEL 
+301 JNEI
+enter SWITCHJUMP 
+302 ASN
+enter ASN 
+303 JE
+enter jump 
+304 PRINTF
+enter PRINTF 
+305 LABEL
+enter LABEL 
+306 JUMP
+enter JUMP 
+307 LABEL
+enter LABEL 
+308 JNEI
+enter SWITCHJUMP 
+309 ASN
+enter ASN 
+310 JE
+enter jump 
+311 PRINTF
+enter PRINTF 
+312 LABEL
+enter LABEL 
+313 JUMP
+enter JUMP 
+314 LABEL
+enter LABEL 
+315 LABEL
+enter LABEL 
+316 ASN
+enter ASN 
+317 ADD
+enter CALCULATE 
+318 ASN
+enter ASN 
+319 JS
+enter jump 
+320 FEND
+enter FEND 
+321 FSTART
+enter FSTART 
+----------------
+----------------
+322 LABEL
+enter LABEL 
+323 CALL
+enter CALL or RCALL 
+324 CALL
+enter CALL or RCALL 
+325 CALL
+enter CALL or RCALL 
+326 PRINTF
+enter PRINTF 
+327 FEND
+enter FEND 
+328 FSTART
+enter FSTART 
+----------------
+key:_ value:$s1
+key:endid value:$s0
+key:i value:$s2
+----------------
+329 LABEL
+enter LABEL 
+330 INTSY
+enter INTSY or CHARSY 
+331 INTSY
+enter INTSY or CHARSY 
+332 INTSY
+enter INTSY or CHARSY 
+333 INTSY
+enter INTSY or CHARSY 
+334 INTSY
+enter INTSY or CHARSY 
+335 CHARSY
+enter INTSY or CHARSY 
+336 CHARSY
+enter INTSY or CHARSY 
+337 ASN
+enter ASN 
+338 ASN
+enter ASN 
+339 ASN
+enter ASN 
+340 ASN
+enter ASN 
+341 ASN
+enter ASN 
+342 ASN
+enter ASN 
+343 LABEL
+enter LABEL 
+344 ASNAR
+enter ASNAR 
+345 ASN
+enter ASN 
+346 ASN
+enter ASN 
+347 ADD
+enter CALCULATE 
+348 ASN
+enter ASN 
+349 JS
+enter jump 
+350 ASN
+enter ASN 
+351 ASN
+enter ASN 
+352 ASN
+enter ASN 
+353 ASN
+enter ASN 
+354 ASN
+enter ASN 
+355 ASN
+enter ASN 
+356 ASN
+enter ASN 
+357 LABEL
+enter LABEL 
+358 ASN
+enter ASN 
+359 ASN
+enter ASN 
+360 ASN
+enter ASN 
+361 ASN
+enter ASN 
+362 ASN
+enter ASN 
+363 DIV
+enter CALCULATE 
+364 ASN
+enter ASN 
+365 ASN
+enter ASN 
+366 MUL
+enter CALCULATE 
+367 SUB
+enter CALCULATE 
+368 SUB
+enter CALCULATE 
+369 ADD
+enter CALCULATE 
+370 SUB
+enter CALCULATE 
+371 DIV
+enter CALCULATE 
+372 ASNAR
+enter ASNAR 
+373 ASN
+enter ASN 
+374 ADD
+enter CALCULATE 
+375 ASN
+enter ASN 
+376 JS
+enter jump 
+377 ASN
+enter ASN 
+378 ASN
+enter ASN 
+379 GETAR
+enter GETAR 
+380 JNE
+enter jump 
+381 PRINTF
+enter PRINTF 
+382 LABEL
+enter LABEL 
+383 FEND
+enter FEND 
+384 FSTART
+enter FSTART 
+----------------
+----------------
+385 LABEL
+enter LABEL 
+386 CALL
+enter CALL or RCALL 
+387 FEND
+enter FEND 
+388 FSTART
+enter FSTART 
+----------------
+key:n value:$s0
+----------------
+389 LABEL
+enter LABEL 
+390 PARA
+enter PARA 
+391 JNEI
+enter SWITCHJUMP 
+392 ASN
+enter ASN 
+393 RETURN
+enter RETURN 
+394 JUMP
+enter JUMP 
+395 LABEL
+enter LABEL 
+396 JNEI
+enter SWITCHJUMP 
+397 ASN
+enter ASN 
+398 RETURN
+enter RETURN 
+399 JUMP
+enter JUMP 
+400 LABEL
+enter LABEL 
+401 JNEI
+enter SWITCHJUMP 
+402 ASN
+enter ASN 
+403 RETURN
+enter RETURN 
+404 JUMP
+enter JUMP 
+405 LABEL
+enter LABEL 
+406 LABEL
+enter LABEL 
+407 ASN
+enter ASN 
+408 SUB
+enter CALCULATE 
+409 PUSH
+enter PUSH 
+410 RCALL
+enter CALL or RCALL 
+411 ASN
+enter ASN 
+412 SUB
+enter CALCULATE 
+413 PUSH
+enter PUSH 
+414 RCALL
+enter CALL or RCALL 
+415 ADD
+enter CALCULATE 
+416 RETURN
+enter RETURN 
+417 FEND
+enter FEND 
+418 FSTART
+enter FSTART 
+----------------
+key:n value:$s0
+----------------
+419 LABEL
+enter LABEL 
+420 INTSY
+enter INTSY or CHARSY 
+421 PRINTF
+enter PRINTF 
+422 SCANF
+enter SCANF 
+~~~~~~~~~~~~~~11
+423 LABEL
+enter LABEL 
+424 ASN
+enter ASN 
+425 JBE
+enter jump 
+426 PRINTF
+enter PRINTF 
+427 SCANF
+enter SCANF 
+~~~~~~~~~~~~~~11
+428 LABEL
+enter LABEL 
+429 ASN
+enter ASN 
+430 JS
+enter jump 
+431 PUSH
+enter PUSH 
+432 RCALL
+enter CALL or RCALL 
+433 PRINTF
+enter PRINTF 
+434 LABEL
+enter LABEL 
+435 ASN
+enter ASN 
+436 JS
+enter jump 
+437 FEND
+enter FEND 
+438 FSTART
+enter FSTART 
+----------------
+----------------
+439 LABEL
+enter LABEL 
+440 PARA
+enter PARA 
+441 PARA
+enter PARA 
+442 DIV
+enter CALCULATE 
+443 MUL
+enter CALCULATE 
+444 SUB
+enter CALCULATE 
+445 RETURN
+enter RETURN 
+446 FEND
+enter FEND 
+447 FSTART
+enter FSTART 
+----------------
+key:m value:$s1
+key:n value:$s0
+----------------
+448 LABEL
+enter LABEL 
+449 PARA
+enter PARA 
+450 PARA
+enter PARA 
+451 INTSY
+enter INTSY or CHARSY 
+452 ASN
+enter ASN 
+453 ASN
+enter ASN 
+454 ASN
+enter ASN 
+455 JNE
+enter jump 
+456 RETURN
+enter RETURN 
+457 LABEL
+enter LABEL 
+458 ASN
+enter ASN 
+459 JNE
+enter jump 
+460 RETURN
+enter RETURN 
+461 LABEL
+enter LABEL 
+462 PUSH
+enter PUSH 
+464 RCALL
+enter CALL or RCALL 
+465 PUSH
+enter PUSH 
+467 RCALL
+enter CALL or RCALL 
+468 RETURN
+enter RETURN 
+469 FEND
+enter FEND 
+470 FSTART
+enter FSTART 
+----------------
+key:m value:$s0
+----------------
+471 LABEL
+enter LABEL 
+472 PARA
+enter PARA 
+473 PARA
+enter PARA 
+474 ASN
+enter ASN 
+475 JB
+enter jump 
+476 ASN
+enter ASN 
+477 RETURN
+enter RETURN 
+478 LABEL
+enter LABEL 
+479 ASN
+enter ASN 
+480 JB
+enter jump 
+481 ASN
+enter ASN 
+482 RETURN
+enter RETURN 
+483 LABEL
+enter LABEL 
+484 ASN
+enter ASN 
+485 RETURN
+enter RETURN 
+486 FEND
+enter FEND 
+487 FSTART
+enter FSTART 
+----------------
+key:m value:$s0
+key:n value:$s1
+----------------
+488 LABEL
+enter LABEL 
+489 INTSY
+enter INTSY or CHARSY 
+490 INTSY
+enter INTSY or CHARSY 
+491 PRINTF
+enter PRINTF 
+492 SCANF
+enter SCANF 
+~~~~~~~~~~~~~~11
+493 SCANF
+enter SCANF 
+~~~~~~~~~~~~~~12
+494 PUSH
+enter PUSH 
+496 RCALL
+enter CALL or RCALL 
+497 JE
+enter jump 
+498 LABEL
+enter LABEL 
+499 PRINTF
+enter PRINTF 
+500 SCANF
+enter SCANF 
+~~~~~~~~~~~~~~11
+501 SCANF
+enter SCANF 
+~~~~~~~~~~~~~~12
+502 PUSH
+enter PUSH 
+504 RCALL
+enter CALL or RCALL 
+505 JNE
+enter jump 
+506 LABEL
+enter LABEL 
+507 PUSH
+enter PUSH 
+509 RCALL
+enter CALL or RCALL 
+510 PRINTF
+enter PRINTF 
+511 FEND
+enter FEND 
+512 FSTART
+enter FSTART 
+----------------
+key:i value:$s0
+key:x value:$s1
+----------------
+513 LABEL
+enter LABEL 
+514 PARA
+enter PARA 
+515 INTSY
+enter INTSY or CHARSY 
+516 ASN
+enter ASN 
+517 ASN
+enter ASN 
+518 ASN
+enter ASN 
+519 JNE
+enter jump 
+520 ASN
+enter ASN 
+521 RETURN
+enter RETURN 
+522 LABEL
+enter LABEL 
+523 LABEL
+enter LABEL 
+524 PUSH
+enter PUSH 
+526 RCALL
+enter CALL or RCALL 
+527 ASN
+enter ASN 
+528 JNE
+enter jump 
+529 ASN
+enter ASN 
+530 RETURN
+enter RETURN 
+531 LABEL
+enter LABEL 
+532 ASN
+enter ASN 
+533 ADD
+enter CALCULATE 
+534 ASN
+enter ASN 
+535 MUL
+enter CALCULATE 
+536 JS
+enter jump 
+537 ASN
+enter ASN 
+538 RETURN
+enter RETURN 
+539 FEND
+enter FEND 
+540 FSTART
+enter FSTART 
+----------------
+key:first value:$s0
+key:i value:$s2
+key:n value:$s1
+----------------
+541 LABEL
+enter LABEL 
+542 PARA
+enter PARA 
+543 INTSY
+enter INTSY or CHARSY 
+544 INTSY
+enter INTSY or CHARSY 
+545 ASN
+enter ASN 
+546 ASN
+enter ASN 
+547 ASN
+enter ASN 
+548 ASN
+enter ASN 
+549 ASN
+enter ASN 
+550 JNE
+enter jump 
+551 PRINTF
+enter PRINTF 
+552 RETURN
+enter RETURN 
+553 LABEL
+enter LABEL 
+554 LABEL
+enter LABEL 
+555 PUSH
+enter PUSH 
+556 RCALL
+enter CALL or RCALL 
+557 ASN
+enter ASN 
+558 JNE
+enter jump 
+559 PUSH
+enter PUSH 
+561 RCALL
+enter CALL or RCALL 
+562 ASN
+enter ASN 
+563 JNE
+enter jump 
+564 LABEL
+enter LABEL 
+565 ASN
+enter ASN 
+566 DIV
+enter CALCULATE 
+567 ASN
+enter ASN 
+568 JNE
+enter jump 
+569 PRINTF
+enter PRINTF 
+570 LABEL
+enter LABEL 
+571 ASN
+enter ASN 
+572 ASN
+enter ASN 
+573 PRINTF
+enter PRINTF 
+574 PUSH
+enter PUSH 
+576 RCALL
+enter CALL or RCALL 
+577 ASN
+enter ASN 
+578 JE
+enter jump 
+579 LABEL
+enter LABEL 
+580 LABEL
+enter LABEL 
+581 ASN
+enter ASN 
+582 ADD
+enter CALCULATE 
+583 ASN
+enter ASN 
+584 MUL
+enter CALCULATE 
+585 JS
+enter jump 
+586 ASN
+enter ASN 
+587 JE
+enter jump 
+588 ASN
+enter ASN 
+589 JNE
+enter jump 
+590 PRINTF
+enter PRINTF 
+591 LABEL
+enter LABEL 
+592 PRINTF
+enter PRINTF 
+593 LABEL
+enter LABEL 
+594 FEND
+enter FEND 
+595 FSTART
+enter FSTART 
+----------------
+key:n value:$s0
+----------------
+596 LABEL
+enter LABEL 
+597 INTSY
+enter INTSY or CHARSY 
+598 PRINTF
+enter PRINTF 
+599 SCANF
+enter SCANF 
+~~~~~~~~~~~~~~11
+600 LABEL
+enter LABEL 
+601 ASN
+enter ASN 
+602 JBE
+enter jump 
+603 PRINTF
+enter PRINTF 
+604 SCANF
+enter SCANF 
+~~~~~~~~~~~~~~11
+605 LABEL
+enter LABEL 
+606 ASN
+enter ASN 
+607 JS
+enter jump 
+608 PRINTF
+enter PRINTF 
+609 PUSH
+enter PUSH 
+610 CALL
+enter CALL or RCALL 
+611 FEND
+enter FEND 
+612 FSTART
+enter FSTART 
+----------------
+key:a value:$s0
+----------------
+613 LABEL
+enter LABEL 
+614 PARA
+enter PARA 
+615 ASN
+enter ASN 
+616 JNE
+enter jump 
+617 ASN
+enter ASN 
+618 RETURN
+enter RETURN 
+619 LABEL
+enter LABEL 
+620 ASN
+enter ASN 
+621 JNE
+enter jump 
+622 ASN
+enter ASN 
+623 RETURN
+enter RETURN 
+624 LABEL
+enter LABEL 
+625 ASN
+enter ASN 
+626 JNE
+enter jump 
+627 ASN
+enter ASN 
+628 RETURN
+enter RETURN 
+629 LABEL
+enter LABEL 
+630 ASN
+enter ASN 
+631 RETURN
+enter RETURN 
+632 FEND
+enter FEND 
+633 FSTART
+enter FSTART 
+----------------
+key:E value:$s3
+key:H value:$s0
+key:M value:$s2
+key:kind value:$s1
+----------------
+634 LABEL
+enter LABEL 
+635 CHARSY
+enter INTSY or CHARSY 
+636 PRINTF
+enter PRINTF 
+637 SCANF
+enter SCANF 
+~~~~~~~~~~~~~~11
+638 PUSH
+enter PUSH 
+639 RCALL
+enter CALL or RCALL 
+640 JE
+enter jump 
+641 LABEL
+enter LABEL 
+642 PRINTF
+enter PRINTF 
+643 SCANF
+enter SCANF 
+~~~~~~~~~~~~~~11
+644 PUSH
+enter PUSH 
+645 RCALL
+enter CALL or RCALL 
+646 JNE
+enter jump 
+647 LABEL
+enter LABEL 
+648 JNEC
+enter SWITCHJUMP 
+649 CALL
+enter CALL or RCALL 
+650 CALL
+enter CALL or RCALL 
+651 CALL
+enter CALL or RCALL 
+652 JUMP
+enter JUMP 
+653 LABEL
+enter LABEL 
+654 JNEC
+enter SWITCHJUMP 
+655 CALL
+enter CALL or RCALL 
+656 CALL
+enter CALL or RCALL 
+657 CALL
+enter CALL or RCALL 
+658 CALL
+enter CALL or RCALL 
+659 JUMP
+enter JUMP 
+660 LABEL
+enter LABEL 
+661 JNEC
+enter SWITCHJUMP 
+662 CALL
+enter CALL or RCALL 
+663 CALL
+enter CALL or RCALL 
+664 CALL
+enter CALL or RCALL 
+665 CALL
+enter CALL or RCALL 
+666 CALL
+enter CALL or RCALL 
+667 CALL
+enter CALL or RCALL 
+668 CALL
+enter CALL or RCALL 
+669 JUMP
+enter JUMP 
+670 LABEL
+enter LABEL 
+671 LABEL
+enter LABEL 
+672 RETURN
+enter RETURN 
+673 FEND
+enter FEND 

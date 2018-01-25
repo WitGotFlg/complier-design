@@ -156,20 +156,20 @@ extern map<string, string>REGISTER;
 
 typedef struct blockinf
 {
-	vector<string> pre;
-	vector<string> suc;
-	int prenum;
-	int sucnum;
-	string label;
-	vector<string> def;
-	int defnum;
-	vector<string> use;
-	int usenum;
-	vector<string> in;
-	int innum;
-	vector<string> out;
-	int outnum;
-	int inchanged;
+	vector<string> pre;   //该基本块的前驱集合
+	vector<string> suc;	  //该基本块的猴急集合
+	int prenum;			  //该基本块的前驱数目
+	int sucnum;			 //该基本块的后继数目
+	string label;         //该基本块的用于标记入口语句的字符串，同时也作为前驱和后继的名
+	vector<string> def;	  //该基本块的def集
+	int defnum;			 //该基本块的def数量
+	vector<string> use;		//该基本块的use集
+	int usenum;			//该基本块的use数量
+	vector<string> in;	//该基本块的in集
+	int innum;			//该基本块的in数量
+	vector<string> out;	//该基本块的out集
+	int outnum;			//该基本块的out数量
+	int inchanged;		//该基本块在流图分析过程中是否发生改变的标志
 }block;
 
 extern vector<block> blocklist;
@@ -193,4 +193,6 @@ typedef struct DAG
 
 void dag_opt();
 extern int errornum ;
+
+extern ofstream debug_information;
 #endif // GLOBAL_H_INCLUDED

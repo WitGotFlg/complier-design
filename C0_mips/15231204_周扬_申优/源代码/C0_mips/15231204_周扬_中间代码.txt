@@ -1,0 +1,674 @@
+0 CONST INTSY 1 cst1
+1 CONST INTSY 2 cst2
+2 CONST INTSY 3 cst3
+3 CONST CHARSY 97 csta
+4 CONST CHARSY 98 cstb
+5 CONST CHARSY 99 cstc
+6 INTSY   g_a
+7 INTSY   g_b
+8 INTSY  2048 g_arr
+9 CHARSY  1024 g_stra
+10 CHARSY  2048 g_strb
+11 FSTART   
+12 LABEL   const_define
+13 CONST INTSY 1 a
+14 CONST INTSY 0 b
+15 CONST INTSY -1 c
+16 CONST CHARSY 120 cst23
+17 CONST CHARSY 122 cst24
+18 CONST CHARSY 65 consta0
+19 CONST CHARSY 49 csta1
+20 CONST CHARSY 47 cst_div
+21 PRINTF  a 
+22 PRINTF  cst_div 
+23 FEND   
+24 FSTART   
+25 LABEL   const_define_test
+26 CALL const_define  
+27 FEND   
+28 FSTART   
+29 LABEL   var_define
+30 INTSY   a
+31 INTSY  1 arr
+32 INTSY   _a
+33 INTSY  2 _arr
+34 INTSY   a1
+35 INTSY  3 arr1
+36 CHARSY   b
+37 CHARSY  1 strb
+38 CHARSY   _b
+39 CHARSY  2 _bstr
+40 CHARSY   _b1
+41 CHARSY  3 _bstr1
+42 INTSY   c
+43 CHARSY   z
+44 FEND   
+45 FSTART   
+46 LABEL   var_define_test
+47 CALL var_define  
+48 FEND   
+49 FSTART   
+50 LABEL   define
+51 CONST INTSY 1 int1
+52 CONST CHARSY 122 cst24
+53 CONST CHARSY 65 consta0
+54 INTSY   val1
+55 CHARSY   b
+56 CHARSY  1 strb
+57 FEND   
+58 FSTART   
+59 LABEL   define_test
+60 CALL var_define_test  
+61 CALL const_define_test  
+62 CALL define  
+63 PRINTF define test passed  
+64 FEND   
+65 FSTART   
+66 LABEL   operator
+67 INTSY   a
+68 INTSY   b
+69 INTSY   c
+70 INTSY   d
+71 INTSY   e
+72 INTSY   f
+73 TEMP2 = 2
+74 TEMP11 = 3
+75 TEMP5 = 1
+76 TEMP4 = 3
+77 TEMP6 = 3 * 1
+78 c = TEMP6
+79 TEMP7 = 4
+80 TEMP14 = 4
+81 TEMP8 = 0 - 4
+82 d = TEMP8
+83 TEMP15 = TEMP8 / 4
+84 TEMP0 = 1
+85 a = 1
+86 TEMP17 = 1 / 1
+87 TEMP21 = 3
+88 TEMP1 = 1
+89 TEMP3 = 1 + 2
+90 b = TEMP3
+91 TEMP12 = TEMP3 * 3
+92 TEMP13 = TEMP12 + TEMP6
+93 TEMP16 = TEMP13 - TEMP15
+94 TEMP18 = TEMP16 + TEMP17
+95 a = TEMP18
+96 TEMP22 = TEMP18 * 3
+97 TEMP25 = 4
+98 TEMP26 = TEMP8 / 4
+99 TEMP10 = 6
+100 f = 6
+101 TEMP9 = 5
+102 e = 5
+103 TEMP28 = 5 * 6
+104 TEMP31 = 0
+105 TEMP19 = 0
+106 TEMP20 = 0 + TEMP18
+107 TEMP23 = TEMP20 + TEMP22
+108 TEMP24 = TEMP23 + TEMP6
+109 TEMP27 = TEMP24 - TEMP26
+110 TEMP29 = TEMP27 + TEMP28
+111 b = TEMP29
+112 TEMP32 = TEMP29 * 0
+113 TEMP35 = 0
+114 TEMP34 = 1
+115 TEMP36 = 1 - 0
+116 TEMP30 = 0 - TEMP18
+117 TEMP33 = TEMP30 + TEMP32
+118 TEMP37 = TEMP33 - TEMP36
+119 e = TEMP37
+120 FEND   
+121 FSTART   
+122 LABEL   operator_test
+123 CALL operator  
+124 PRINTF operator test passed  
+125 FEND   
+126 FSTART   
+127 LABEL   string
+128 PRINTF ABCDEFGHIJKLMNOPQRSTUVWXYZ abcdefghijklmnopqrstuvwxyz  
+129 PRINTF !#$%&'()*+,-./:;<=>?@[]^_`{|}~  
+130 FEND   
+131 FSTART   
+132 LABEL   string_test
+133 CALL string  
+134 FEND   
+135 FSTART   
+136 LABEL   dowhile
+137 INTSY   i
+138 TEMP38 = 100
+139 i = 100
+140 LABEL   label0
+141 TEMP39 = 50
+142 JS i TEMP39 label1
+143 TEMP40 = 2
+144 TEMP41 = i / 2
+145 i = TEMP41
+146 LABEL   label1
+147 TEMP42 = 50
+148 JBE i TEMP42 label2
+149 TEMP43 = 10
+150 TEMP45 = 10
+151 TEMP44 = i + 10
+152 TEMP46 = TEMP44 / 10
+153 i = TEMP46
+154 LABEL   label2
+155 TEMP47 = 10
+156 JBE i TEMP47 label0
+157 LABEL   label3
+158 TEMP48 = 1
+159 TEMP49 = i - 1
+160 i = TEMP49
+161 PRINTF dowhile test passed  
+162 TEMP50 = 0
+163 JNE TEMP50 0 label3
+164 FEND   
+165 FSTART   
+166 LABEL   dowhile_test
+167 CALL dowhile  
+168 FEND   
+169 FSTART   
+170 LABEL   ifcondition
+171 INTSY   a
+172 INTSY   rightnumber
+173 TEMP53 = 1
+174 TEMP52 = 0
+175 rightnumber = 0
+176 TEMP51 = 1
+177 a = 1
+178 JNE a TEMP53 label4
+179 TEMP54 = 1
+180 TEMP55 = rightnumber + 1
+181 rightnumber = TEMP55
+182 LABEL   label4
+183 TEMP57 = 1
+184 TEMP56 = 2
+185 a = 2
+186 JSE a TEMP57 label5
+187 TEMP58 = 1
+188 TEMP59 = rightnumber + 1
+189 rightnumber = TEMP59
+190 LABEL   label5
+191 TEMP61 = 1
+192 TEMP60 = 0
+193 a = 0
+194 JBE a TEMP61 label6
+195 TEMP62 = 1
+196 TEMP63 = rightnumber + 1
+197 rightnumber = TEMP63
+198 LABEL   label6
+199 TEMP64 = 1
+200 JE a TEMP64 label7
+201 TEMP65 = 1
+202 TEMP66 = rightnumber + 1
+203 rightnumber = TEMP66
+204 LABEL   label7
+205 TEMP67 = 0
+206 JS a TEMP67 label8
+207 TEMP68 = 1
+208 TEMP69 = rightnumber + 1
+209 rightnumber = TEMP69
+210 LABEL   label8
+211 TEMP70 = 0
+212 JB a TEMP70 label9
+213 TEMP71 = 1
+214 TEMP72 = rightnumber + 1
+215 rightnumber = TEMP72
+216 LABEL   label9
+217 TEMP74 = 1
+218 TEMP76 = 1
+219 TEMP79 = 3
+220 TEMP78 = 1
+221 TEMP80 = 1 * 3
+222 TEMP73 = 1
+223 TEMP75 = 1 + 1
+224 TEMP77 = TEMP75 + 1
+225 TEMP81 = TEMP77 + TEMP80
+226 JE rightnumber TEMP81 label10
+227 PRINTF ifcondition clause error!  
+228 LABEL   label10
+229 JE rightnumber rightnumber label11
+230 PRINTF ifcondition clause error  
+231 LABEL   label11
+232 FEND   
+233 FSTART   
+234 LABEL   switchcodintionans
+235 PARA INTSY  x
+236 JNEI x 1 label13
+237 TEMP82 = 2
+238 RETURN   TEMP82
+239 JUMP   label12
+240 LABEL   label13
+241 JNEI x 2 label14
+242 TEMP83 = 3
+243 RETURN   TEMP83
+244 JUMP   label12
+245 LABEL   label14
+246 JNEI x 3 label15
+247 TEMP84 = 4
+248 RETURN   TEMP84
+249 JUMP   label12
+250 LABEL   label15
+251 LABEL   label12
+252 TEMP85 = 5
+253 RETURN   TEMP85
+254 FEND   
+255 FSTART   
+256 LABEL   switchcodintion
+257 INTSY   i
+258 INTSY   rightnumber
+259 TEMP87 = 0
+260 rightnumber = 0
+261 TEMP86 = 1
+262 i = 1
+263 LABEL   label16
+264 TEMP88 = 1
+265 TEMP89 = i + 1
+266 PUSH   i
+267 RCALL switchcodintionans  TEMP90
+268 JNE TEMP89 TEMP90 label17
+269 TEMP91 = 1
+270 TEMP92 = rightnumber + 1
+271 rightnumber = TEMP92
+272 LABEL   label17
+273 TEMP95 = 5
+274 TEMP93 = 1
+275 TEMP94 = i + 1
+276 i = TEMP94
+277 JS i TEMP95 label16
+278 TEMP96 = 4
+279 JE rightnumber TEMP96 label18
+280 PRINTF switchcodintion clause  error!  
+281 LABEL   label18
+282 JE rightnumber 0 label19
+283 RETURN   i
+284 LABEL   label19
+285 PRINTF switchcodintion clause  error!  
+286 FEND   
+287 FSTART   
+288 LABEL   condition
+289 CONST INTSY 5 intermax
+290 INTSY   iter
+291 TEMP97 = 0
+292 iter = 0
+293 LABEL   label20
+294 JNEI iter 0 label22
+295 TEMP98 = 0
+296 JE iter TEMP98 label23
+297 PRINTF error 0  
+298 LABEL   label23
+299 JUMP   label21
+300 LABEL   label22
+301 JNEI iter 1 label24
+302 TEMP99 = 1
+303 JE iter TEMP99 label25
+304 PRINTF error 1  
+305 LABEL   label25
+306 JUMP   label21
+307 LABEL   label24
+308 JNEI iter 2 label26
+309 TEMP100 = 2
+310 JE iter TEMP100 label27
+311 PRINTF error 2  
+312 LABEL   label27
+313 JUMP   label21
+314 LABEL   label26
+315 LABEL   label21
+316 TEMP101 = 1
+317 TEMP102 = iter + 1
+318 iter = TEMP102
+319 JS iter intermax label20
+320 FEND   
+321 FSTART   
+322 LABEL   condition_test
+323 CALL ifcondition  
+324 CALL switchcodintion  
+325 CALL condition  
+326 PRINTF condition test passed  
+327 FEND   
+328 FSTART   
+329 LABEL   miscellaneous
+330 INTSY   _
+331 INTSY   a
+332 INTSY  23 array
+333 INTSY   i
+334 INTSY   endid
+335 CHARSY   ch1
+336 CHARSY  256 buf
+337 TEMP105 = 0
+338 i = 0
+339 TEMP104 = 2
+340 a = 2
+341 TEMP103 = 1
+342 _ = 1
+343 LABEL   label28
+344 array[i] = i
+345 TEMP108 = 23
+346 TEMP106 = 1
+347 TEMP107 = i + 1
+348 i = TEMP107
+349 JS i TEMP108 label28
+350 TEMP111 = 0
+351 _ = 0
+352 TEMP110 = 127
+353 i = 127
+354 endid = 127
+355 TEMP109 = '97'
+356 ch1 = '97'
+357 LABEL   label29
+358 TEMP125 = '97'
+359 TEMP112 = 1
+360 TEMP115 = 1
+361 TEMP118 = 1
+362 TEMP117 = 2
+363 TEMP119 = 2 / 1
+364 TEMP121 = 1
+365 TEMP123 = 2
+366 TEMP113 = _ * 1
+367 TEMP114 = TEMP113 - _
+368 TEMP116 = TEMP114 - 1
+369 TEMP120 = TEMP116 + TEMP119
+370 TEMP122 = TEMP120 - 1
+371 TEMP124 = TEMP122 / 2
+372 buf[TEMP124] = TEMP125
+373 TEMP126 = 1
+374 TEMP127 = _ + 1
+375 _ = TEMP127
+376 JS _ endid label29
+377 TEMP130 = '97'
+378 TEMP128 = 0
+379 TEMP129 = buf[0]
+380 JNE TEMP129 TEMP130 label30
+381 PRINTF miscellaneous test passed  
+382 LABEL   label30
+383 FEND   
+384 FSTART   
+385 LABEL   miscellaneous_test
+386 CALL miscellaneous  
+387 FEND   
+388 FSTART   
+389 LABEL   fibonaci
+390 PARA INTSY  n
+391 JNEI n 0 label32
+392 TEMP131 = 0
+393 RETURN   TEMP131
+394 JUMP   label31
+395 LABEL   label32
+396 JNEI n 1 label33
+397 TEMP132 = 1
+398 RETURN   TEMP132
+399 JUMP   label31
+400 LABEL   label33
+401 JNEI n 2 label34
+402 TEMP133 = 1
+403 RETURN   TEMP133
+404 JUMP   label31
+405 LABEL   label34
+406 LABEL   label31
+407 TEMP134 = 1
+408 TEMP135 = n - 1
+409 PUSH   TEMP135
+410 RCALL fibonaci  TEMP136
+411 TEMP137 = 2
+412 TEMP138 = n - 2
+413 PUSH   TEMP138
+414 RCALL fibonaci  TEMP139
+415 TEMP140 = TEMP136 + TEMP139
+416 RETURN   TEMP140
+417 FEND   
+418 FSTART   
+419 LABEL   fibonaci_test
+420 INTSY   n
+421 PRINTF Fibonaci: Please input a unsigned positive integer ?  
+422 SCANF   n
+423 LABEL   label35
+424 TEMP141 = 0
+425 JBE n TEMP141 label36
+426 PRINTF Input error, try again:  
+427 SCANF   n
+428 LABEL   label36
+429 TEMP142 = 0
+430 JS n TEMP142 label37
+431 PUSH   n
+432 RCALL fibonaci  TEMP143
+433 PRINTF The fibonaci's answer is  TEMP143 
+434 LABEL   label37
+435 TEMP144 = 0
+436 JS n TEMP144 label35
+437 FEND   
+438 FSTART   
+439 LABEL   mod
+440 PARA INTSY  n
+441 PARA INTSY  m
+442 TEMP145 = n / m
+443 TEMP146 = TEMP145 * m
+444 TEMP147 = n - TEMP146
+445 RETURN   TEMP147
+446 FEND   
+447 FSTART   
+448 LABEL   gcd
+449 PARA INTSY  n
+450 PARA INTSY  m
+451 INTSY   rem
+452 TEMP149 = 0
+453 TEMP148 = 0
+454 rem = 0
+455 JNE n TEMP149 label38
+456 RETURN   m
+457 LABEL   label38
+458 TEMP150 = 0
+459 JNE m TEMP150 label39
+460 RETURN   n
+461 LABEL   label39
+462 PUSH   n
+463 PUSH   m
+464 RCALL mod  TEMP151
+465 PUSH   m
+466 PUSH   TEMP151
+467 RCALL gcd  TEMP152
+468 RETURN   TEMP152
+469 FEND   
+470 FSTART   
+471 LABEL   iswronggcd
+472 PARA INTSY  n
+473 PARA INTSY  m
+474 TEMP153 = 0
+475 JB n TEMP153 label40
+476 TEMP154 = 1
+477 RETURN   TEMP154
+478 LABEL   label40
+479 TEMP155 = 0
+480 JB m TEMP155 label41
+481 TEMP156 = 1
+482 RETURN   TEMP156
+483 LABEL   label41
+484 TEMP157 = 0
+485 RETURN   TEMP157
+486 FEND   
+487 FSTART   
+488 LABEL   gcd_test
+489 INTSY   n
+490 INTSY   m
+491 PRINTF GCD: Please input two unsigned positive integer ?  
+492 SCANF   n
+493 SCANF   m
+494 PUSH   n
+495 PUSH   m
+496 RCALL iswronggcd  TEMP158
+497 JE TEMP158 0 label42
+498 LABEL   label43
+499 PRINTF Input error, try Again:   
+500 SCANF   n
+501 SCANF   m
+502 PUSH   n
+503 PUSH   m
+504 RCALL iswronggcd  TEMP159
+505 JNE TEMP159 0 label43
+506 LABEL   label42
+507 PUSH   n
+508 PUSH   m
+509 RCALL gcd  TEMP160
+510 PRINTF The gcd's answer is  TEMP160 
+511 FEND   
+512 FSTART   
+513 LABEL   is_prime
+514 PARA INTSY  x
+515 INTSY   i
+516 TEMP162 = 2
+517 TEMP161 = 2
+518 i = 2
+519 JNE x TEMP162 label44
+520 TEMP163 = 1
+521 RETURN   TEMP163
+522 LABEL   label44
+523 LABEL   label45
+524 PUSH   x
+525 PUSH   i
+526 RCALL mod  TEMP164
+527 TEMP165 = 0
+528 JNE TEMP164 TEMP165 label46
+529 TEMP166 = 0
+530 RETURN   TEMP166
+531 LABEL   label46
+532 TEMP167 = 1
+533 TEMP168 = i + 1
+534 i = TEMP168
+535 TEMP169 = TEMP168 * TEMP168
+536 JS TEMP169 x label45
+537 TEMP170 = 1
+538 RETURN   TEMP170
+539 FEND   
+540 FSTART   
+541 LABEL   prime_factorization
+542 PARA INTSY  n
+543 INTSY   i
+544 INTSY   first
+545 TEMP173 = 1
+546 TEMP172 = 0
+547 first = 0
+548 TEMP171 = 2
+549 i = 2
+550 JNE n TEMP173 label47
+551 PRINTF 1  
+552 RETURN   
+553 LABEL   label47
+554 LABEL   label48
+555 PUSH   i
+556 RCALL is_prime  TEMP174
+557 TEMP175 = 1
+558 JNE TEMP174 TEMP175 label49
+559 PUSH   n
+560 PUSH   i
+561 RCALL mod  TEMP176
+562 TEMP177 = 0
+563 JNE TEMP176 TEMP177 label50
+564 LABEL   label51
+565 TEMP179 = 1
+566 TEMP178 = n / i
+567 n = TEMP178
+568 JNE first TEMP179 label52
+569 PRINTF *  
+570 LABEL   label52
+571 TEMP180 = 1
+572 first = 1
+573 PRINTF  i 
+574 PUSH   n
+575 PUSH   i
+576 RCALL mod  TEMP181
+577 TEMP182 = 0
+578 JE TEMP181 TEMP182 label51
+579 LABEL   label50
+580 LABEL   label49
+581 TEMP183 = 1
+582 TEMP184 = i + 1
+583 i = TEMP184
+584 TEMP185 = TEMP184 * TEMP184
+585 JS TEMP185 n label48
+586 TEMP186 = 1
+587 JE n TEMP186 label53
+588 TEMP187 = 1
+589 JNE first TEMP187 label54
+590 PRINTF *  
+591 LABEL   label54
+592 PRINTF  n 
+593 LABEL   label53
+594 FEND   
+595 FSTART   
+596 LABEL   prime_factorization_test
+597 INTSY   n
+598 PRINTF prime_factorization: Please input a unsigned positive integer(<2^31-1) ?  
+599 SCANF   n
+600 LABEL   label55
+601 TEMP188 = 0
+602 JBE n TEMP188 label56
+603 PRINTF Input error, try again:  
+604 SCANF   n
+605 LABEL   label56
+606 TEMP189 = 0
+607 JS n TEMP189 label55
+608 PRINTF The factor of n is   
+609 PUSH   n
+610 CALL prime_factorization  
+611 FEND   
+612 FSTART   
+613 LABEL   iswrong
+614 PARA CHARSY  a
+615 TEMP190 = '69'
+616 JNE TEMP190 a label57
+617 TEMP191 = 0
+618 RETURN   TEMP191
+619 LABEL   label57
+620 TEMP192 = '77'
+621 JNE TEMP192 a label58
+622 TEMP193 = 0
+623 RETURN   TEMP193
+624 LABEL   label58
+625 TEMP194 = '72'
+626 JNE TEMP194 a label59
+627 TEMP195 = 0
+628 RETURN   TEMP195
+629 LABEL   label59
+630 TEMP196 = 1
+631 RETURN   TEMP196
+632 FEND   
+633 FSTART   
+634 LABEL   main
+635 CHARSY   kind
+636 PRINTF Please input Test Type:E(Easy), (M)Middle, H(Hard):   
+637 SCANF   kind
+638 PUSH   kind
+639 RCALL iswrong  TEMP197
+640 JE TEMP197 0 label60
+641 LABEL   label61
+642 PRINTF Try Again:   
+643 SCANF   kind
+644 PUSH   kind
+645 RCALL iswrong  TEMP198
+646 JNE TEMP198 0 label61
+647 LABEL   label60
+648 JNEC kind E label63
+649 CALL define_test  
+650 CALL operator_test  
+651 CALL fibonaci_test  
+652 JUMP   label62
+653 LABEL   label63
+654 JNEC kind M label64
+655 CALL dowhile_test  
+656 CALL condition_test  
+657 CALL string_test  
+658 CALL gcd_test  
+659 JUMP   label62
+660 LABEL   label64
+661 JNEC kind H label65
+662 CALL define_test  
+663 CALL operator_test  
+664 CALL dowhile_test  
+665 CALL condition_test  
+666 CALL string_test  
+667 CALL miscellaneous_test  
+668 CALL prime_factorization_test  
+669 JUMP   label62
+670 LABEL   label65
+671 LABEL   label62
+672 RETURN   
+673 FEND   

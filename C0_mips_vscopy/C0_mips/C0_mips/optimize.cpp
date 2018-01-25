@@ -708,18 +708,8 @@ bool search_op_dag(dagtree* tree,string op,string name,dagele* ob1,dagele* ob2,d
 
 void dag_opt()
 {
-	int blockcount = -1;
 	for (int i = 0; i < midcode_length; i++)
 	{
-		if (middlecode_list[i].op.compare("FSTART") == 0)
-		{
-			blockcount = -1;
-		}
-		if (middlecode_list[i].op.compare("LABEL") == 0)
-		{
-			blockcount++;
-		}
-
 		vector<dagtree*> dagtreelist;
 		int codecount = 0;
 		for (; (middlecode_list[i].op.compare("ADD") == 0) ||
@@ -986,13 +976,13 @@ void dag_opt()
 				//cout << k << endl;
 				///////////////////////
 				k = (k == 0) ? dagtreelist[j]->element.size() - 1 : k - 1;
-				cout << k << endl;
+			//	cout << k << endl;
 			}
-			cout << "在生成dag图的for中的while成功跳出" << endl;
+		//	cout << "在生成dag图的for中的while成功跳出" << endl;
 		}
-		cout << "在dag图的入栈for成功跳出" << endl;
+		//cout << "在dag图的入栈for成功跳出" << endl;
 /////////////////////////////////////////////////用得到的stack重新生成中间代码
-		int countfinecode = 0;
+		int finecodecount = 0;
 		for (int k = elestack.size() - 1; k >= 0; k--)
 		{
 			if ((elestack[k]->nodevalue.compare("ADD") == 0) ||
@@ -1034,8 +1024,8 @@ void dag_opt()
 							code.ob2.erase(0, 1);
 							code.ob2.erase(strlen(code.ob2.c_str()) - 1, 1);
 						}
-						middlecode_list[i - codecount + countfinecode] = code;
-						countfinecode++;
+						middlecode_list[i - codecount + finecodecount] = code;
+						finecodecount++;
 					}
 					else if (elestack[k]->var[var_count].substr(0, 4).compare("TEMP") != 0)
 					{
@@ -1059,8 +1049,8 @@ void dag_opt()
 							code.ob1.erase(0, 1);
 							code.ob1.erase(strlen(code.ob1.c_str()) - 1, 1);
 						}
-						middlecode_list[i - codecount + countfinecode] = code;
-						countfinecode++;
+						middlecode_list[i - codecount + finecodecount] = code;
+						finecodecount++;
 					}
 				}
 			}
@@ -1087,18 +1077,18 @@ void dag_opt()
 						code.ob1.erase(0, 1);
 						code.ob1.erase(code.ob1.length - 1, 1);
 					} */
-					middlecode_list[i - codecount + countfinecode] = code;
-					countfinecode++;
+					middlecode_list[i - codecount + finecodecount] = code;
+					finecodecount++;
 				}
 			}
 		}
 
 		for (int k = i; k < midcode_length; k++)
 		{
-			middlecode_list[k - codecount + countfinecode] = middlecode_list[k];
+			middlecode_list[k - codecount + finecodecount] = middlecode_list[k];
 		}
-		midcode_length = midcode_length - codecount + countfinecode;
+		midcode_length = midcode_length - codecount + finecodecount;
 
 	}
-	cout << "out 最外面的for" << endl;
+	//cout << "out 最外面的for" << endl;
 }

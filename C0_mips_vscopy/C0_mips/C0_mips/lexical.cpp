@@ -705,7 +705,7 @@ void readCodeFile()
 	}
 	code[code_count] = '\0';
 	infile.close();
-	cout << "infile !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!" << endl;
+//	cout << "infile !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!" << endl;
 	symcodeinit();
 	//Lexical_output();
 }

@@ -1,0 +1,361 @@
+0 CONST INTSY 1 con_int1
+1 CONST INTSY -1 con_int2
+2 CONST INTSY 34 con_int3
+3 CONST INTSY 10 con_int4
+4 CONST CHARSY 65 con_ch4
+5 INTSY   index
+6 INTSY  10 var_arr
+7 INTSY   bigger_input
+8 CHARSY  10 var_arr_ch
+9 FSTART   
+10 LABEL   find_bigger
+11 PARA INTSY  a
+12 PARA INTSY  b
+13 JS a b label0
+14 RETURN   a
+15 LABEL   label0
+16 ASN 1  TEMP0
+17 ADD a TEMP0 TEMP1
+18 PUSH   TEMP1
+19 PUSH   b
+20 RCALL find_bigger  TEMP2
+21 RETURN   TEMP2
+22 FEND   
+23 FSTART   
+24 LABEL   print_bigger
+25 PRINTF The bigger number is  bigger_input 
+26 FEND   
+27 FSTART   
+28 LABEL   relation
+29 PARA INTSY  a
+30 PARA INTSY  b
+31 CONST INTSY 0 sml_eql
+32 CONST INTSY 1 bgr_eql
+33 INTSY   re
+34 JB a b label1
+35 ASN sml_eql  re
+36 PRINTF input3 is smaller OR equal than input4  
+37 LABEL   label1
+38 JS a b label2
+39 ASN bgr_eql  re
+40 PRINTF input3 is bigger OR equal than input4  
+41 LABEL   label2
+42 JE a b label3
+43 LABEL   label3
+44 JNE a b label4
+45 PRINTF input3 is equal to input4  
+46 LABEL   label4
+47 JNEI re 0 label6
+48 JBE a b label7
+49 PRINTF input3 is smaller than input4  
+50 LABEL   label7
+51 JUMP   label5
+52 LABEL   label6
+53 JNEI re 1 label8
+54 JSE a b label9
+55 PRINTF input3 is bigger than input4  
+56 LABEL   label9
+57 JUMP   label5
+58 LABEL   label8
+59 LABEL   label5
+60 FEND   
+61 FSTART   
+62 LABEL   main
+63 INTSY   input1
+64 INTSY   input2
+65 INTSY   input3
+66 INTSY   input4
+67 SCANF   input1
+68 SCANF   input2
+69 SCANF   input3
+70 SCANF   input4
+71 ASN 0  TEMP3
+72 ASN TEMP3  index
+73 PUSH   input1
+74 PUSH   input2
+75 RCALL find_bigger  TEMP4
+76 ASN TEMP4  bigger_input
+77 CALL print_bigger  
+78 PUSH   input3
+79 PUSH   input4
+80 CALL relation  
+81 SUB 0 input3 TEMP5
+82 ASN -1  TEMP6
+83 DIV input3 TEMP6 TEMP7
+84 MUL input4 TEMP7 TEMP8
+85 ASN '97'  TEMP9
+86 MUL TEMP8 TEMP9 TEMP10
+87 ADD TEMP5 TEMP10 TEMP11
+88 PUSH   input3
+89 PUSH   input4
+90 RCALL find_bigger  TEMP12
+91 ASN 7  TEMP13
+92 MUL TEMP12 TEMP13 TEMP14
+93 ADD TEMP11 TEMP14 TEMP15
+94 PRINTF  TEMP15 
+95 LABEL   label10
+96 ASN 2  TEMP16
+97 MUL index TEMP16 TEMP17
+98 ASN 1  TEMP18
+99 ADD TEMP17 TEMP18 TEMP19
+100 ASNAR TEMP19 index var_arr
+101 ADD con_ch4 index TEMP20
+102 ASNAR TEMP20 index var_arr_ch
+103 GETAR var_arr index TEMP21
+104 PRINTF  TEMP21 
+105 GETAR var_arr_ch index TEMP22
+106 PRINTF  TEMP22 
+107 ASN 1  TEMP23
+108 ADD index TEMP23 TEMP24
+109 ASN TEMP24  index
+110 JS index con_int4 label10
+111 FEND   
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+con_int1 CONST INTSY 0
+con_int2 CONST INTSY 0
+con_int3 CONST INTSY 0
+con_int4 CONST INTSY 0
+con_ch4 CONST CHARSY 0
+index VAR INTSY 0
+var_arr VAR INTSY 10
+bigger_input VAR INTSY 0
+var_arr_ch VAR CHARSY 10
+find_bigger FUNCTION INTSY 2
+print_bigger FUNCTION VOIDSY 0
+relation FUNCTION VOIDSY 2
+main FUNCTION VOIDSY 0
+0 CONST
+enter CONST 
+1 CONST
+enter CONST 
+2 CONST
+enter CONST 
+3 CONST
+enter CONST 
+4 CONST
+enter CONST 
+5 INTSY
+enter INTSY or CHARSY 
+6 INTSY
+enter INTSY or CHARSY 
+7 INTSY
+enter INTSY or CHARSY 
+8 CHARSY
+enter INTSY or CHARSY 
+9 FSTART
+enter FSTART 
+----------------
+key:a value:$s1
+key:b value:$s0
+----------------
+10 LABEL
+enter LABEL 
+11 PARA
+enter PARA 
+12 PARA
+enter PARA 
+13 JS
+enter jump 
+14 RETURN
+enter RETURN 
+15 LABEL
+enter LABEL 
+16 ASN
+enter ASN 
+17 ADD
+enter CALCULATE 
+18 PUSH
+enter PUSH 
+20 RCALL
+enter CALL or RCALL 
+21 RETURN
+enter RETURN 
+22 FEND
+enter FEND 
+23 FSTART
+enter FSTART 
+----------------
+----------------
+24 LABEL
+enter LABEL 
+25 PRINTF
+enter PRINTF 
+26 FEND
+enter FEND 
+27 FSTART
+enter FSTART 
+----------------
+key:a value:$s2
+key:b value:$s1
+key:bgr_eql value:$s3
+key:re value:$s0
+key:sml_eql value:$s4
+----------------
+28 LABEL
+enter LABEL 
+29 PARA
+enter PARA 
+30 PARA
+enter PARA 
+31 CONST
+enter CONST 
+32 CONST
+enter CONST 
+33 INTSY
+enter INTSY or CHARSY 
+34 JB
+enter jump 
+35 ASN
+enter ASN 
+36 PRINTF
+enter PRINTF 
+37 LABEL
+enter LABEL 
+38 JS
+enter jump 
+39 ASN
+enter ASN 
+40 PRINTF
+enter PRINTF 
+41 LABEL
+enter LABEL 
+42 JE
+enter jump 
+43 LABEL
+enter LABEL 
+44 JNE
+enter jump 
+45 PRINTF
+enter PRINTF 
+46 LABEL
+enter LABEL 
+47 JNEI
+enter SWITCHJUMP 
+48 JBE
+enter jump 
+49 PRINTF
+enter PRINTF 
+50 LABEL
+enter LABEL 
+51 JUMP
+enter JUMP 
+52 LABEL
+enter LABEL 
+53 JNEI
+enter SWITCHJUMP 
+54 JSE
+enter jump 
+55 PRINTF
+enter PRINTF 
+56 LABEL
+enter LABEL 
+57 JUMP
+enter JUMP 
+58 LABEL
+enter LABEL 
+59 LABEL
+enter LABEL 
+60 FEND
+enter FEND 
+61 FSTART
+enter FSTART 
+----------------
+----------------
+62 LABEL
+enter LABEL 
+63 INTSY
+enter INTSY or CHARSY 
+64 INTSY
+enter INTSY or CHARSY 
+65 INTSY
+enter INTSY or CHARSY 
+66 INTSY
+enter INTSY or CHARSY 
+67 SCANF
+enter SCANF 
+~~~~~~~~~~~~~~9
+68 SCANF
+enter SCANF 
+~~~~~~~~~~~~~~10
+69 SCANF
+enter SCANF 
+~~~~~~~~~~~~~~11
+70 SCANF
+enter SCANF 
+~~~~~~~~~~~~~~12
+71 ASN
+enter ASN 
+72 ASN
+enter ASN 
+73 PUSH
+enter PUSH 
+75 RCALL
+enter CALL or RCALL 
+76 ASN
+enter ASN 
+77 CALL
+enter CALL or RCALL 
+78 PUSH
+enter PUSH 
+80 CALL
+enter CALL or RCALL 
+81 ASN
+enter ASN 
+82 DIV
+enter CALCULATE 
+83 ASN
+enter ASN 
+84 MUL
+enter CALCULATE 
+85 MUL
+enter CALCULATE 
+86 SUB
+enter CALCULATE 
+87 ADD
+enter CALCULATE 
+88 PUSH
+enter PUSH 
+90 RCALL
+enter CALL or RCALL 
+91 ASN
+enter ASN 
+92 MUL
+enter CALCULATE 
+93 ADD
+enter CALCULATE 
+94 PRINTF
+enter PRINTF 
+95 LABEL
+enter LABEL 
+96 ASN
+enter ASN 
+97 ASN
+enter ASN 
+98 MUL
+enter CALCULATE 
+99 ADD
+enter CALCULATE 
+100 ASNAR
+enter ASNAR 
+101 ADD
+enter CALCULATE 
+102 ASNAR
+enter ASNAR 
+103 GETAR
+enter GETAR 
+104 PRINTF
+enter PRINTF 
+105 GETAR
+enter GETAR 
+106 PRINTF
+enter PRINTF 
+107 ASN
+enter ASN 
+108 ADD
+enter CALCULATE 
+109 ASN
+enter ASN 
+110 JS
+enter jump 
+111 FEND
+enter FEND 

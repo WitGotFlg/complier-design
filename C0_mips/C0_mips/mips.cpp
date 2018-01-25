@@ -484,7 +484,7 @@ void assignMIPS(string ob1, string ob3)
 void scanfMIPS(string ob3)
 {
 	int index = getMIPSindex(ob3);
-	cout << "~~~~~~~~~~~~~~" << index << endl;
+	debug_information << "~~~~~~~~~~~~~~" << index << endl;
 	if (mipssymboltable[index].type.compare("INTSY") == 0)
 	{
 		mipsfile << "addi $v0,$zero,5" << endl;
@@ -705,10 +705,13 @@ void mips_generate()
 	int i = 0;
 	while (i < midcode_length)
 	{
-		cout << i <<" " << middlecode_list[i].op<< endl;
+		debug_information << i << " " << middlecode_list[i].op << " "
+			<< middlecode_list[i].ob1 << " "
+			<< middlecode_list[i].ob2 << " "
+			<< middlecode_list[i].ob3 << endl;
 		if (middlecode_list[i].op.compare("CONST") == 0)
 		{
-			cout << "enter CONST " << endl;
+			debug_information << "enter CONST " << endl;
 			if (REGISTER.find(middlecode_list[i].ob3) != REGISTER.end())//如果发现分配了全局寄存器
 			{
 				mipsfile << "addi " << REGISTER[middlecode_list[i].ob3] << "," << "$zero" << "," << middlecode_list[i].ob2 << endl;
@@ -737,7 +740,7 @@ void mips_generate()
 		}
 		else if ((middlecode_list[i].op.compare("INTSY") == 0) || (middlecode_list[i].op.compare("CHARSY") == 0))
 		{
-			cout << "enter INTSY or CHARSY " << endl;
+			debug_information << "enter INTSY or CHARSY " << endl;
 			if (mipslevel == 0)
 			{
 				if (middlecode_list[i].ob2.compare("") == 0)     //不是数组的情况
@@ -765,27 +768,27 @@ void mips_generate()
 		}
 		else if (middlecode_list[i].op.compare("FSTART") == 0)
 		{
-			cout << "enter FSTART " << endl;
+			debug_information << "enter FSTART " << endl;
 			mipslevel++;
 			basepoint = mipstablelength;
 			REGISTER.clear();
 			//REGISTER.erase(REGISTER.begin(), REGISTER.end());
 			map<string, string>::iterator  it = REGISTER.begin();
 			for (; it != REGISTER.end(); ++it)
-				cout << "key:" << it->first << " "
+				debug_information << "key:" << it->first << " "
 				<< "value:" << it->second << endl;
-			cout << "----------------" << endl;
-	//		register_used = 0;
+			debug_information << "----------------" << endl;
+			//register_used = 0;
 			REGISTERallocation(i);
 			it = REGISTER.begin();
 			for (; it != REGISTER.end(); ++it)
-				cout << "key:" << it->first << " "
+				debug_information << "key:" << it->first << " "
 				<< "value:" << it->second << endl;
-			cout << "----------------" << endl;
+			debug_information << "----------------" << endl;
 		}
 		else if (middlecode_list[i].op.compare("FEND") == 0)
 		{
-			cout << "enter FEND " << endl;
+			debug_information << "enter FEND " << endl;
 			if (mainflag == true)
 			{
 				mipsfile << "EXIT:" << endl;
@@ -804,7 +807,7 @@ void mips_generate()
 		}
 		else if (middlecode_list[i].op.compare("LABEL") == 0)
 		{
-			cout << "enter LABEL " << endl;
+			debug_information << "enter LABEL " << endl;
 			if (textflag == false)      //代码段的开始
 			{
 				mipsfile << ".text" << endl;
@@ -830,7 +833,7 @@ void mips_generate()
 		}
 		else if (middlecode_list[i].op.compare("PUSH") == 0)
 		{
-			cout << "enter PUSH " << endl;
+			debug_information << "enter PUSH " << endl;
 			int word_offset = 0;
 			savestackMIPS();
 			while (middlecode_list[i].op.compare("PUSH") == 0)
@@ -870,7 +873,7 @@ void mips_generate()
 		}
 		else if ((middlecode_list[i].op.compare("CALL") == 0) || (middlecode_list[i].op.compare("RCALL") == 0))
 		{
-			cout << "enter CALL or RCALL " << endl;
+			debug_information << "enter CALL or RCALL " << endl;
 			int func_index = getsymindex(middlecode_list[i].ob1, string("FUNCTION"));
 			if (symboltable[func_index].length == 0)
 			{
@@ -924,7 +927,7 @@ void mips_generate()
 		}
 		else if (middlecode_list[i].op.compare("PARA")==0)
 		{
-			cout << "enter PARA " << endl;
+			debug_information << "enter PARA " << endl;
 			insertmipssymboltable(middlecode_list[i].ob3, middlecode_list[i].ob1, string("0"), mipslevel);
 			if (REGISTER.find(middlecode_list[i].ob3) != REGISTER.end())
 			{
@@ -951,27 +954,27 @@ void mips_generate()
 		else if ((middlecode_list[i].op.compare("ADD") == 0) || (middlecode_list[i].op.compare("SUB") == 0) ||
 			(middlecode_list[i].op.compare("MUL") == 0) || (middlecode_list[i].op.compare("DIV") == 0))
 		{
-			cout << "enter CALCULATE " << endl;
+			debug_information << "enter CALCULATE " << endl;
 			calculateMIPS(middlecode_list[i].op, middlecode_list[i].ob1, middlecode_list[i].ob2, middlecode_list[i].ob3);
 		}
 		else if (middlecode_list[i].op.compare("ASN") == 0)
 		{
-			cout << "enter ASN " << endl;
+			debug_information << "enter ASN " << endl;
 			assignMIPS(middlecode_list[i].ob1, middlecode_list[i].ob3);
 		}
 		else if (middlecode_list[i].op.compare("ASNAR") == 0)
 		{
-			cout << "enter ASNAR " << endl;
+			debug_information << "enter ASNAR " << endl;
 			assignarrMIPS(middlecode_list[i].ob1, middlecode_list[i].ob2, middlecode_list[i].ob3);
 		}
 		else if (middlecode_list[i].op.compare("GETAR") == 0)
 		{
-			cout << "enter GETAR " << endl;
+			debug_information << "enter GETAR " << endl;
 			getarrMIPS(middlecode_list[i].ob1, middlecode_list[i].ob2, middlecode_list[i].ob3);
 		}
 		else if ((middlecode_list[i].op.compare("RETURN") == 0) && mainflag == false)
 		{
-			cout << "enter RETURN " << endl;
+			debug_information << "enter RETURN " << endl;
 			int index = getMIPSindex(middlecode_list[i].ob3);
 			if (index != -1)
 			{
@@ -1000,34 +1003,34 @@ void mips_generate()
 		}
 		else if ((middlecode_list[i].op.compare("RETURN") == 0) && mainflag == true)
 		{
-			cout << "enter RETURN " << endl;
+			debug_information << "enter RETURN " << endl;
 			mipsfile << "j EXIT" << endl;
 		}
 		else if (middlecode_list[i].op.compare("SCANF") == 0)
 		{
-			cout << "enter SCANF " << endl;
+			debug_information << "enter SCANF " << endl;
 			scanfMIPS(middlecode_list[i].ob3);
 		}
 		else if (middlecode_list[i].op.compare("PRINTF") == 0)
 		{
-			cout << "enter PRINTF " << endl;
+			debug_information << "enter PRINTF " << endl;
 			printfMIPS(middlecode_list[i].ob1, middlecode_list[i].ob2);
 		}
 		else if (middlecode_list[i].op.compare("JUMP") == 0)
 		{
-			cout << "enter JUMP " << endl;
+			debug_information << "enter JUMP " << endl;
 			mipsfile << "j " << middlecode_list[i].ob3 << endl;
 		}
 		else if ((middlecode_list[i].op.compare("JBE") == 0) || (middlecode_list[i].op.compare("JB") == 0) ||
 			(middlecode_list[i].op.compare("JSE") == 0) || (middlecode_list[i].op.compare("JS") == 0) ||
 			(middlecode_list[i].op.compare("JE") == 0) || (middlecode_list[i].op.compare("JNE") == 0))
 		{
-			cout << "enter jump " << endl;
+			debug_information << "enter jump " << endl;
 			jumpMIPS(middlecode_list[i].op, middlecode_list[i].ob1, middlecode_list[i].ob2, middlecode_list[i].ob3);
 		}
 		else if ((middlecode_list[i].op.compare("JNEI") == 0) || (middlecode_list[i].op.compare("JNEC") == 0))
 		{
-			cout << "enter SWITCHJUMP " << endl;
+			debug_information << "enter SWITCHJUMP " << endl;
 			jumpswitchMIPS(middlecode_list[i].op, middlecode_list[i].ob1, middlecode_list[i].ob2, middlecode_list[i].ob3);
 		}
 		//////////////////////////////////////////////////////////

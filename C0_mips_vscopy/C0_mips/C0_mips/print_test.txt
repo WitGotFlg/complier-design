@@ -1,0 +1,26 @@
+const int con_int1 = +1, con_int2 = -1 , con_int3 = 34,con_int4 = 10;
+const char con_ch4 = 'A';                          
+
+int index , var_arr[10] , bigger_input;
+char var_arr_ch[10];                           
+
+int find_bigger(int a, int b)
+{
+    if(a >= b)
+        return(a);
+    return(find_bigger(a+1,b));
+}                                                 
+
+int print_bigger()
+{
+    bigger_input = 10;
+    printf("The bigger number is ",bigger_input);
+    return(6);
+}                                              
+
+
+void main()
+{
+    printf("print test ",print_bigger());
+}
+

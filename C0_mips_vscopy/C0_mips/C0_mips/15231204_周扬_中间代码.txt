@@ -1,0 +1,112 @@
+0 CONST INTSY 1 con_int1
+1 CONST INTSY -1 con_int2
+2 CONST INTSY 34 con_int3
+3 CONST INTSY 10 con_int4
+4 CONST CHARSY 65 con_ch4
+5 INTSY   index
+6 INTSY  10 var_arr
+7 INTSY   bigger_input
+8 CHARSY  10 var_arr_ch
+9 FSTART   
+10 LABEL   find_bigger
+11 PARA INTSY  a
+12 PARA INTSY  b
+13 JS a b label0
+14 RETURN   a
+15 LABEL   label0
+16 TEMP0 = 1
+17 TEMP1 = a + 1
+18 PUSH   TEMP1
+19 PUSH   b
+20 RCALL find_bigger  TEMP2
+21 RETURN   TEMP2
+22 FEND   
+23 FSTART   
+24 LABEL   print_bigger
+25 PRINTF The bigger number is  bigger_input 
+26 FEND   
+27 FSTART   
+28 LABEL   relation
+29 PARA INTSY  a
+30 PARA INTSY  b
+31 CONST INTSY 0 sml_eql
+32 CONST INTSY 1 bgr_eql
+33 INTSY   re
+34 JB a b label1
+35 re = sml_eql
+36 PRINTF input3 is smaller OR equal than input4  
+37 LABEL   label1
+38 JS a b label2
+39 re = bgr_eql
+40 PRINTF input3 is bigger OR equal than input4  
+41 LABEL   label2
+42 JE a b label3
+43 LABEL   label3
+44 JNE a b label4
+45 PRINTF input3 is equal to input4  
+46 LABEL   label4
+47 JNEI re 0 label6
+48 JBE a b label7
+49 PRINTF input3 is smaller than input4  
+50 LABEL   label7
+51 JUMP   label5
+52 LABEL   label6
+53 JNEI re 1 label8
+54 JSE a b label9
+55 PRINTF input3 is bigger than input4  
+56 LABEL   label9
+57 JUMP   label5
+58 LABEL   label8
+59 LABEL   label5
+60 FEND   
+61 FSTART   
+62 LABEL   main
+63 INTSY   input1
+64 INTSY   input2
+65 INTSY   input3
+66 INTSY   input4
+67 SCANF   input1
+68 SCANF   input2
+69 SCANF   input3
+70 SCANF   input4
+71 TEMP3 = 0
+72 index = 0
+73 PUSH   input1
+74 PUSH   input2
+75 RCALL find_bigger  TEMP4
+76 bigger_input = TEMP4
+77 CALL print_bigger  
+78 PUSH   input3
+79 PUSH   input4
+80 CALL relation  
+81 TEMP6 = -1
+82 TEMP7 = input3 / -1
+83 TEMP9 = '97'
+84 TEMP8 = input4 * TEMP7
+85 TEMP10 = TEMP8 * 97
+86 TEMP5 = 0 - input3
+87 TEMP11 = TEMP5 + TEMP10
+88 PUSH   input3
+89 PUSH   input4
+90 RCALL find_bigger  TEMP12
+91 TEMP13 = 7
+92 TEMP14 = TEMP12 * 7
+93 TEMP15 = TEMP11 + TEMP14
+94 PRINTF  TEMP15 
+95 LABEL   label10
+96 TEMP16 = 2
+97 TEMP18 = 1
+98 TEMP17 = index * 2
+99 TEMP19 = TEMP17 + 1
+100 var_arr[index] = TEMP19
+101 TEMP20 = con_ch4 + index
+102 var_arr_ch[index] = TEMP20
+103 TEMP21 = var_arr[index]
+104 PRINTF  TEMP21 
+105 TEMP22 = var_arr_ch[index]
+106 PRINTF  TEMP22 
+107 TEMP23 = 1
+108 TEMP24 = index + 1
+109 index = TEMP24
+110 JS index con_int4 label10
+111 FEND   

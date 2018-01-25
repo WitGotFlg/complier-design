@@ -1,0 +1,54 @@
+int a[100];
+
+void main()
+{
+    int i,j,n,temp;
+    printf("Please input the number of interger:");
+    scanf(n);
+    if(n>=100) 
+    {
+     	printf("The number is too big");
+     	return;
+    }
+    if(n<=0) 
+    {
+	printf("The number is illegal");
+	return;
+    }
+    i=0;
+    printf("Please input the interger: ");
+    do
+    {
+	scanf(temp);
+	a[i] = temp;
+	i = i+1;
+    }while(i<n)    
+    i = 0;
+    do
+    {
+        j=i+1;
+        if(j<n)
+	{
+		do
+		{
+            	if(a[i]>a[j])
+	   	{
+            	    temp=a[i];
+           	    a[i]=a[j];
+         	    a[j]=temp;
+         	}
+         	   j=j+1;
+      		}while(j<n)
+	}
+        i=i+1;
+    }while( i < n -1)
+    printf("After sorting:");
+    i=0;
+    do
+    {
+	temp = a[i];
+	printf(temp);
+        i=i+1;
+    }while(i<n)
+    return;
+}
